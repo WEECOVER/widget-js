@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './components/App';
 import './main.scss';
 
 
 ReactDOM.render(
-  <div>Main setup ready</div>,
-  document.getElementById('widget-root')
+	<App/>,
+	document.getElementById('widget-root')
 );

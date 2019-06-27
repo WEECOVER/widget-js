@@ -1,0 +1,28 @@
+.checkbox {
+  width: 15px;
+  height: 15px;
+  border: 1px solid var(--border-color);
+  display: inline-block;
+  position: relative;
+  background-color: var(--c-white);
+  color: var(--accent);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.5s ease;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.checkbox--checked::before{
+  position: absolute;
+  font: 600 13px/1 Arial, Helvetica, sans-serif;
+  left: 0;
+  top: -2px;
+  content: '\02143';
+  transform: rotate(40deg);
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

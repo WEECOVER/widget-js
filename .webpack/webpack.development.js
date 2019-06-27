@@ -2,25 +2,31 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = () => ({
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
   module: {
     rules: [
       {
-        test: /\.(s?)css$/,
+        test: /\.css$/,
         use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
           {
-            loader: 'sass-resources-loader',
+            loader: MiniCssExtractPlugin.loader,
             options: {
-              resources: require(path.join(
-                process.cwd(),
-                'src/styles/utils.js'
-              ))
-            }
-          }
-        ]
-      }
+              // only enable hot in development
+              hmr: process.env.NODE_ENV === 'development',
+              // if hmr does not work, this is a forceful method.
+              reloadAll: true,
+            },
+          },
+          'css-loader',
+        ],
+      },
     ]
   }
 })

@@ -10,22 +10,9 @@ module.exports = () => ({
   module: {
     rules: [
       {
-        test: /\.(s?)css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
-          {
-            loader: 'sass-resources-loader',
-            options: {
-              resources: require(path.join(
-                process.cwd(),
-                'src/styles/utils.js'
-              ))
-            }
-          }
-        ]
-      }
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
     ]
   },
   optimization: {
@@ -42,7 +29,8 @@ module.exports = () => ({
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'styles.css'
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     })
   ]
 })

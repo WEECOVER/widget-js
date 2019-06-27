@@ -1,0 +1,15 @@
+:root {
+--underline: 1px solid var(--border-color);
+}
+
+.wrapper {
+  padding: var(--space-m) 0;
+}
+
+.header {
+  padding: 0 var(--space-m);
+}
+
+.button-wrapper {
+  padding: var(--space-m);
+}

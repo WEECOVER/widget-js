@@ -1,0 +1,8 @@
+.card {
+  padding: 0 var(--space-m);
+  border: var(--underline); 
+}
+
+.price {
+  color: var(--accent);
+}

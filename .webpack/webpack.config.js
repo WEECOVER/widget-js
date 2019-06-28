@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpackMerge = require('webpack-merge')
-const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
+const Dotenv = require('dotenv-webpack');
 
 const modeConfig = env => require(`./webpack.${env}.js`)(env)
 
@@ -38,7 +38,8 @@ module.exports = ({mode, presets} = {mode: 'production', presets: []}) => {
       },
       plugins: [
         new HtmlWebpackPlugin({template: './src/assets/index.html'}),
-        new webpack.ProgressPlugin()
+        new webpack.ProgressPlugin(),
+        new Dotenv()
       ]
     },
     modeConfig(mode)

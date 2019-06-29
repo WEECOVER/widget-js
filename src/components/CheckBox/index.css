@@ -1,6 +1,10 @@
+:root {
+  --small: 15px;
+  --medium: 20px;
+  --large: 25px;
+}
+
 .checkbox {
-  width: 15px;
-  height: 15px;
   border: 1px solid var(--border-color);
   display: inline-block;
   position: relative;
@@ -11,6 +15,21 @@
   transition: all 0.5s ease;
   border-radius: 0;
   -webkit-appearance: none;
+}
+
+.checkbox--small {
+  width: var(--small);
+  height: var(--small);
+}
+
+.checkbox--medium {
+  width: var(--medium);
+  height: var(--medium);
+}
+
+.checkbox--large {
+  width: var(--large);
+  height: var(--large);
 }
 
 .checkbox--checked::before{

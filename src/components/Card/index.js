@@ -1,25 +1,34 @@
 import React from 'react';
-import CheckBox from '../CheckBox';
+import PropTypes from 'prop-types';
+import Complement from './Complement';
+import Title from './Title';
 
-const Card = () => {
-  const onClickCheckBox = ({ checked }) => {
+const Card = ({ children }) => {
+  const onSelectComplement = ({ checked }) => {
     console.log(checked);
   };
 
   return (
     <div className="card">
-      <h3>
-        Básico <span className="price">XX,XX€</span>
-      </h3>
-      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod.</p>
-      <div>
-        <CheckBox onClick={onClickCheckBox} />
-        <p>
-          Praesent tincidunt aliquet urna por <span className="price">XX,XX€</span>
-        </p>
-      </div>
+      {React.Children.map(children, child =>
+        React.cloneElement(child, {
+          onSelectComplement
+        })
+      )}
     </div>
   );
+};
+
+Card.Title = Title;
+Card.Complement = Complement;
+
+Card.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.object,
+    PropTypes.array,
+    PropTypes.string
+  ]).isRequired
 };
 
 export default Card;

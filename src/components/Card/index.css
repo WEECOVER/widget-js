@@ -1,8 +1,15 @@
-.card {
-  padding: 0 var(--space-m);
-  border: var(--underline); 
+@import "./Title/index.css";
+@import "./Complement/index.css";
+
+:root {
+  --underline: 1px solid var(--border-color);
+}  
+
+.card:not(:first-child) {
+  border-top: 0;
 }
 
-.price {
-  color: var(--accent);
+.card {
+  padding: 0 var(--space-m);
+  border-bottom: var(--underline); 
 }

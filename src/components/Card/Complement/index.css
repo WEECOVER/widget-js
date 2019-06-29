@@ -1,0 +1,8 @@
+.complement-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.complement-description {
+  font-size: var(--fz-xss);
+}

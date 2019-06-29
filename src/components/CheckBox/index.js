@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-const CheckBox = ({ onClick }) => {
+const CheckBox = ({ onClick, size }) => {
   const [isChecked, setChecked] = useState(false);
+
   const handleCheckBox = ({ target: { checked } }) => {
     onClick({ checked });
     setChecked(checked);
   };
 
-  const CheckBoxClassName = classnames('checkbox', {
+  const CheckBoxClassName = classnames(`checkbox checkbox--${size}`, {
     'checkbox--checked': isChecked
   });
 
@@ -17,7 +18,12 @@ const CheckBox = ({ onClick }) => {
 };
 
 CheckBox.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  size: PropTypes.oneOfType(['small', 'medium', 'large'])
+};
+
+CheckBox.defaultProps = {
+  size: 'small'
 };
 
 export default CheckBox;

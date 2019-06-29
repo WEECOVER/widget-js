@@ -1,0 +1,17 @@
+.card-title-container {
+  display: flex;
+  align-items: center;
+}
+
+.card-title-text {
+  margin: 0;
+  padding: var(--space-s) 0;
+}
+
+.card-title-price {
+  color: var(--accent);
+}
+
+.card-title-description {
+  font-size: var(--fz-xs);
+}

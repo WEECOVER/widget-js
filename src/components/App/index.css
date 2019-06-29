@@ -1,9 +1,9 @@
 :root {
---underline: 1px solid var(--border-color);
+--perimeter: 1px solid var(--text-color);
 }
 
 .wrapper {
-  padding: var(--space-m) 0;
+  padding: var(--space-m);
 }
 
 .header {
@@ -12,4 +12,8 @@
 
 .button-wrapper {
   padding: var(--space-m);
+}
+
+.cards-wrapper {
+  border: var(--perimeter);
 }

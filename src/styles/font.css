@@ -1,6 +1,7 @@
 @import "../assets/helvetica-neue-webfont/style.css";
 
 :root {
+  --fz-xsss: 10px;
   --fz-xss: 12px;
   --fz-xs: 14px;
   --fz-m: 16px;

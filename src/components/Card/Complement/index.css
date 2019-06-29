@@ -4,5 +4,9 @@
 }
 
 .complement-description {
-  font-size: var(--fz-xss);
+  font-size: var(--fz-xs);
+}
+
+.complement-price {
+  color: var(--accent);
 }

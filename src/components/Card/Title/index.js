@@ -5,7 +5,7 @@ import CheckBox from '../../CheckBox';
 const Title = ({ title, description, price, currency, onSelectComplement }) => (
   <Fragment>
     <div className="card-title-container">
-      <CheckBox onClick={onSelectComplement} />
+      <CheckBox onClick={onSelectComplement} size={CheckBox.availableSizes.large} />
       <h3 className="card-title-text">
         {title}{' '}
         <span className="card-title-price">

@@ -5,7 +5,8 @@
 
 .card-title-text {
   margin: 0;
-  padding: var(--space-s) 0;
+  margin-left: var(--space-m);
+  padding: var(--space-m) 0;
 }
 
 .card-title-price {
@@ -13,5 +14,5 @@
 }
 
 .card-title-description {
-  font-size: var(--fz-xs);
+  font-size: var(--fz-xsss);
 }

@@ -8,6 +8,8 @@
 
 .header {
   padding: 0 var(--space-m);
+  border: 1px solid var(--text-color);
+  border-bottom: 0;
 }
 
 .button-wrapper {
@@ -16,4 +18,16 @@
 
 .cards-wrapper {
   border: var(--perimeter);
+  border-top: 1px solid var(--border-color);
+}
+
+.header-title {
+  font-size: var(--fz-l);
+  margin: 0;
+  padding-top: var(--space-m);
+}
+.header-subtitle {
+  font-size: var(--fz-xss);
+  margin: 0;
+  padding: var(--space-s) 0;
 }

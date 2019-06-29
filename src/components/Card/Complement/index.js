@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import CheckBox from '../../CheckBox';
 
-const Complement = ({ onSelectComplement }) => (
-  <div className="complement-wrapper">
-    <CheckBox onClick={onSelectComplement} />
-    <p className="complement-description">
-      Praesent tincidunt aliquet urna por <span className="price">XX,XX€</span>
-    </p>
-  </div>
+const Complement = ({ onSelectComplement, complements }) => (
+  <Fragment>
+    {complements &&
+      complements.map(({ checked, description, price, currency, id }) => (
+        <div key={id} className="complement-wrapper">
+          <CheckBox onClick={onSelectComplement} checked={checked} />
+          <p className="complement-description">
+            {description}
+            <span className="complement-price">
+              {price}
+              {currency}
+            </span>
+          </p>
+        </div>
+      ))}
+  </Fragment>
 );
 
 Complement.propTypes = {
-  onSelectComplement: PropTypes.func.isRequired
+  onSelectComplement: PropTypes.func.isRequired,
+  complements: PropTypes.array.isRequired
 };
 
 export default Complement;

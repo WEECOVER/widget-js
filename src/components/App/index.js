@@ -25,15 +25,12 @@ const App = () => {
   useEffect(() => {
     // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
     setMainModifier(availableStyles.compressed);
-    setComplementaryModifier(complementaryModifiers.withCheckbox);
+    setComplementaryModifier(complementaryModifiers.withButton);
   }, [mainModifier]);
 
   const addElement = ({ type, element }) => {
     console.log(type, element);
   };
-
-  const displayGlobalAddButton =
-    availableStyles.compressed === mainModifier || availableStyles.single === mainModifier;
 
   if (!mainModifier) return null;
 
@@ -52,7 +49,11 @@ const App = () => {
         availableStyles={availableStyles}
         complementaryModifier={complementaryModifier}
       />
-      <Footer displayGlobalAddButton={displayGlobalAddButton} addElement={addElement} />
+      <Footer
+        mainModifier={mainModifier}
+        availableStyles={availableStyles}
+        addElement={addElement}
+      />
     </main>
   );
 };

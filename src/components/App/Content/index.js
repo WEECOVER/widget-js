@@ -2,7 +2,6 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Card from '../../Card';
-import Button from '../../Button';
 
 const Content = ({ insurances, mainModifier, availableStyles, addElement }) => {
   const displayCheckboxInCardTitle =
@@ -27,6 +26,7 @@ const Content = ({ insurances, mainModifier, availableStyles, addElement }) => {
               displayCheckbox={displayCheckboxInCardTitle}></Card.Title>
             <Card.Complement complements={complements}></Card.Complement>
             <Card.Footer
+              addElement={addElement}
               availableStyles={availableStyles}
               mainModifier={mainModifier}
               element={{ title, price, currency, description, complements, id }}></Card.Footer>

@@ -9,7 +9,7 @@ const Complement = ({ onSelectComplement, complements }) => (
         <div key={id} className="complement-wrapper">
           <CheckBox onClick={onSelectComplement} checked={checked} />
           <p className="complement-description">
-            {description}
+            {description}{' '}
             <span className="complement-price">
               {price}
               {currency}
@@ -21,8 +21,12 @@ const Complement = ({ onSelectComplement, complements }) => (
 );
 
 Complement.propTypes = {
-  onSelectComplement: PropTypes.func.isRequired,
+  onSelectComplement: PropTypes.func,
   complements: PropTypes.array.isRequired
+};
+
+Complement.defaultProps = {
+  onSelectComplement: () => {}
 };
 
 export default Complement;

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 import Complement from './Complement';
 import Title from './Title';
+import { getModifiers } from '../../utils/data-mappers';
 
 const availableStyle = {
   compressed: 'compressed',
@@ -14,16 +14,15 @@ const Card = ({ children, modifiers }) => {
     console.log(checked);
   };
 
-  console.log(modifiers);
-
-  const parsedModifiers = modifiers.map(modifier => `card--${modifier}`).join('');
-
   return (
-    <div className={`card ${parsedModifiers}`}>
-      {React.Children.map(children, child =>
-        React.cloneElement(child, {
-          onSelectComplement
-        })
+    <div className={`card ${getModifiers(modifiers, 'card')}`}>
+      {React.Children.map(
+        children,
+        child =>
+          child &&
+          React.cloneElement(child, {
+            onSelectComplement
+          })
       )}
     </div>
   );

@@ -8,7 +8,8 @@
 }
 
 .checkbox {
-  border: 1px solid var(--border-color);
+  margin: 0;
+  border: 1px solid var(--text-color);
   display: inline-block;
   position: relative;
   background-color: var(--c-white);

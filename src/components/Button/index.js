@@ -1,15 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getModifiers } from '../../utils/data-mappers';
 
-const Button = ({ children, onClick }) => (
-  <button type="button" className="button" onClick={onClick}>
+const availableSizes = {
+  sm: 'sm',
+  default: ''
+};
+
+const Button = ({ children, onClick, modifiers }) => (
+  <button type="button" className={`button ${getModifiers(modifiers, 'button')}`} onClick={onClick}>
     {children}
   </button>
 );
 
+Button.availableSizes = availableSizes;
+
 Button.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  modifiers: PropTypes.arrayOf(PropTypes.string)
+};
+
+Button.defaultProps = {
+  modifiers: []
 };
 
 export default Button;

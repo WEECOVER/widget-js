@@ -6,3 +6,7 @@
   padding: var(--space-s);
   border: 0;
 }
+
+.button--sm {
+  padding: var(--space-sm) 0px;
+}

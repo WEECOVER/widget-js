@@ -23,7 +23,8 @@
 }
 
 .cards-wrapper--uncompressed {
-  padding-bottom: var(--space-s);
+  padding-bottom: var(--space-m);
+  border-bottom: 1px solid var(--text-color);
 }
 
 .header-title {
@@ -40,8 +41,4 @@
 .button-wrapper {
   border: 1px solid var(--text-color);
   border-top: 0;
-}
-
-.button-wrapper--uncompressed {
-  padding-top: 0;
 }

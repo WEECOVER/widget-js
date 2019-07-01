@@ -20,9 +20,13 @@ const Title = ({ title, description, price, currency, onSelectComplement }) => (
 Title.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
-  onSelectComplement: PropTypes.func.isRequired
+  onSelectComplement: PropTypes.func
+};
+
+Title.defaultProps = {
+  onSelectComplement: () => {}
 };
 
 export default Title;

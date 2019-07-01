@@ -18,16 +18,16 @@ const App = () => {
   useEffect(() => {
     // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
     setMainModifier(availableStyles.uncompressed);
-  }, []);
+  }, [mainModifier]);
 
   const cardsWrapperClassName = classnames('cards-wrapper', {
     'cards-wrapper--compressed': mainModifier === availableStyles.compressed,
     'cards-wrapper--uncompressed': mainModifier === availableStyles.uncompressed
   });
 
-  const buttonWrapperClassname = classnames('button-wrapper', {
-    'button-wrapper--uncompressed': mainModifier === availableStyles.uncompressed
-  });
+  const addElement = ({ type, element }) => {
+    console.log(type, element);
+  };
 
   return (
     <main className="wrapper">
@@ -46,12 +46,26 @@ const App = () => {
                 currency={currency}
                 description={description}></Card.Title>
               <Card.Complement complements={complements}></Card.Complement>
+              {mainModifier === availableStyles.uncompressed && (
+                <Button
+                  onClick={() =>
+                    addElement({
+                      type: 'single',
+                      element: { title, price, currency, description, complements, id }
+                    })
+                  }
+                  modifiers={[Button.availableSizes.sm]}>
+                  AÑADIR
+                </Button>
+              )}
             </Card>
           ))}
       </section>
-      <div className={buttonWrapperClassname}>
-        <Button>AÑADIR</Button>
-      </div>
+      {availableStyles.compressed === mainModifier && (
+        <div className="button-wrapper">
+          <Button onClick={() => addElement({ type: 'global', element: 'all' })}>AÑADIR</Button>
+        </div>
+      )}
     </main>
   );
 };

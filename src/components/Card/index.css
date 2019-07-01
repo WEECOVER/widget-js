@@ -5,11 +5,26 @@
   --underline: 1px solid var(--border-color);
 }  
 
-.card:not(:first-child) {
+.card {
+
+}
+
+.card--compressed {
+  padding: 0 var(--space-m);
+  border-bottom: var(--underline); 
+}
+
+.card--compressed.card:not(:first-child) {
   border-top: 0;
 }
 
-.card {
-  padding: 0 var(--space-m);
-  border-bottom: var(--underline); 
+.card--uncompressed {
+  margin: var(--space-m);
+  padding: var(--space-s);
+  border: 1px solid var(--border-color);
+
+}
+
+.card:last-child {
+  border-bottom: var(--underline);
 }

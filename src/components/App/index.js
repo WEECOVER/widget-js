@@ -1,71 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import classnames from 'classnames';
 import Card from '../Card';
 import Button from '../Button';
+import { fakeData } from './fakeData';
 
-console.log('CARD.complement', Card.Complement);
-console.log('CARD.title', Card.Title);
+// TODO: Delete faleData when real data implemented
+const [{ mainTitle, mainDescription, insurances }] = fakeData;
+
+const availableStyles = {
+  compressed: 'compressed',
+  uncompressed: 'uncompressed'
+};
 
 const App = () => {
-  // TODO: Delete when real data implemented
+  const [mainModifier, setMainModifier] = useState('');
 
-  const fakeData = [
-    {
-      mainTitle: 'Seguro Lorem Ipsum',
-      mainDescription: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.',
-      insurances: [
-        {
-          id: 1,
-          title: 'Básico',
-          price: 49.99,
-          currency: '€',
-          description: 'Integer enim tellus, dapibus quis dui quis, adam accumsan posuere ipsum.',
-          complements: [
-            {
-              id: 1.1,
-              checked: false,
-              price: 29.99,
-              currency: '€',
-              description: 'Praesent tincidunt aliquet urna por'
-            }
-          ]
-        },
-        {
-          id: 2,
-          title: 'Premium',
-          price: 49.99,
-          currency: '€',
-          description: 'Integer enim tellus, dapibus quis dui quis, adam accumsan posuere ipsum.',
-          complements: [
-            {
-              id: 2.2,
-              checked: false,
-              price: 29.99,
-              currency: '€',
-              description: 'Praesent tincidunt aliquet urna por'
-            }
-          ]
-        },
-        {
-          id: 3,
-          title: 'Top',
-          price: 49.99,
-          currency: '€',
-          description: 'Integer enim tellus, dapibus quis dui quis, adam accumsan posuere ipsum.',
-          complements: [
-            {
-              id: 3.3,
-              checked: false,
-              price: 29.99,
-              currency: '€',
-              description: 'Praesent tincidunt aliquet urna por'
-            }
-          ]
-        }
-      ]
-    }
-  ];
+  useEffect(() => {
+    // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
+    setMainModifier(availableStyles.uncompressed);
+  }, []);
 
-  const [{ mainTitle, mainDescription, insurances }] = fakeData;
+  const cardsWrapperClassName = classnames('cards-wrapper', {
+    'cards-wrapper--compressed': mainModifier === availableStyles.compressed,
+    'cards-wrapper--uncompressed': mainModifier === availableStyles.uncompressed
+  });
+
+  const buttonWrapperClassname = classnames('button-wrapper', {
+    'button-wrapper--uncompressed': mainModifier === availableStyles.uncompressed
+  });
 
   return (
     <main className="wrapper">
@@ -73,10 +35,10 @@ const App = () => {
         <h1 className="header-title">{mainTitle}</h1>
         <p className="header-subtitle">{mainDescription}</p>
       </header>
-      <section className="cards-wrapper">
+      <section className={cardsWrapperClassName}>
         {insurances &&
           insurances.map(({ title, price, currency, description, complements, id }) => (
-            <Card key={id}>
+            <Card key={id} modifiers={[mainModifier]}>
               <Card.Title
                 id={id}
                 title={title}
@@ -87,7 +49,7 @@ const App = () => {
             </Card>
           ))}
       </section>
-      <div className="button-wrapper">
+      <div className={buttonWrapperClassname}>
         <Button>AÑADIR</Button>
       </div>
     </main>

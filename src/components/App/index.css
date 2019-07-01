@@ -19,6 +19,11 @@
 .cards-wrapper {
   border: var(--perimeter);
   border-top: 1px solid var(--border-color);
+  border-bottom: 0;
+}
+
+.cards-wrapper--uncompressed {
+  padding-bottom: var(--space-s);
 }
 
 .header-title {
@@ -30,4 +35,13 @@
   font-size: var(--fz-xss);
   margin: 0;
   padding: var(--space-s) 0;
+}
+
+.button-wrapper {
+  border: 1px solid var(--text-color);
+  border-top: 0;
+}
+
+.button-wrapper--uncompressed {
+  padding-top: 0;
 }

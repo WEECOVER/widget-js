@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
 import Card from '../Card';
 import Button from '../Button';
-import { fakeData } from './fakeData';
+import { fakeData, SingleFakeData } from './fakeData'; // eslint-disable-line
 
 // TODO: Delete faleData when real data implemented
-const [{ mainTitle, mainDescription, insurances }] = fakeData;
+const [{ mainTitle, mainDescription, insurances }] = SingleFakeData;
 
 const availableStyles = {
   compressed: 'compressed',
-  uncompressed: 'uncompressed'
+  uncompressed: 'uncompressed',
+  single: 'single'
 };
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
 
   useEffect(() => {
     // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
-    setMainModifier(availableStyles.uncompressed);
+    setMainModifier(availableStyles.single);
   }, [mainModifier]);
 
   const cardsWrapperClassName = classnames('cards-wrapper', {

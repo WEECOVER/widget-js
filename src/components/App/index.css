@@ -22,6 +22,10 @@
   border-bottom: 0;
 }
 
+.cards-wrapper--single {
+  
+}
+
 .cards-wrapper--uncompressed {
   padding-bottom: var(--space-m);
   border-bottom: 1px solid var(--text-color);

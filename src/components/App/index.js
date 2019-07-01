@@ -20,10 +20,12 @@ const complementaryModifiers = {
 
 const App = () => {
   const [mainModifier, setMainModifier] = useState('');
+  const [complementaryModifier, setComplementaryModifier] = useState('');
 
   useEffect(() => {
     // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
     setMainModifier(availableStyles.compressed);
+    setComplementaryModifier(complementaryModifiers.withCheckbox);
   }, [mainModifier]);
 
   const addElement = ({ type, element }) => {
@@ -48,6 +50,7 @@ const App = () => {
         mainModifier={mainModifier}
         insurances={insurances}
         availableStyles={availableStyles}
+        complementaryModifier={complementaryModifier}
       />
       <Footer displayGlobalAddButton={displayGlobalAddButton} addElement={addElement} />
     </main>

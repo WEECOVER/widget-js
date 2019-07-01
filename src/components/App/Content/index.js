@@ -26,18 +26,10 @@ const Content = ({ insurances, mainModifier, availableStyles, addElement }) => {
               description={description}
               displayCheckbox={displayCheckboxInCardTitle}></Card.Title>
             <Card.Complement complements={complements}></Card.Complement>
-            {mainModifier === availableStyles.uncompressed && (
-              <Button
-                onClick={() =>
-                  addElement({
-                    type: 'single',
-                    element: { title, price, currency, description, complements, id }
-                  })
-                }
-                modifiers={[Button.availableSizes.sm]}>
-                AÑADIR
-              </Button>
-            )}
+            <Card.Footer
+              availableStyles={availableStyles}
+              mainModifier={mainModifier}
+              element={{ title, price, currency, description, complements, id }}></Card.Footer>
           </Card>
         ))}
     </section>

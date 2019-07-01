@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Complement from './Complement';
+import Footer from './Footer';
 import Title from './Title';
 import { getModifiers } from '../../utils/data-mappers';
 
@@ -37,6 +38,7 @@ const Card = ({ children, modifiers }) => {
 Card.availableStyle = availableStyle;
 Card.Title = Title;
 Card.Complement = Complement;
+Card.Footer = Footer;
 
 Card.propTypes = {
   children: PropTypes.oneOfType([

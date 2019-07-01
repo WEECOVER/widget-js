@@ -10,6 +10,16 @@
   font-size: var(--fz-xs);
 }
 
+.card-title-price-prefix {
+  color: var(--text-color);
+}
+
+.card-title-text--single {
+  font-size: var(--fz-l);
+  margin: 0;
+  padding-top: 0;
+}
+
 .card-title-price {
   color: var(--accent);
 }

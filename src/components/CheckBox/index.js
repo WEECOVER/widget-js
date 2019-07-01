@@ -32,7 +32,7 @@ CheckBox.availableSizes = availableSize;
 
 CheckBox.propTypes = {
   onClick: PropTypes.func.isRequired,
-  size: PropTypes.oneOfType(['small', 'medium', 'large']),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
   checked: PropTypes.bool
 };
 

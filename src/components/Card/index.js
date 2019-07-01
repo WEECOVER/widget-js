@@ -16,14 +16,20 @@ const Card = ({ children, modifiers }) => {
 
   return (
     <div className={`card ${getModifiers(modifiers, 'card')}`}>
-      {React.Children.map(
-        children,
-        child =>
+      {React.Children.map(children, child => {
+        const allModifiers =
+          child && child.props && child.props.modifiers
+            ? [...modifiers, ...child.props.modifiers]
+            : modifiers;
+        return (
           child &&
           React.cloneElement(child, {
-            onSelectComplement
+            onSelectComplement,
+            modifiers: allModifiers,
+            className: child.props.className
           })
-      )}
+        );
+      })}
     </div>
   );
 };

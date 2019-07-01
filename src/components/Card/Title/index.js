@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import CheckBox from '../../CheckBox';
 import Button from '../../Button';
+import { getModifiers } from '../../../utils/data-mappers';
 
 const Title = ({
   title,
@@ -10,17 +11,26 @@ const Title = ({
   currency,
   onSelectComplement,
   displayCheckbox,
-  displayAddButton
+  displayAddButton,
+  modifiers
 }) => (
   <Fragment>
     <div className="card-title-container">
       {displayCheckbox && (
         <CheckBox onClick={onSelectComplement} size={CheckBox.availableSizes.large} />
       )}
-      <h3 className="card-title-text">
-        {title}{' '}
+      <h3 className={`card-title-text ${getModifiers(modifiers, 'card-title-text')}`}>
+        {title} {modifiers.includes('single') && <br />}
         <span className="card-title-price">
-          {price} {currency}
+          {modifiers.includes('single') ? (
+            <Fragment>
+              <span className="card-title-price-prefix">por </span>
+              {price}
+            </Fragment>
+          ) : (
+            price
+          )}{' '}
+          {currency}
         </span>
       </h3>
       {displayAddButton && <Button onClick={onSelectComplement}>Añadir</Button>}
@@ -36,13 +46,15 @@ Title.propTypes = {
   currency: PropTypes.string.isRequired,
   onSelectComplement: PropTypes.func,
   displayCheckbox: PropTypes.bool,
-  displayAddButton: PropTypes.bool
+  displayAddButton: PropTypes.bool,
+  modifiers: PropTypes.arrayOf(PropTypes.string)
 };
 
 Title.defaultProps = {
   onSelectComplement: () => {},
   displayCheckbox: false,
-  displayAddButton: false
+  displayAddButton: false,
+  modifiers: []
 };
 
 export default Title;

@@ -3,9 +3,10 @@ import classnames from 'classnames';
 import Card from '../Card';
 import Button from '../Button';
 import { fakeData, SingleFakeData } from './fakeData'; // eslint-disable-line
+import { getModifiers } from '../../utils/data-mappers';
 
 // TODO: Delete faleData when real data implemented
-const [{ mainTitle, mainDescription, insurances }] = SingleFakeData;
+const [{ mainTitle, mainDescription, insurances }] = fakeData;
 
 const availableStyles = {
   compressed: 'compressed',
@@ -18,24 +19,35 @@ const App = () => {
 
   useEffect(() => {
     // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
-    setMainModifier(availableStyles.single);
+    setMainModifier(availableStyles.compressed);
   }, [mainModifier]);
-
-  const cardsWrapperClassName = classnames('cards-wrapper', {
-    'cards-wrapper--compressed': mainModifier === availableStyles.compressed,
-    'cards-wrapper--uncompressed': mainModifier === availableStyles.uncompressed
-  });
 
   const addElement = ({ type, element }) => {
     console.log(type, element);
   };
 
+  const cardsWrapperClassName = classnames('cards-wrapper', {
+    'cards-wrapper--compressed': mainModifier === availableStyles.compressed,
+    'cards-wrapper--uncompressed': mainModifier === availableStyles.uncompressed,
+    'cards-wrapper--single': mainModifier === availableStyles.single
+  });
+
+  const displayGlobalAddButton =
+    availableStyles.compressed === mainModifier || availableStyles.single === mainModifier;
+
+  const displayCheckboxInCardTitle =
+    availableStyles.compressed === mainModifier || mainModifier === availableStyles.uncompressed;
+
+  if (!mainModifier) return null;
+
   return (
     <main className="wrapper">
-      <header className="header">
-        <h1 className="header-title">{mainTitle}</h1>
-        <p className="header-subtitle">{mainDescription}</p>
-      </header>
+      {availableStyles.single !== mainModifier && (
+        <header className="header">
+          <h1 className="header-title">{mainTitle}</h1>
+          <p className="header-subtitle">{mainDescription}</p>
+        </header>
+      )}
       <section className={cardsWrapperClassName}>
         {insurances &&
           insurances.map(({ title, price, currency, description, complements, id }) => (
@@ -45,7 +57,8 @@ const App = () => {
                 title={title}
                 price={price}
                 currency={currency}
-                description={description}></Card.Title>
+                description={description}
+                displayCheckbox={displayCheckboxInCardTitle}></Card.Title>
               <Card.Complement complements={complements}></Card.Complement>
               {mainModifier === availableStyles.uncompressed && (
                 <Button
@@ -62,7 +75,7 @@ const App = () => {
             </Card>
           ))}
       </section>
-      {availableStyles.compressed === mainModifier && (
+      {displayGlobalAddButton && (
         <div className="button-wrapper">
           <Button onClick={() => addElement({ type: 'global', element: 'all' })}>AÑADIR</Button>
         </div>

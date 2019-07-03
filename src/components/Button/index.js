@@ -8,7 +8,7 @@ const availableSizes = {
 };
 
 const Button = ({ children, onClick, modifiers }) => (
-  <button type="button" className={`button ${getModifiers(modifiers, 'button')}`} onClick={onClick}>
+  <button type="button" className={getModifiers(modifiers, 'button')} onClick={onClick}>
     {children}
   </button>
 );

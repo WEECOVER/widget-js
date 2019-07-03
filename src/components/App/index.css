@@ -1,3 +1,5 @@
+@import './Header/index.css';
+@import './Content/index.css';
 @import './Footer/index.css';
 
 :root {
@@ -6,50 +8,4 @@
 
 .wrapper {
   padding: var(--space-m);
-}
-
-.header {
-  padding: 0 var(--space-m);
-  border: 1px solid var(--text-color);
-  border-bottom: 0;
-}
-
-.header-title {
-  font-size: var(--fz-l);
-  margin: 0;
-  padding-top: var(--space-m);
-}
-.header-subtitle {
-  font-size: var(--fz-xss);
-  margin: 0;
-  padding: var(--space-s) 0;
-}
-
-.cards-wrapper {
-  border: var(--perimeter);
-  border-top: 1px solid var(--border-color);
-  border-bottom: 0;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.cards-wrapper--single {
-  border: 1px solid var(--text-color);
-  border-bottom: 0;
-}
-
-.cards-wrapper--uncompressed {
-  border-bottom: 1px solid var(--text-color);
-  padding-top: var(--space-m);
-}
-
-.button-wrapper {
-  border: 1px solid var(--text-color);
-  border-top: 0;
-}
-
-@media screen and (min-width: 400px) {
-  .cards-wrapper--uncompressed {
-    border-top: 0;
-  }
 }

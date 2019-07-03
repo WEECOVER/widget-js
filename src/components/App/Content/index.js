@@ -1,19 +1,14 @@
 import React from 'react';
-import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Card from '../../Card';
+import { getModifiers } from '../../../utils/data-mappers';
 
 const Content = ({ insurances, mainModifier, availableStyles, addElement }) => {
   const displayCheckboxInCardTitle =
     availableStyles.compressed === mainModifier || mainModifier === availableStyles.uncompressed;
 
-  const cardsWrapperClassName = classnames('cards-wrapper', {
-    'cards-wrapper--compressed': mainModifier === availableStyles.compressed,
-    'cards-wrapper--uncompressed': mainModifier === availableStyles.uncompressed,
-    'cards-wrapper--single': mainModifier === availableStyles.single
-  });
   return (
-    <section className={cardsWrapperClassName}>
+    <section className={getModifiers([mainModifier], 'cards-wrapper')}>
       {insurances &&
         insurances.map(({ title, price, currency, description, complements, id }) => (
           <Card key={id} modifiers={[mainModifier]}>

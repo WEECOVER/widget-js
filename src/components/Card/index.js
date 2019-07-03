@@ -16,7 +16,7 @@ const Card = ({ children, modifiers }) => {
   };
 
   return (
-    <div className={`card ${getModifiers(modifiers, 'card')}`}>
+    <div className={getModifiers(modifiers, 'card')}>
       {React.Children.map(children, child => {
         const existChildAndModifiers = child && child.props && child.props.modifiers;
         const allModifiers = existChildAndModifiers

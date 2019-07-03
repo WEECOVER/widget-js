@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { getModifiers } from '../../../utils/data-mappers';
 
 const Header = ({ availableStyles, mainModifier, mainTitle, mainDescription }) => (
   <Fragment>
     {availableStyles.single !== mainModifier && (
-      <header className="header">
+      <header className={getModifiers([mainModifier], 'header')}>
         <h1 className="header-title">{mainTitle}</h1>
         <p className="header-subtitle">{mainDescription}</p>
       </header>

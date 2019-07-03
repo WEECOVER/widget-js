@@ -1,0 +1,32 @@
+.cards-wrapper {
+  border: var(--perimeter);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cards-wrapper--single {
+  border: 1px solid var(--text-color);
+  border-bottom: 0;
+}
+
+.cards-wrapper--uncompressed {
+  border-bottom: 1px solid var(--text-color);
+  padding-top: var(--space-m);
+}
+
+.cards-wrapper--compressedSidebar {
+  padding: 0 26px;
+}
+
+.button-wrapper {
+  border: 1px solid var(--text-color);
+  border-top: 0;
+}
+
+@media screen and (min-width: 400px) {
+  .cards-wrapper--uncompressed {
+    border-top: 0;
+  }
+}

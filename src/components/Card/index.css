@@ -13,6 +13,10 @@
   border-bottom: var(--underline);
 }
 
+.card--single {
+  width: 100%;
+}
+
 .card--single:last-child {
   padding: var(--space-m) var(--space-l);
   padding-bottom: 0;

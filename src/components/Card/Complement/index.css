@@ -1,11 +1,18 @@
 .complement-wrapper {
   display: flex;
   align-items: center;
+  margin-top: var(--space-m);
+}
+
+.complement-wrapper:last-child {
+  margin-bottom: var(--space-m);
 }
 
 .complement-description {
   font-size: var(--fz-xss);
   margin-left: var(--space-s);
+  margin: 0;
+  margin-left: 8px;
 }
 
 .complement-price {
@@ -15,10 +22,22 @@
 @media screen and (min-width: 400px) {
   .complement-wrapper {
     border-top: 1px solid var(--border-color);
-    margin-top: 18px;
+    margin-top: var(--space-m);
+  }
+
+  .complement-wrapper--single {
+    border: 0;
+    
+  }
+
+  .complement-wrapper--single:last-child {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--space-m);
+    margin-bottom: var(--space-m);
   }
 
   .complement-description {
     font-size: var(--fz-xs);
   }
+
 } 

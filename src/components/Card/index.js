@@ -18,10 +18,10 @@ const Card = ({ children, modifiers }) => {
   return (
     <div className={`card ${getModifiers(modifiers, 'card')}`}>
       {React.Children.map(children, child => {
-        const allModifiers =
-          child && child.props && child.props.modifiers
-            ? [...modifiers, ...child.props.modifiers]
-            : modifiers;
+        const existChildAndModifiers = child && child.props && child.props.modifiers;
+        const allModifiers = existChildAndModifiers
+          ? [...modifiers, ...child.props.modifiers]
+          : modifiers;
         return (
           child &&
           React.cloneElement(child, {

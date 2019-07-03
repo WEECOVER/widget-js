@@ -1,0 +1,19 @@
+.button-wrapper {
+  padding: var(--space-m);
+}
+
+.button-wrapper--single {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 26px 16px;
+}
+
+.button--single {
+  flex: 1 1 auto;
+}
+
+@media screen and (min-width: 400px) {
+  .button--single {
+    flex: 0 0 140px;
+  }
+}

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
 import Button from '../../Button';
+import { getModifiers } from '../../../utils/data-mappers';
 
 const Footer = ({ addElement, mainModifier, availableStyles }) => {
   const displayGlobalAddButton =
@@ -8,8 +9,12 @@ const Footer = ({ addElement, mainModifier, availableStyles }) => {
   return (
     <Fragment>
       {displayGlobalAddButton && (
-        <div className="button-wrapper">
-          <Button onClick={() => addElement({ type: 'global', element: 'all' })}>AÑADIR</Button>
+        <div className={`button-wrapper ${getModifiers([mainModifier], 'button-wrapper')}`}>
+          <Button
+            modifiers={[mainModifier]}
+            onClick={() => addElement({ type: 'global', element: 'all' })}>
+            AÑADIR
+          </Button>
         </div>
       )}
     </Fragment>

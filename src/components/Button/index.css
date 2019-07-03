@@ -5,6 +5,7 @@
   background-color: var(--accent);
   padding: var(--space-s);
   border: 0;
+  cursor: pointer;
 }
 
 .button--sm {

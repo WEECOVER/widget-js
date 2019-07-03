@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useRef } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import CheckBox from '../../CheckBox';
 import Button from '../../Button';
 import { getModifiers } from '../../../utils/data-mappers';
@@ -20,11 +21,11 @@ const Title = ({
         <CheckBox onClick={onSelectComplement} size={CheckBox.availableSizes.large} />
       )}
       <h3 className={`card-title-text ${getModifiers(modifiers, 'card-title-text')}`}>
-        {title} {modifiers.includes('single') && <br />}
+        {title}
         <span className="card-title-price">
           {modifiers.includes('single') ? (
             <Fragment>
-              <span className="card-title-price-prefix">por </span>
+              <span className="card-title-price-prefix"> por </span>
               {price}
             </Fragment>
           ) : (

@@ -37,16 +37,19 @@
 .checkbox--small {
   width: var(--small);
   height: var(--small);
+  flex: 0 0 var(--small);
 }
 
 .checkbox--medium {
   width: var(--medium);
   height: var(--medium);
+  flex: 0 0 var(--medium);
 }
 
 .checkbox--large {
   width: var(--large);
   height: var(--large);
+  flex: 0 0 var(--large);
 }
 
 .checkbox--small.checkbox--checked::before {

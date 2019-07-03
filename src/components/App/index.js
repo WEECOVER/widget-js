@@ -13,19 +13,12 @@ const availableStyles = {
   single: 'single'
 };
 
-const complementaryModifiers = {
-  withCheckbox: 'withCheckbox',
-  withButton: 'withButton'
-};
-
 const App = () => {
   const [mainModifier, setMainModifier] = useState('');
-  const [complementaryModifier, setComplementaryModifier] = useState('');
 
   useEffect(() => {
     // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
-    setMainModifier(availableStyles.compressed);
-    setComplementaryModifier(complementaryModifiers.withButton);
+    setMainModifier(availableStyles.uncompressed);
   }, [mainModifier]);
 
   const addElement = ({ type, element }) => {
@@ -47,7 +40,6 @@ const App = () => {
         mainModifier={mainModifier}
         insurances={insurances}
         availableStyles={availableStyles}
-        complementaryModifier={complementaryModifier}
       />
       <Footer
         mainModifier={mainModifier}

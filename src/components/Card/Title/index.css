@@ -28,3 +28,13 @@
   font-size: var(--fz-xsss);
   margin: 0;
 }
+
+@media screen and (min-width: 400px) {
+  .card-title-text {
+    font-size: var(--fz-m);
+  }
+
+  .card-title-description {
+    font-size: var(--fz-xs);
+  }
+} 

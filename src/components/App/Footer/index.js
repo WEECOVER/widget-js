@@ -2,11 +2,9 @@ import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
 import Button from '../../Button';
 
-const Footer = ({ addElement, mainModifier, availableStyles, complementaryModifier }) => {
-  const compressedWithoutComplementaryModifier =
-    availableStyles.compressed === mainModifier && complementaryModifier;
+const Footer = ({ addElement, mainModifier, availableStyles }) => {
   const displayGlobalAddButton =
-    compressedWithoutComplementaryModifier || availableStyles.single === mainModifier;
+    availableStyles.single === mainModifier || availableStyles.compressed === mainModifier;
   return (
     <Fragment>
       {displayGlobalAddButton && (
@@ -21,12 +19,7 @@ const Footer = ({ addElement, mainModifier, availableStyles, complementaryModifi
 Footer.propTypes = {
   mainModifier: propTypes.string.isRequired,
   availableStyles: propTypes.object.isRequired,
-  addElement: propTypes.func.isRequired,
-  complementaryModifier: propTypes.string
-};
-
-Footer.defaultProps = {
-  complementaryModifier: ''
+  addElement: propTypes.func.isRequired
 };
 
 export default Footer;

@@ -11,3 +11,14 @@
 .complement-price {
   color: var(--accent);
 }
+
+@media screen and (min-width: 400px) {
+  .complement-wrapper {
+    border-top: 1px solid var(--border-color);
+    margin-top: 18px;
+  }
+
+  .complement-description {
+    font-size: var(--fz-xs);
+  }
+} 

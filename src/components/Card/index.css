@@ -13,10 +13,6 @@
   border-bottom: var(--underline);
 }
 
-.card--uncompressed:last-child {
-  margin-bottom: 0;
-}
-
 .card--single:last-child {
   padding: var(--space-m) var(--space-l);
   padding-bottom: 0;
@@ -33,10 +29,10 @@
 }
 
 .card--uncompressed {
+  flex: 1 1 178px;
   margin: var(--space-m);
+  margin-top: 0;
   padding: var(--space-s) var(--space-ml) var(--space-m);
   border: 1px solid var(--border-color);
-
 }
-
 

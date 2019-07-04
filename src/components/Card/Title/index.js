@@ -16,7 +16,7 @@ const Title = ({
   modifiers
 }) => (
   <Fragment>
-    <div className="card-title-container">
+    <div className={getModifiers(modifiers, 'card-title-container')}>
       {displayCheckbox && (
         <CheckBox onClick={onSelectComplement} size={CheckBox.availableSizes.large} />
       )}
@@ -34,7 +34,13 @@ const Title = ({
           {currency}
         </span>
       </h3>
-      {displayAddButton && <Button onClick={onSelectComplement}>Añadir</Button>}
+      {displayAddButton && (
+        <div className={getModifiers(modifiers, 'card-add-button-container')}>
+          <Button modifiers={[Button.availableSizes.sm]} onClick={onSelectComplement}>
+            Añadir
+          </Button>
+        </div>
+      )}
     </div>
     <p className="card-title-description">{description}</p>
   </Fragment>

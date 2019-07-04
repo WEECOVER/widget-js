@@ -13,6 +13,7 @@ const Content = ({ insurances, mainModifier, availableStyles, addElement }) => {
         insurances.map(({ title, price, currency, description, complements, id }) => (
           <Card key={id} modifiers={[mainModifier]}>
             <Card.Title
+              displayAddButton={mainModifier === availableStyles.compressedSideBar}
               id={id}
               title={title}
               price={price}

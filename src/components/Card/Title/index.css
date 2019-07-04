@@ -3,6 +3,11 @@
   align-items: center;
 }
 
+.card-title-container--compressedSideBar {
+  display: flex;
+  justify-content: space-between;
+}
+
 .card-title-text {
   margin: 0;
   margin-left: var(--space-s);
@@ -27,6 +32,10 @@
 .card-title-description {
   font-size: var(--fz-xsss);
   margin: 0;
+}
+
+.card-add-button-container {
+  flex: 0 0 100px
 }
 
 @media screen and (min-width: 0px) {

@@ -30,6 +30,12 @@
     
   }
 
+  .complement-wrapper--compressedSideBar{
+    border: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .complement-wrapper--single:last-child {
     border-bottom: 1px solid var(--border-color);
     padding-bottom: var(--space-m);

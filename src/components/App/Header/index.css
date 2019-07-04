@@ -16,6 +16,9 @@
 }
 
 .header--compressedSideBar {
-  border-bottom: 0;
   padding: 0 26px;
+}
+
+.header--compressedSideBar > .header-subtitle {
+  border-bottom: 1px solid var(--border-color);
 }

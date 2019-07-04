@@ -32,6 +32,15 @@
   border-top: 0;
 }
 
+.card--compressedSideBar{
+  flex: 1 1 100%;
+  border-bottom: var(--underline);
+}
+
+.card--compressedSideBar:last-child{
+  margin-bottom: 16px;
+}
+
 .card--uncompressed {
   flex: 1 1 178px;
   margin: var(--space-m);

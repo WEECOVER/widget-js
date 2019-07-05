@@ -1,4 +1,4 @@
-export const loadCss = callback => {
+export const loadCss = CSSDone => {
   const cssId = 'widget-css';
   if (!document.getElementById(cssId)) {
     const link = document.createElement('link');
@@ -8,8 +8,8 @@ export const loadCss = callback => {
 
     document.getElementsByTagName('head')[0].appendChild(link);
 
-    const img = document.createElement('img');
-    img.onerror = () => callback();
-    img.src = process.env.CSS_URI;
+    link.onload = () => {
+      CSSDone('onload listener');
+    };
   }
 };

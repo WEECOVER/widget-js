@@ -19,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
-    setMainModifier(availableStyles.compressedSideBar);
+    setMainModifier(availableStyles.compressed);
   }, [mainModifier]);
 
   const addElement = ({ type, element }) => {

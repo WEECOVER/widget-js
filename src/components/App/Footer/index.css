@@ -2,6 +2,11 @@
   padding: var(--space-m);
 }
 
+.button-wrapper--compressed {
+  border-bottom: 0;
+  padding-bottom: 6px;
+}
+
 .button-wrapper--single {
   display: flex;
   justify-content: flex-end;
@@ -20,6 +25,10 @@
   justify-content: flex-end;
   height: 40px;
   align-items: center;
+}
+
+.logo-wrapper--compressed{
+  justify-content: center;
 }
 
 .logo-image {

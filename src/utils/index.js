@@ -1,4 +1,4 @@
-export const loadCss = CSSDone => {
+export const loadCss = onLoadCss => {
   const cssId = 'widget-css';
   if (!document.getElementById(cssId)) {
     const link = document.createElement('link');
@@ -9,7 +9,7 @@ export const loadCss = CSSDone => {
     document.getElementsByTagName('head')[0].appendChild(link);
 
     link.onload = () => {
-      CSSDone('onload listener');
+      onLoadCss();
     };
   }
 };

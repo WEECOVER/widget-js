@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
 import Button from '../../Button';
 import { getModifiers } from '../../../utils/data-mappers';
+import logo from '../../../assets/images/logo.png';
 
 const Footer = ({ addElement, mainModifier, availableStyles }) => {
   const displayGlobalAddButton =
@@ -17,6 +18,9 @@ const Footer = ({ addElement, mainModifier, availableStyles }) => {
           </Button>
         </div>
       )}
+      <div className={getModifiers([mainModifier], 'logo-wrapper')}>
+        <img className="logo-image" src={logo} alt="weecover logo" />
+      </div>
     </Fragment>
   );
 };

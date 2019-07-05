@@ -12,6 +12,20 @@
   flex: 1 1 auto;
 }
 
+.logo-wrapper {
+  border: 1px solid var(--text-color);
+  border-top: 0;
+  padding: 0 26px;
+  display: flex;
+  justify-content: flex-end;
+  height: 40px;
+  align-items: center;
+}
+
+.logo-image {
+  height: 28px;
+}
+
 @media screen and (min-width: 400px) {
   .button--single {
     flex: 0 0 140px;

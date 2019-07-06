@@ -27,9 +27,10 @@
   align-items: center;
 }
 
-.logo-wrapper--compressed{
+.logo-wrapper--compressed, .logo-wrapper--uncompressed{
   justify-content: center;
 }
+
 
 .logo-image {
   height: 28px;

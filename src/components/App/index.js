@@ -19,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
-    setMainModifier(availableStyles.compressed);
+    setMainModifier(availableStyles.uncompressed);
   }, [mainModifier]);
 
   const addElement = ({ type, element }) => {

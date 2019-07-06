@@ -19,6 +19,7 @@ const Footer = ({ addElement, mainModifier, availableStyles }) => {
         </div>
       )}
       <div className={getModifiers([mainModifier], 'logo-wrapper')}>
+        <span>By </span>
         <img className="logo-image" src={logo} alt="weecover logo" />
       </div>
     </Fragment>

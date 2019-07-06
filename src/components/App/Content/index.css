@@ -20,11 +20,6 @@
   padding-top: var(--space-m);
 }
 
-.button-wrapper {
-  border: 1px solid var(--text-color);
-  border-top: 0;
-}
-
 @media screen and (min-width: 400px) {
   .cards-wrapper--uncompressed {
     border-top: 0;

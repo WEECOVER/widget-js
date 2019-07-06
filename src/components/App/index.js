@@ -5,7 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 
 // TODO: Delete faleData when real data implemented
-const [{ mainTitle, mainDescription, insurances }] = fakeData;
+const [{ mainTitle, mainDescription, insurances }] = SingleFakeData;
 
 const availableStyles = {
   compressed: 'compressed',
@@ -19,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
-    setMainModifier(availableStyles.uncompressed);
+    setMainModifier(availableStyles.single);
   }, [mainModifier]);
 
   const addElement = ({ type, element }) => {

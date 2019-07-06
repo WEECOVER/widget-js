@@ -22,7 +22,7 @@ const Title = ({
       )}
       <h3 className={getModifiers(modifiers, 'card-title-text')}>
         {title}
-        <span className="card-title-price">
+        <span className={getModifiers(modifiers, 'card-title-price')}>
           {modifiers.includes('single') ? (
             <Fragment>
               <span className="card-title-price-prefix"> por </span>

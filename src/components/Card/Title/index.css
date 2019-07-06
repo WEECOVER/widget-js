@@ -43,6 +43,11 @@
     content: '\A';
     display: block;
   }
+
+  .card-title-price--uncompressed::before{
+    content: '\00a0';
+    display: inline-block;
+  }
 }
 
 @media screen and (min-width: 400px) {

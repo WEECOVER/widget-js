@@ -10,7 +10,7 @@ const Footer = ({ addElement, mainModifier, availableStyles }) => {
   return (
     <Fragment>
       {displayGlobalAddButton && (
-        <div className={getModifiers([mainModifier], 'button-wrapper')}>
+        <div className={getModifiers([mainModifier], 'footer-button-wrapper')}>
           <Button
             modifiers={[mainModifier]}
             onClick={() => addElement({ type: 'global', element: 'all' })}>

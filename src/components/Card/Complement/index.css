@@ -50,4 +50,8 @@
     font-size: var(--fz-xs);
   }
 
+  .complement-wrapper--uncompressed {
+    padding-top: 8px;
+  }
+
 } 

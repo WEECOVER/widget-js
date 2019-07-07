@@ -7,6 +7,13 @@ const cleanPreviousComplements = insurance => ({
   }))
 });
 
+const removeComplements = updatedInsurances => {
+  const existAnyCheckedInsurance = updatedInsurances.find(insurance => insurance.checked);
+  return !existAnyCheckedInsurance
+    ? updatedInsurances.map(insurance => cleanPreviousComplements(insurance))
+    : updatedInsurances;
+};
+
 const setCurrentAddButtonThroughComplement = insurance => ({
   ...insurance,
   checked: true
@@ -24,14 +31,15 @@ const switchBetweenInsurances = (complements, id) =>
     complement.id === id ? { ...complement, checked: !complement.checked } : complement
   );
 
-const handleInsuranceSelected = (insurances, id, checked, insuranceId) =>
-  insurances.map(insurance => {
+const handleInsuranceSelected = (insurances, id, checked, insuranceId) => {
+  const updatedInsurances = insurances.map(insurance => {
     const currentInsurace =
-      insurance.id === id && checked
+      insurance.id === id
         ? { ...insurance, checked: !insurance.checked }
         : setThroughComplement(insurance, insuranceId);
     currentInsurace.complements = switchBetweenInsurances(currentInsurace.complements, id);
     return currentInsurace;
   });
-
+  return !checked ? removeComplements(updatedInsurances) : updatedInsurances;
+};
 export { setThroughComplement, switchBetweenInsurances, handleInsuranceSelected };

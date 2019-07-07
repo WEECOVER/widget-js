@@ -10,30 +10,23 @@ const availableStyle = {
   uncompressed: 'uncompressed'
 };
 
-const Card = ({ children, modifiers }) => {
-  const onSelectComplement = ({ checked }) => {
-    console.log(checked);
-  };
-
-  return (
-    <div className={getModifiers(modifiers, 'card')}>
-      {React.Children.map(children, child => {
-        const existChildAndModifiers = child && child.props && child.props.modifiers;
-        const allModifiers = existChildAndModifiers
-          ? [...modifiers, ...child.props.modifiers]
-          : modifiers;
-        return (
-          child &&
-          React.cloneElement(child, {
-            onSelectComplement,
-            modifiers: allModifiers,
-            className: child.props.className
-          })
-        );
-      })}
-    </div>
-  );
-};
+const Card = ({ children, modifiers }) => (
+  <div className={getModifiers(modifiers, 'card')}>
+    {React.Children.map(children, child => {
+      const existChildAndModifiers = child && child.props && child.props.modifiers;
+      const allModifiers = existChildAndModifiers
+        ? [...modifiers, ...child.props.modifiers]
+        : modifiers;
+      return (
+        child &&
+        React.cloneElement(child, {
+          modifiers: allModifiers,
+          className: child.props.className
+        })
+      );
+    })}
+  </div>
+);
 
 Card.availableStyle = availableStyle;
 Card.Title = Title;

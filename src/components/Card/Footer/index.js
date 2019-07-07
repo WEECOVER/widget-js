@@ -2,28 +2,35 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../Button';
 
-const Footer = ({ mainModifier, availableStyles, element, addInsuanceToCart }) => (
-  <Fragment>
-    {mainModifier === availableStyles.uncompressed && (
-      <Button
-        onClick={() =>
-          addInsuanceToCart({
-            type: 'single',
-            element
-          })
-        }
-        modifiers={[Button.availableSizes.sm]}>
-        AÑADIR
-      </Button>
-    )}
-  </Fragment>
-);
+const Footer = ({ mainModifier, availableStyles, element, addInsuanceToCart, checked, id }) => {
+  const getButtonModifiers = () =>
+    checked
+      ? [Button.availableSizes.sm, Button.availableSizes.selected]
+      : [Button.availableSizes.sm];
+  return (
+    <Fragment>
+      {mainModifier === availableStyles.uncompressed && (
+        <Button
+          onClick={() =>
+            addInsuanceToCart({
+              type: 'single',
+              id
+            })
+          }
+          modifiers={getButtonModifiers()}>
+          AÑADIR
+        </Button>
+      )}
+    </Fragment>
+  );
+};
 
 Footer.propTypes = {
   mainModifier: PropTypes.string.isRequired,
   availableStyles: PropTypes.object.isRequired,
   element: PropTypes.object.isRequired,
-  addInsuanceToCart: PropTypes.func.isRequired
+  addInsuanceToCart: PropTypes.func.isRequired,
+  checked: PropTypes.bool.isRequired
 };
 
 export default Footer;

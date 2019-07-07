@@ -17,9 +17,8 @@ const Title = ({
   modifiers,
   checked
 }) => {
-  console.log('CHECKED', checked);
   const handleSelect = () => {
-    onSelect({ checked: !checked, id, title });
+    onSelect({ checked: !checked, id, type: 'insurance' });
   };
 
   const getButtonModifiers = () =>

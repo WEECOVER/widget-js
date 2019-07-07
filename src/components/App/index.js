@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Content from './Content';
 import Header from './Header';
 import Footer from './Footer';
+import { setThroughComplement, switchBetweenInsurances } from './handle-insurances';
 
 const availableStyles = {
   compressed: 'compressed',
@@ -27,30 +28,33 @@ const App = () => {
         { mainTitle: _mainTitle, mainDescription: _mainDescription, insurances: _insurances }
       ] = fakeData;
       if (!insurances.length) {
-        console.log('set', insurances.length);
         setMainTitle(_mainTitle);
         setMainDescription(_mainDescription);
         setInsurances(_insurances);
       }
     })();
     // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
-    setMainModifier(availableStyles.compressedSideBar);
+    setMainModifier(availableStyles.uncompressed);
   }, [insurances, mainDescription, mainModifier, mainTitle]);
 
-  const addInsuanceToCart = e => {
-    console.log('ARGUMENTS!', e);
-    console.log(e);
-    const updatedInsurance = insurances.map(insurance =>
-      insurance.id === e.id ? { ...insurance, checked: !insurance.checked } : insurance
-    );
+  const addInsuanceToCart = ({ checked, id, type, insuranceId = null }) => {
+    const updatedInsurance = insurances.map(insurance => {
+      const currentInsurace =
+        insurance.id === id
+          ? { ...insurance, checked: !insurance.checked }
+          : setThroughComplement(insurance, insuranceId);
 
-    console.log(updatedInsurance);
+      currentInsurace.complements = switchBetweenInsurances(currentInsurace.complements, id);
+
+      return currentInsurace;
+    });
 
     setInsurances(updatedInsurance);
-    // console.log('ADD', checked, element);
   };
 
   if (!mainModifier) return null;
+
+  console.log(insurances, 'insurances');
 
   return (
     <main className="wrapper">

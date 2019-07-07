@@ -12,7 +12,16 @@ export const fakeData = [
         description: 'Integer enim tellus, dapibus quis dui quis, adam accumsan posuere ipsum.',
         complements: [
           {
+            insuranceId: '1',
             id: '1.1',
+            checked: false,
+            price: '29.99',
+            currency: '€',
+            description: 'Praesent tincidunt aliquet urna por'
+          },
+          {
+            insuranceId: '1',
+            id: '1.2',
             checked: false,
             price: '29.99',
             currency: '€',
@@ -29,6 +38,7 @@ export const fakeData = [
         description: 'Integer enim tellus, dapibus quis dui quis, adam accumsan posuere ipsum.',
         complements: [
           {
+            insuranceId: '2',
             id: '2.2',
             checked: false,
             price: '29.99',
@@ -46,6 +56,7 @@ export const fakeData = [
         description: 'Integer enim tellus, dapibus quis dui quis, adam accumsan posuere ipsum.',
         complements: [
           {
+            insuranceId: '3',
             id: '3.3',
             checked: false,
             price: '29.99',
@@ -71,6 +82,7 @@ export const SingleFakeData = [
         description: 'Integer enim tellus, dapibus quis dui quis, adam accumsan posuere ipsum.',
         complements: [
           {
+            insuranceId: '1',
             id: '1.1',
             checked: false,
             price: '29.99',
@@ -78,6 +90,7 @@ export const SingleFakeData = [
             description: 'Praesent tincidunt aliquet urna por'
           },
           {
+            insuranceId: '1',
             id: '1.2',
             checked: false,
             price: '29.99',

@@ -30,7 +30,7 @@ const Title = ({
     <Fragment>
       <div className={getModifiers(modifiers, 'card-title-container')}>
         {displayCheckbox && (
-          <CheckBox onClick={handleSelect} size={CheckBox.availableSizes.large} />
+          <CheckBox checked={checked} onClick={handleSelect} size={CheckBox.availableSizes.large} />
         )}
         <Price title={title} modifiers={modifiers} price={price} currency={currency} />
         {displayAddButton && (

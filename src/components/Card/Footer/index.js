@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../Button';
 
-const Footer = ({ mainModifier, availableStyles, element, addInsuanceToCart, checked, id }) => {
+const Footer = ({ mainModifier, availableStyles, element, addInsuanceToCart, checked }) => {
   const getButtonModifiers = () =>
     checked
       ? [Button.availableSizes.sm, Button.availableSizes.selected]
@@ -14,7 +14,7 @@ const Footer = ({ mainModifier, availableStyles, element, addInsuanceToCart, che
           onClick={() =>
             addInsuanceToCart({
               type: 'single',
-              id
+              id: element.id
             })
           }
           modifiers={getButtonModifiers()}>

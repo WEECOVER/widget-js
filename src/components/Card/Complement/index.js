@@ -35,8 +35,7 @@ const Complement = ({ onSelect, complements, modifiers }) => {
 Complement.propTypes = {
   onSelect: PropTypes.func.isRequired,
   complements: PropTypes.array,
-  modifiers: PropTypes.array,
-  id: PropTypes.string.isRequired
+  modifiers: PropTypes.array
 };
 
 Complement.defaultProps = {

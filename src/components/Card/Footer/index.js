@@ -2,12 +2,12 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../Button';
 
-const Footer = ({ mainModifier, availableStyles, element, addElement }) => (
+const Footer = ({ mainModifier, availableStyles, element, addInsuanceToCart }) => (
   <Fragment>
     {mainModifier === availableStyles.uncompressed && (
       <Button
         onClick={() =>
-          addElement({
+          addInsuanceToCart({
             type: 'single',
             element
           })
@@ -23,7 +23,7 @@ Footer.propTypes = {
   mainModifier: PropTypes.string.isRequired,
   availableStyles: PropTypes.object.isRequired,
   element: PropTypes.object.isRequired,
-  addElement: PropTypes.func.isRequired
+  addInsuanceToCart: PropTypes.func.isRequired
 };
 
 export default Footer;

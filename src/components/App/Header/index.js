@@ -16,8 +16,13 @@ const Header = ({ availableStyles, mainModifier, mainTitle, mainDescription }) =
 Header.propTypes = {
   availableStyles: PropTypes.object.isRequired,
   mainModifier: PropTypes.string.isRequired,
-  mainTitle: PropTypes.string.isRequired,
-  mainDescription: PropTypes.string.isRequired
+  mainTitle: PropTypes.string,
+  mainDescription: PropTypes.string
+};
+
+Header.defaultProps = {
+  mainTitle: '',
+  mainDescription: ''
 };
 
 export default Header;

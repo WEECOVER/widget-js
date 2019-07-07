@@ -4,48 +4,51 @@ export const fakeData = [
     mainDescription: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.',
     insurances: [
       {
-        id: 1,
+        id: '1',
         title: 'Básico',
-        price: 49.99,
+        price: '49.99',
         currency: '€',
+        checked: false,
         description: 'Integer enim tellus, dapibus quis dui quis, adam accumsan posuere ipsum.',
         complements: [
           {
-            id: 1.1,
+            id: '1.1',
             checked: false,
-            price: 29.99,
+            price: '29.99',
             currency: '€',
             description: 'Praesent tincidunt aliquet urna por'
           }
         ]
       },
       {
-        id: 2,
+        id: '2',
         title: 'Premium',
-        price: 49.99,
+        price: '49.99',
         currency: '€',
+        checked: false,
         description: 'Integer enim tellus, dapibus quis dui quis, adam accumsan posuere ipsum.',
         complements: [
           {
-            id: 2.2,
+            id: '2.2',
             checked: false,
-            price: 29.99,
+            price: '29.99',
             currency: '€',
             description: 'Praesent tincidunt aliquet urna por'
           }
         ]
       },
       {
-        id: 3,
+        id: '3',
         title: 'Top',
-        price: 49.99,
+        price: '49.99',
         currency: '€',
+        checked: false,
         description: 'Integer enim tellus, dapibus quis dui quis, adam accumsan posuere ipsum.',
         complements: [
           {
-            id: 3.3,
+            id: '3.3',
             checked: false,
-            price: 29.99,
+            price: '29.99',
             currency: '€',
             description: 'Praesent tincidunt aliquet urna por'
           }
@@ -61,23 +64,23 @@ export const SingleFakeData = [
     mainDescription: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.',
     insurances: [
       {
-        id: 1,
+        id: '1',
         title: 'Básico',
-        price: 49.99,
+        price: '49.99',
         currency: '€',
         description: 'Integer enim tellus, dapibus quis dui quis, adam accumsan posuere ipsum.',
         complements: [
           {
-            id: 1.1,
+            id: '1.1',
             checked: false,
-            price: 29.99,
+            price: '29.99',
             currency: '€',
             description: 'Praesent tincidunt aliquet urna por'
           },
           {
-            id: 1.2,
+            id: '1.2',
             checked: false,
-            price: 29.99,
+            price: '29.99',
             currency: '€',
             description: 'Praesent tincidunt aliquet urna por'
           }

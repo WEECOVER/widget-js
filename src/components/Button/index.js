@@ -4,6 +4,7 @@ import { getModifiers } from '../../utils/data-mappers';
 
 const availableSizes = {
   sm: 'sm',
+  selected: 'selected',
   default: ''
 };
 

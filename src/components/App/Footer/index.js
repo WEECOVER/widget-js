@@ -4,7 +4,7 @@ import Button from '../../Button';
 import { getModifiers } from '../../../utils/data-mappers';
 import logo from '../../../assets/images/logo.png';
 
-const Footer = ({ addElement, mainModifier, availableStyles }) => {
+const Footer = ({ addInsuanceToCart, mainModifier, availableStyles }) => {
   const displayGlobalAddButton =
     availableStyles.single === mainModifier || availableStyles.compressed === mainModifier;
   return (
@@ -13,7 +13,7 @@ const Footer = ({ addElement, mainModifier, availableStyles }) => {
         <div className={getModifiers([mainModifier], 'footer-button-wrapper')}>
           <Button
             modifiers={[mainModifier]}
-            onClick={() => addElement({ type: 'global', element: 'all' })}>
+            onClick={() => addInsuanceToCart({ type: 'global', element: 'all' })}>
             AÑADIR
           </Button>
         </div>
@@ -29,7 +29,7 @@ const Footer = ({ addElement, mainModifier, availableStyles }) => {
 Footer.propTypes = {
   mainModifier: propTypes.string.isRequired,
   availableStyles: propTypes.object.isRequired,
-  addElement: propTypes.func.isRequired
+  addInsuanceToCart: propTypes.func.isRequired
 };
 
 export default Footer;

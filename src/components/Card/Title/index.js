@@ -1,67 +1,70 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 import CheckBox from '../../CheckBox';
 import Button from '../../Button';
 import { getModifiers } from '../../../utils/data-mappers';
+import Price from './Price';
 
 const Title = ({
+  id,
   title,
   description,
   price,
   currency,
-  onSelectComplement,
+  onSelect,
   displayCheckbox,
   displayAddButton,
-  modifiers
-}) => (
-  <Fragment>
-    <div className={getModifiers(modifiers, 'card-title-container')}>
-      {displayCheckbox && (
-        <CheckBox onClick={onSelectComplement} size={CheckBox.availableSizes.large} />
-      )}
-      <h3 className={getModifiers(modifiers, 'card-title-text')}>
-        {title}
-        <span className={getModifiers(modifiers, 'card-title-price')}>
-          {modifiers.includes('single') ? (
-            <Fragment>
-              <span className="card-title-price-prefix"> por </span>
-              {price}
-            </Fragment>
-          ) : (
-            price
-          )}{' '}
-          {currency}
-        </span>
-      </h3>
-      {displayAddButton && (
-        <div className={getModifiers(modifiers, 'card-add-button-container')}>
-          <Button modifiers={[Button.availableSizes.sm]} onClick={onSelectComplement}>
-            Añadir
-          </Button>
-        </div>
-      )}
-    </div>
-    <p className="card-title-description">{description}</p>
-  </Fragment>
-);
+  modifiers,
+  checked
+}) => {
+  console.log('CHECKED', checked);
+  const handleSelect = () => {
+    onSelect({ checked: !checked, id, title });
+  };
+
+  const getButtonModifiers = () =>
+    checked
+      ? [Button.availableSizes.sm, Button.availableSizes.selected]
+      : [Button.availableSizes.sm];
+
+  return (
+    <Fragment>
+      <div className={getModifiers(modifiers, 'card-title-container')}>
+        {displayCheckbox && (
+          <CheckBox onClick={handleSelect} size={CheckBox.availableSizes.large} />
+        )}
+        <Price title={title} modifiers={modifiers} price={price} currency={currency} />
+        {displayAddButton && (
+          <div className={getModifiers(modifiers, 'card-add-button-container')}>
+            <Button modifiers={getButtonModifiers()} onClick={handleSelect}>
+              Añadir
+            </Button>
+          </div>
+        )}
+      </div>
+      <p className="card-title-description">{description}</p>
+    </Fragment>
+  );
+};
 
 Title.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired,
-  onSelectComplement: PropTypes.func,
+  onSelect: PropTypes.func.isRequired,
   displayCheckbox: PropTypes.bool,
   displayAddButton: PropTypes.bool,
-  modifiers: PropTypes.arrayOf(PropTypes.string)
+  modifiers: PropTypes.arrayOf(PropTypes.string),
+  id: PropTypes.string.isRequired,
+  checked: PropTypes.bool
 };
 
 Title.defaultProps = {
-  onSelectComplement: () => {},
   displayCheckbox: false,
   displayAddButton: false,
-  modifiers: []
+  modifiers: [],
+  checked: false
 };
 
 export default Title;

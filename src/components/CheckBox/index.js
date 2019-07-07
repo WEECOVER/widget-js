@@ -16,7 +16,6 @@ const CheckBox = ({ onClick, size, checked }) => {
   }, [checked]);
 
   const handleCheckBox = ({ target: { checked: _checked } }) => {
-    console.log(onClick, 'onClick');
     onClick({ checked: _checked });
     setChecked(_checked);
   };

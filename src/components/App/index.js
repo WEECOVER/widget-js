@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Content from './Content';
 import Header from './Header';
 import Footer from './Footer';
-import { setThroughComplement, switchBetweenInsurances } from './handle-insurances';
+import { handleInsuranceSelected } from './handle-insurances';
+import { getPrice } from './handle-price';
 
 const availableStyles = {
   compressed: 'compressed',
@@ -12,13 +13,12 @@ const availableStyles = {
   compressedSideBar: 'compressedSideBar'
 };
 
-console.log('AAAA');
-
 const App = () => {
   const [mainModifier, setMainModifier] = useState('');
   const [insurances, setInsurances] = useState([]);
   const [mainTitle, setMainTitle] = useState(null);
   const [mainDescription, setMainDescription] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -37,18 +37,10 @@ const App = () => {
     setMainModifier(availableStyles.uncompressed);
   }, [insurances, mainDescription, mainModifier, mainTitle]);
 
-  const addInsuanceToCart = ({ id, insuranceId = null }) => {
-    const updatedInsurance = insurances.map(insurance => {
-      const currentInsurace =
-        insurance.id === id
-          ? { ...insurance, checked: !insurance.checked }
-          : setThroughComplement(insurance, insuranceId);
-
-      currentInsurace.complements = switchBetweenInsurances(currentInsurace.complements, id);
-
-      return currentInsurace;
-    });
-
+  const addInsuanceToCart = ({ id, insuranceId = null, checked }) => {
+    setTotalPrice(0);
+    const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId);
+    setTotalPrice(getPrice(updatedInsurance));
     setInsurances(updatedInsurance);
   };
 

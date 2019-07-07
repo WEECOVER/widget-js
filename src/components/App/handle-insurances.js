@@ -24,4 +24,14 @@ const switchBetweenInsurances = (complements, id) =>
     complement.id === id ? { ...complement, checked: !complement.checked } : complement
   );
 
-export { setThroughComplement, switchBetweenInsurances };
+const handleInsuranceSelected = (insurances, id, checked, insuranceId) =>
+  insurances.map(insurance => {
+    const currentInsurace =
+      insurance.id === id && checked
+        ? { ...insurance, checked: !insurance.checked }
+        : setThroughComplement(insurance, insuranceId);
+    currentInsurace.complements = switchBetweenInsurances(currentInsurace.complements, id);
+    return currentInsurace;
+  });
+
+export { setThroughComplement, switchBetweenInsurances, handleInsuranceSelected };

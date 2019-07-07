@@ -24,9 +24,10 @@ const App = () => {
     (async () => {
       const { fakeData, singleFakeData } = await import('./fakeData');
       // TODO: Delete faleData when real data implemented
+      console.log(singleFakeData, 'singleFakeData');
       const [
         { mainTitle: _mainTitle, mainDescription: _mainDescription, insurances: _insurances }
-      ] = fakeData;
+      ] = singleFakeData;
       if (!insurances.length) {
         setMainTitle(_mainTitle);
         setMainDescription(_mainDescription);
@@ -34,10 +35,11 @@ const App = () => {
       }
     })();
     // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
-    setMainModifier(availableStyles.uncompressed);
+    setMainModifier(availableStyles.single);
   }, [insurances, mainDescription, mainModifier, mainTitle]);
 
-  const addInsuanceToCart = ({ id, insuranceId = null, checked }) => {
+  const addInsuanceToCart = ({ id, insuranceId = null, checked, type }) => {
+    console.log(type);
     setTotalPrice(0);
     const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId);
     setTotalPrice(getPrice(updatedInsurance));
@@ -47,6 +49,7 @@ const App = () => {
   console.log(totalPrice);
 
   if (!mainModifier) return null;
+  if (!insurances.length > 0) return null;
 
   return (
     <main className="wrapper">

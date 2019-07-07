@@ -4,16 +4,23 @@ import Button from '../../Button';
 import { getModifiers } from '../../../utils/data-mappers';
 import logo from '../../../assets/images/logo.png';
 
-const Footer = ({ addInsuanceToCart, mainModifier, availableStyles }) => {
+const Footer = ({ addInsuanceToCart, mainModifier, availableStyles, checked, id }) => {
   const displayGlobalAddButton =
     availableStyles.single === mainModifier || availableStyles.compressed === mainModifier;
+  const handleSelect = () => {
+    addInsuanceToCart({ checked: !checked, id, type: 'single' });
+  };
+
+  const getButtonModifiers = () =>
+    checked
+      ? [Button.availableSizes.sm, Button.availableSizes.selected]
+      : [Button.availableSizes.sm];
+
   return (
     <Fragment>
       {displayGlobalAddButton && (
         <div className={getModifiers([mainModifier], 'footer-button-wrapper')}>
-          <Button
-            modifiers={[mainModifier]}
-            onClick={() => addInsuanceToCart({ type: 'global', element: 'all' })}>
+          <Button modifiers={getButtonModifiers()} onClick={() => handleSelect()}>
             AÑADIR
           </Button>
         </div>

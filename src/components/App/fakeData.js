@@ -1,4 +1,4 @@
-export const fakeData = [
+const fakeData = [
   {
     mainTitle: 'Seguro Lorem Ipsum',
     mainDescription: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.',
@@ -69,7 +69,7 @@ export const fakeData = [
   }
 ];
 
-export const SingleFakeData = [
+const singleFakeData = [
   {
     mainTitle: 'Seguro Lorem Ipsum',
     mainDescription: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.',
@@ -102,3 +102,5 @@ export const SingleFakeData = [
     ]
   }
 ];
+
+export { fakeData, singleFakeData };

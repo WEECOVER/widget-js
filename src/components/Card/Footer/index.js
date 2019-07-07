@@ -30,7 +30,11 @@ Footer.propTypes = {
   availableStyles: PropTypes.object.isRequired,
   element: PropTypes.object.isRequired,
   addInsuanceToCart: PropTypes.func.isRequired,
-  checked: PropTypes.bool.isRequired
+  checked: PropTypes.bool
+};
+
+Footer.defaultProps = {
+  checked: false
 };
 
 export default Footer;

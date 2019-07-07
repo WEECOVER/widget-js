@@ -11,8 +11,8 @@
 
 .button--selected {
   background-color: var(--c-white);
-  border: 1px solid var(--border-color);
-  color: var(--border-color);
+  border: 1px solid var(--accent);
+  color: var(--accent);
 }
 
 .button--sm {

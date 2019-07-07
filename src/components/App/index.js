@@ -34,7 +34,7 @@ const App = () => {
       }
     })();
     // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
-    setMainModifier(availableStyles.compressed);
+    setMainModifier(availableStyles.uncompressed);
   }, [insurances, mainDescription, mainModifier, mainTitle]);
 
   const addInsuanceToCart = ({ checked, id, type, insuranceId = null }) => {

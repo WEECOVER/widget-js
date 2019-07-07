@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Content from './Content';
 import Header from './Header';
 import Footer from './Footer';
-import { handleInsuranceSelected } from './handle-insurances';
-import { getPrice } from './handle-price';
+import { handleInsuranceSelected } from './handlers/handle-insurances';
+import { getPrice } from './handlers/handle-price';
 
 const availableStyles = {
   compressed: 'compressed',
@@ -43,6 +43,8 @@ const App = () => {
     setTotalPrice(getPrice(updatedInsurance));
     setInsurances(updatedInsurance);
   };
+
+  console.log(totalPrice);
 
   if (!mainModifier) return null;
 

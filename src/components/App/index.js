@@ -37,7 +37,7 @@ const App = () => {
     setMainModifier(availableStyles.uncompressed);
   }, [insurances, mainDescription, mainModifier, mainTitle]);
 
-  const addInsuanceToCart = ({ checked, id, type, insuranceId = null }) => {
+  const addInsuanceToCart = ({ id, insuranceId = null }) => {
     const updatedInsurance = insurances.map(insurance => {
       const currentInsurace =
         insurance.id === id

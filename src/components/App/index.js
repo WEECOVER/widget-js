@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 // import { fakeData, SingleFakeData } from './fakeData'; // eslint-disable-line
 import Content from './Content';
 import Header from './Header';
@@ -19,6 +19,7 @@ const App = () => {
   const [mainTitle, setMainTitle] = useState(null);
   const [mainDescription, setMainDescription] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
+  const parentRef = useRef(null);
 
   useEffect(() => {
     (async () => {
@@ -28,13 +29,16 @@ const App = () => {
       ] = fakeData;
 
       if (!insurances.length) {
+        const displayMode =
+          parentRef.current && parentRef.current.parentElement.clientWidth > 375
+            ? availableStyles.uncompressed
+            : availableStyles.compressedSideBar;
         setMainTitle(_mainTitle);
         setMainDescription(_mainDescription);
         setInsurances(_insurances);
-        // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
 
         _insurances.length > 1
-          ? setMainModifier(availableStyles.compressedSideBar)
+          ? setMainModifier(displayMode)
           : setMainModifier(availableStyles.single);
       }
     })();
@@ -61,9 +65,8 @@ const App = () => {
 
   if (!mainModifier) return null;
 
-  console.log(totalPrice, 'totalPrice');
   return (
-    <main className="wrapper">
+    <main className="wrapper" ref={parentRef}>
       <Header
         availableStyles={availableStyles}
         mainModifier={mainModifier}

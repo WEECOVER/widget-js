@@ -18,14 +18,6 @@ const fakeData = [
             price: '29.99',
             currency: '€',
             description: 'Praesent tincidunt aliquet urna por'
-          },
-          {
-            insuranceId: '1',
-            id: '1.2',
-            checked: false,
-            price: '29.99',
-            currency: '€',
-            description: 'Praesent tincidunt aliquet urna por'
           }
         ]
       },

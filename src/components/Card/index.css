@@ -41,7 +41,3 @@
   border: 1px solid var(--border-color);
 }
 
-.card--uncompressed:last-child {
-  margin-bottom: 0;
-}
-

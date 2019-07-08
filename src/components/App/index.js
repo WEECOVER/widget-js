@@ -23,34 +23,45 @@ const App = () => {
   useEffect(() => {
     (async () => {
       const { fakeData, singleFakeData } = await import('./fakeData');
-      // TODO: Delete faleData when real data implemented
-      console.log(singleFakeData, 'singleFakeData');
       const [
         { mainTitle: _mainTitle, mainDescription: _mainDescription, insurances: _insurances }
-      ] = singleFakeData;
+      ] = fakeData;
+
       if (!insurances.length) {
         setMainTitle(_mainTitle);
         setMainDescription(_mainDescription);
         setInsurances(_insurances);
+        // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
+
+        _insurances.length > 1
+          ? setMainModifier(availableStyles.compressedSideBar)
+          : setMainModifier(availableStyles.single);
       }
     })();
-    // Seteamos el modificador principal estos datos vienen de API BACK_OFFICE
-    setMainModifier(availableStyles.single);
   }, [insurances, mainDescription, mainModifier, mainTitle]);
 
-  const addInsuanceToCart = ({ id, insuranceId = null, checked, type }) => {
-    console.log(type);
-    setTotalPrice(0);
+  const addInsuanceToCart = ({ id = null, insuranceId = null, checked }) => {
+    if (mainModifier === 'single') {
+      const updatedInsurance = id
+        ? handleInsuranceSelected(insurances, id, checked, insuranceId)
+        : insurances.map(insurance => ({ ...insurance, checked: true }));
+      setTotalPrice(getPrice(updatedInsurance));
+      setInsurances(updatedInsurance);
+      return;
+    }
+
+    if (!id) {
+      console.log(totalPrice, 'send total price');
+      setTotalPrice(0);
+    }
     const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId);
     setTotalPrice(getPrice(updatedInsurance));
     setInsurances(updatedInsurance);
   };
 
-  console.log(totalPrice);
-
   if (!mainModifier) return null;
-  if (!insurances.length > 0) return null;
 
+  console.log(totalPrice, 'totalPrice');
   return (
     <main className="wrapper">
       <Header
@@ -69,6 +80,7 @@ const App = () => {
         mainModifier={mainModifier}
         availableStyles={availableStyles}
         addInsuanceToCart={addInsuanceToCart}
+        insurances={insurances}
       />
     </main>
   );

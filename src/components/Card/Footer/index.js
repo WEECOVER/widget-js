@@ -5,7 +5,7 @@ import Button from '../../Button';
 const Footer = ({ mainModifier, availableStyles, element, addInsuanceToCart, checked }) => {
   const getButtonModifiers = () =>
     checked
-      ? [Button.availableSizes.sm, Button.availableSizes.selected]
+      ? [Button.availableSizes.sm, Button.availableModifiers.selected]
       : [Button.availableSizes.sm];
   return (
     <Fragment>

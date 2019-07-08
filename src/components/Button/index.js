@@ -4,26 +4,39 @@ import { getModifiers } from '../../utils/data-mappers';
 
 const availableSizes = {
   sm: 'sm',
-  selected: 'selected',
   default: ''
 };
 
-const Button = ({ children, onClick, modifiers }) => (
-  <button type="button" className={getModifiers(modifiers, 'button')} onClick={onClick}>
+const availableModifiers = {
+  selected: 'selected',
+  disabled: 'disabled'
+};
+
+const Button = ({ children, onClick, modifiers, disabled }) => (
+  <button
+    type="button"
+    className={getModifiers(modifiers, 'button')}
+    onClick={e => {
+      if (disabled) return;
+      onClick(e);
+    }}>
     {children}
   </button>
 );
 
 Button.availableSizes = availableSizes;
+Button.availableModifiers = availableModifiers;
 
 Button.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   onClick: PropTypes.func.isRequired,
-  modifiers: PropTypes.arrayOf(PropTypes.string)
+  modifiers: PropTypes.arrayOf(PropTypes.string),
+  disabled: PropTypes.bool
 };
 
 Button.defaultProps = {
-  modifiers: []
+  modifiers: [],
+  disabled: false
 };
 
 export default Button;

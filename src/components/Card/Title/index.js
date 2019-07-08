@@ -23,7 +23,7 @@ const Title = ({
 
   const getButtonModifiers = () =>
     checked
-      ? [Button.availableSizes.sm, Button.availableSizes.selected]
+      ? [Button.availableSizes.sm, Button.availableModifiers.selected]
       : [Button.availableSizes.sm];
 
   return (

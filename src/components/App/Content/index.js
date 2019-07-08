@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../Card';
 import { getModifiers } from '../../../utils/data-mappers';

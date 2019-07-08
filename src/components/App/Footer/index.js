@@ -1,26 +1,28 @@
 import React, { Fragment } from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Button from '../../Button';
 import { getModifiers } from '../../../utils/data-mappers';
 import logo from '../../../assets/images/logo.png';
 
-const Footer = ({ addInsuanceToCart, mainModifier, availableStyles, checked, id }) => {
+const Footer = ({ addInsuanceToCart, mainModifier, availableStyles, insurances }) => {
   const displayGlobalAddButton =
     availableStyles.single === mainModifier || availableStyles.compressed === mainModifier;
-  const handleSelect = () => {
-    addInsuanceToCart({ checked: !checked, id, type: 'single' });
-  };
+
+  const anyChecked = insurances.some(({ checked }) => checked);
 
   const getButtonModifiers = () =>
-    checked
-      ? [Button.availableSizes.sm, Button.availableSizes.selected]
-      : [Button.availableSizes.sm];
+    anyChecked || mainModifier === 'single'
+      ? [Button.availableSizes.sm]
+      : [Button.availableSizes.sm, Button.availableModifiers.disabled];
 
   return (
     <Fragment>
       {displayGlobalAddButton && (
         <div className={getModifiers([mainModifier], 'footer-button-wrapper')}>
-          <Button modifiers={getButtonModifiers()} onClick={() => handleSelect()}>
+          <Button
+            disabled={!(anyChecked || mainModifier === 'single')}
+            modifiers={getButtonModifiers()}
+            onClick={addInsuanceToCart}>
             AÑADIR
           </Button>
         </div>
@@ -34,9 +36,10 @@ const Footer = ({ addInsuanceToCart, mainModifier, availableStyles, checked, id 
 };
 
 Footer.propTypes = {
-  mainModifier: propTypes.string.isRequired,
-  availableStyles: propTypes.object.isRequired,
-  addInsuanceToCart: propTypes.func.isRequired
+  mainModifier: PropTypes.string.isRequired,
+  availableStyles: PropTypes.object.isRequired,
+  addInsuanceToCart: PropTypes.func.isRequired,
+  insurances: PropTypes.array.isRequired
 };
 
 export default Footer;

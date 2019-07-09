@@ -6,6 +6,7 @@ module.exports = () => ({
   output: {
     path: path.join(__dirname, '../dist'),
     filename: '[name].js',
+    chunkFilename: '[name].js'
   },
   module: {
     rules: [
@@ -25,7 +26,8 @@ module.exports = () => ({
           }
         }
       })
-    ]
+    ],
+    runtimeChunk: false,
   },
   plugins: [
     new MiniCssExtractPlugin({

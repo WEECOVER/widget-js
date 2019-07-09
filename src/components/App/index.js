@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import { fakeData, SingleFakeData } from './fakeData'; // eslint-disable-line
 import Content from './Content';
 import Header from './Header';
 import Footer from './Footer';
 import { handleInsuranceSelected } from './handlers/handle-insurances';
 import { getPrice } from './handlers/handle-price';
+import { fakeData, singleFakeData } from './fakeData';
 
 const availableStyles = {
   compressed: 'compressed',
@@ -23,7 +23,6 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      const { fakeData, singleFakeData } = await import('./fakeData');
       const [
         { mainTitle: _mainTitle, mainDescription: _mainDescription, insurances: _insurances }
       ] = fakeData;

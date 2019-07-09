@@ -38,7 +38,6 @@ const load = (function(){
 })();
 
 Promise.all([
-  load.js('%process.env.BASE_URI%/0.js'),
   load.js('%process.env.BASE_URI%/main.js'),
   load.css('%process.env.BASE_URI%/main.css')
 ]).then(function(){

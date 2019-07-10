@@ -1,6 +1,5 @@
 const getPrice = updatedInsurance => {
   let price = 0;
-  console.log(updatedInsurance);
   updatedInsurance.forEach(insurance => {
     if (insurance.checked) {
       price += Number(insurance.price);

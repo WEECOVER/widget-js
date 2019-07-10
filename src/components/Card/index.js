@@ -6,7 +6,6 @@ import Title from './Title';
 import { getModifiers } from '../../utils/data-mappers';
 
 const availableStyle = {
-  compressed: 'compressed',
   uncompressed: 'uncompressed'
 };
 

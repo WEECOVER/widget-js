@@ -4,11 +4,6 @@
   border-top: 0;
 }
 
-.footer-button-wrapper--compressed {
-  border-bottom: 0;
-  padding-bottom: 6px;
-}
-
 .footer-button-wrapper--single {
   display: flex;
   justify-content: flex-end;
@@ -32,7 +27,7 @@
   align-items: center;
 }
 
-.logo-wrapper--compressed, .logo-wrapper--uncompressed, .logo-wrapper--single{
+.logo-wrapper--uncompressed, .logo-wrapper--single{
   justify-content: center;
 }
 

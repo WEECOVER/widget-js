@@ -5,8 +5,7 @@ import { getModifiers } from '../../../utils/data-mappers';
 import logo from '../../../assets/images/logo.png';
 
 const Footer = ({ addInsuanceToCart, mainModifier, availableStyles, insurances }) => {
-  const displayGlobalAddButton =
-    availableStyles.single === mainModifier || availableStyles.compressed === mainModifier;
+  const displayGlobalAddButton = availableStyles.single === mainModifier;
 
   const anyChecked = insurances.some(({ checked }) => checked);
 

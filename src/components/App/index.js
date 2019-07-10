@@ -7,7 +7,6 @@ import { getPrice } from './handlers/handle-price';
 import { fakeData, singleFakeData } from './fakeData';
 
 const availableStyles = {
-  compressed: 'compressed',
   uncompressed: 'uncompressed',
   single: 'single',
   compressedSideBar: 'compressedSideBar'
@@ -25,7 +24,7 @@ const App = () => {
     (async () => {
       const [
         { mainTitle: _mainTitle, mainDescription: _mainDescription, insurances: _insurances }
-      ] = fakeData;
+      ] = singleFakeData;
 
       if (!insurances.length) {
         setMainTitle(_mainTitle);
@@ -70,7 +69,7 @@ const App = () => {
       setTotalPrice(0);
     }
     const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId, type);
-    console.log(updatedInsurance, 'updatedInsurance');
+    // TODO: EMIT PRICE getPrice(updatedInsurance)
     setTotalPrice(getPrice(updatedInsurance));
     setInsurances(updatedInsurance);
   };

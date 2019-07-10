@@ -70,6 +70,7 @@ const singleFakeData = [
         id: '1',
         title: 'Básico',
         price: '49.99',
+        checked: false,
         currency: '€',
         description: 'Integer enim tellus, dapibus quis dui quis, adam accumsan posuere ipsum.',
         complements: [

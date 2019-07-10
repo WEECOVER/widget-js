@@ -36,7 +36,7 @@ const Title = ({
         {displayAddButton && (
           <div className={getModifiers(modifiers, 'card-add-button-container')}>
             <Button modifiers={getButtonModifiers()} onClick={handleSelect}>
-              Añadir
+              {checked ? 'Añadido' : 'Añadir'}
             </Button>
           </div>
         )}

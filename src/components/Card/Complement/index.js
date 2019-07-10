@@ -5,6 +5,7 @@ import { getModifiers } from '../../../utils/data-mappers';
 
 const Complement = ({ onSelect, complements, modifiers }) => {
   const handleSelect = ({ checked, id, insuranceId }) => {
+    console.log('CHECKBOX', { insuranceId, checked, id, type: 'complement' });
     onSelect({ insuranceId, checked, id, type: 'complement' });
   };
 

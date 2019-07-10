@@ -10,11 +10,14 @@ const Footer = ({ addInsuanceToCart, mainModifier, availableStyles, insurances }
 
   const anyChecked = insurances.some(({ checked }) => checked);
 
-  const getButtonModifiers = () =>
-    anyChecked || mainModifier === 'single'
-      ? [Button.availableSizes.sm]
-      : [Button.availableSizes.sm, Button.availableModifiers.disabled];
+  const getButtonModifiers = () => {
+    const modifiers = [];
 
+    mainModifier === 'single' && modifiers.push([Button.availableSizes.sm]);
+    anyChecked && modifiers.push([Button.availableModifiers.selected]);
+
+    return modifiers;
+  };
   return (
     <Fragment>
       {displayGlobalAddButton && (
@@ -22,8 +25,8 @@ const Footer = ({ addInsuanceToCart, mainModifier, availableStyles, insurances }
           <Button
             disabled={!(anyChecked || mainModifier === 'single')}
             modifiers={getButtonModifiers()}
-            onClick={addInsuanceToCart}>
-            AÑADIR
+            onClick={event => addInsuanceToCart({ ...event, type: 'add' })}>
+            {anyChecked ? 'AÑADIDO' : 'AÑADIR'}
           </Button>
         </div>
       )}

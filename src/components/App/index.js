@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Content from './Content';
 import Header from './Header';
 import Footer from './Footer';
-import { handleInsuranceSelected } from './handlers/handle-insurances';
+import { handleInsuranceSelected, removeComplements } from './handlers/handle-insurances';
 import { getPrice } from './handlers/handle-price';
 import { fakeData, singleFakeData } from './fakeData';
 
@@ -28,13 +28,16 @@ const App = () => {
       ] = fakeData;
 
       if (!insurances.length) {
+        setMainTitle(_mainTitle);
+        setMainDescription(_mainDescription);
+        setInsurances(_insurances);
+      }
+
+      if (parentRef) {
         const displayMode =
           parentRef.current && parentRef.current.parentElement.clientWidth > 375
             ? availableStyles.uncompressed
             : availableStyles.compressedSideBar;
-        setMainTitle(_mainTitle);
-        setMainDescription(_mainDescription);
-        setInsurances(_insurances);
 
         _insurances.length > 1
           ? setMainModifier(displayMode)
@@ -43,26 +46,37 @@ const App = () => {
     })();
   }, [insurances, mainDescription, mainModifier, mainTitle]);
 
-  const addInsuanceToCart = ({ id = null, insuranceId = null, checked }) => {
+  const addInsuanceToCart = ({ id = null, insuranceId = null, checked, type }) => {
     if (mainModifier === 'single') {
       const updatedInsurance = id
-        ? handleInsuranceSelected(insurances, id, checked, insuranceId)
-        : insurances.map(insurance => ({ ...insurance, checked: true }));
+        ? insurances.map(insurance => ({
+            ...insurance,
+            complements: insurance.complements.map(complement =>
+              complement.id === id ? { ...complement, checked: !complement.checked } : complement
+            )
+          }))
+        : insurances.map(insurance => ({ ...insurance, checked: !insurances[0].checked }));
+
+      // TODO: EMIT PRICE getPrice(updatedInsurance)
+
       setTotalPrice(getPrice(updatedInsurance));
-      setInsurances(updatedInsurance);
+      type === 'add' && insurances[0].checked
+        ? setInsurances(removeComplements(updatedInsurance))
+        : setInsurances(updatedInsurance);
       return;
     }
 
     if (!id) {
-      console.log(totalPrice, 'send total price');
       setTotalPrice(0);
     }
-    const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId);
+    const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId, type);
+    console.log(updatedInsurance, 'updatedInsurance');
     setTotalPrice(getPrice(updatedInsurance));
     setInsurances(updatedInsurance);
   };
 
   if (!mainModifier) return null;
+  console.log(totalPrice, 'price');
 
   return (
     <main className="wrapper" ref={parentRef}>

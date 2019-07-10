@@ -5,6 +5,7 @@ import Footer from './Footer';
 import { handleInsuranceSelected, removeComplements } from './handlers/handle-insurances';
 import { getPrice } from './handlers/handle-price';
 import { fakeData, singleFakeData } from './fakeData';
+import { applyInitialConfig } from './handlers/handle-initial-config';
 
 const availableStyles = {
   uncompressed: 'uncompressed',
@@ -22,6 +23,7 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
+      await applyInitialConfig();
       const [
         { mainTitle: _mainTitle, mainDescription: _mainDescription, insurances: _insurances }
       ] = singleFakeData;
@@ -33,14 +35,16 @@ const App = () => {
       }
 
       if (parentRef) {
-        const displayMode =
-          parentRef.current && parentRef.current.parentElement.clientWidth > 375
-            ? availableStyles.uncompressed
-            : availableStyles.compressedSideBar;
+        const parentWidth = parentRef.current && parentRef.current.parentElement.clientWidth > 375;
+        const displayMode = parentWidth
+          ? availableStyles.uncompressed
+          : availableStyles.compressedSideBar;
 
         _insurances.length > 1
           ? setMainModifier(displayMode)
-          : setMainModifier(availableStyles.single);
+          : setMainModifier(
+              parentWidth ? availableStyles.single : availableStyles.compressedSideBar
+            );
       }
     })();
   }, [insurances, mainDescription, mainModifier, mainTitle]);

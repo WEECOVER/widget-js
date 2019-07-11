@@ -19,18 +19,21 @@ const App = () => {
   const [insurances, setInsurances] = useState([]);
   const [mainTitle, setMainTitle] = useState(null);
   const [mainDescription, setMainDescription] = useState(null);
-  const [totalPrice, setTotalPrice] = useState(0);
   const parentRef = useRef(null);
+  const [allAvailableInsurances, setAllAvailableInsurances] = useState(null);
 
   useEffect(() => {
     (async () => {
-      const clientInsurances = await applyInitialConfig();
-      console.log(clientInsurances, 'clientInsurances');
-      const data = await getInsuranceList();
-      console.log(data);
+      if (!allAvailableInsurances) {
+        const clientInsurances = await applyInitialConfig();
+        const data = await getInsuranceList();
+        // console.log({ clientInsurances, data });
+        setAllAvailableInsurances(clientInsurances);
+      }
+
       const [
         { mainTitle: _mainTitle, mainDescription: _mainDescription, insurances: _insurances }
-      ] = singleFakeData;
+      ] = fakeData;
 
       if (!insurances.length) {
         setMainTitle(_mainTitle);
@@ -51,7 +54,7 @@ const App = () => {
             );
       }
     })();
-  }, [insurances, mainDescription, mainModifier, mainTitle]);
+  }, [allAvailableInsurances, insurances, mainDescription, mainModifier, mainTitle]);
 
   const addInsuanceToCart = ({ id = null, insuranceId = null, checked, type }) => {
     if (mainModifier === 'single') {
@@ -64,26 +67,21 @@ const App = () => {
           }))
         : insurances.map(insurance => ({ ...insurance, checked: !insurances[0].checked }));
 
-      // TODO: EMIT PRICE getPrice(updatedInsurance)
+      window.widgetEventBus.publish('price', getPrice(updatedInsurance));
 
-      setTotalPrice(getPrice(updatedInsurance));
-      type === 'add' && insurances[0].checked
+      return type === 'add' && insurances[0].checked
         ? setInsurances(removeComplements(updatedInsurance))
         : setInsurances(updatedInsurance);
-      return;
     }
 
-    if (!id) {
-      setTotalPrice(0);
-    }
     const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId, type);
-    // TODO: EMIT PRICE getPrice(updatedInsurance)
-    setTotalPrice(getPrice(updatedInsurance));
+
+    window.widgetEventBus.publish('price', getPrice(updatedInsurance));
+
     setInsurances(updatedInsurance);
   };
 
   if (!mainModifier) return null;
-  console.log(totalPrice, 'price');
 
   return (
     <main className="wrapper" ref={parentRef}>

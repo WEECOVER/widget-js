@@ -10,11 +10,14 @@
   
   <div id="widget-root"></div>
 
-  <script src="http://localhost:3000/downloader.js" onload="initListeners()"></script>
+  <script src="http://localhost:3000/downloader.js" ></script>
   <script>
-    function initListeners() {
-      console.log('aaaaa', window.widgetEventBus)
-    }
+      var el = document.getElementById("widget-root").addEventListener("widget:loaded", function() {
+        console.log('EL WIDGET HA CARGADO', window.widgetEventBus)
+        window.widgetEventBus.subscribe('price', function({detail}) {
+          console.log('price has change', detail)
+        })
+      })
   </script>
 </body>
 </html>

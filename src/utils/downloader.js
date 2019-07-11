@@ -37,11 +37,19 @@ const load = (function(){
   };
 })();
 
-Promise.all([load.css('%process.env.BASE_URI%/main.css'), load.js('%process.env.BASE_URI%/event-bus.js')]).then(() => {
+Promise.all([
+  load.css('%process.env.BASE_URI%/main.css'), 
+  load.js('%process.env.BASE_URI%/event-bus.js')
+  // load.js('%process.env.BASE_URI%/vendor.js'),
+]).then(() => {
     Promise.all([
       load.js('%process.env.BASE_URI%/main.js'),
     ]).then(function(){
       console.log('loaded')
+      const rootElement = document.getElementById('widget-root');
+      console.log('ROOT', rootElement)
+      const event = new Event('widget:loaded');
+      rootElement.dispatchEvent(event);
     }).catch(function(){
       console.log('Oh no, epic failure!');
     })

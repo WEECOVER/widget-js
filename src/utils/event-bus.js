@@ -1,27 +1,19 @@
-function EventBus() {
-  const subscriptions = {};
+/* eslint-disable */ 
 
-  this.subscribe = function subscribeCallbackToEvent(eventType, callback) {
-    const id = Symbol('id');
-    if (!subscriptions[eventType]) subscriptions[eventType] = {};
-    subscriptions[eventType][id] = callback;
-    return {
-      unsubscribe: function unsubscribe() {
-        delete subscriptions[eventType][id];
-        if (Object.getOwnPropertySymbols(subscriptions[eventType]).length === 0) {
-          delete subscriptions[eventType];
-        }
-      }
-    };
+function EventBus() {
+  let bus = document.getElementById('widget-root');
+
+  this.subscribe = function(event, callback) {
+    bus.addEventListener(event, callback);
   };
 
-  this.publish = function publishEventWithArgs(eventType, arg) {
-    if (!subscriptions[eventType]) return;
+  this.removeEventListener = function(event, callback) {
+    bus.removeEventListener(event, callback);
+  };
 
-    Object.getOwnPropertySymbols(subscriptions[eventType]).forEach(key =>
-      subscriptions[eventType][key](arg)
-    );
+  this.publish = function(event, detail = {}) {
+    bus.dispatchEvent(new CustomEvent(event, { detail }));
   };
 }
 
-window.widgetEventBus = new EventBus();
+window.widgetEventBus = new EventBus()

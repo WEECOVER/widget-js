@@ -67,7 +67,7 @@ const App = () => {
           }))
         : insurances.map(insurance => ({ ...insurance, checked: !insurances[0].checked }));
 
-      window.widgetEventBus.publish('price', getPrice(updatedInsurance));
+      window.widgetEventBus.publish('widget:onchange:price', getPrice(updatedInsurance));
 
       return type === 'add' && insurances[0].checked
         ? setInsurances(removeComplements(updatedInsurance))
@@ -76,7 +76,7 @@ const App = () => {
 
     const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId, type);
 
-    window.widgetEventBus.publish('price', getPrice(updatedInsurance));
+    window.widgetEventBus.publish('widget:onchange:price', getPrice(updatedInsurance));
 
     setInsurances(updatedInsurance);
   };

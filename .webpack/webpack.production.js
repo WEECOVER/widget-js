@@ -34,6 +34,11 @@ module.exports = () => ({
           test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
           name: 'vendor',
           chunks: 'all',
+        },
+        vendor: {
+          test: /[\\/]node_modules[\\/](axios)[\\/]/,
+          name: 'axios',
+          chunks: 'all',
         }
       }
     }

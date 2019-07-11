@@ -1,8 +1,8 @@
 /* eslint-disable */
 const load = (function(){
   function _load(tag) {
-    return url =>
-      new Promise((resolve, reject) => {
+    return function(url) {
+      return new Promise(function(resolve, reject) {
         const element = document.createElement(tag);
         let parent = 'body';
         let attr = 'src';
@@ -28,6 +28,7 @@ const load = (function(){
         element[attr] = url;
         document[parent].appendChild(element);
       });
+    }
   }
 
   return {
@@ -39,18 +40,16 @@ const load = (function(){
 
 Promise.all([
   load.css('%process.env.BASE_URI%/main.css'), 
-  load.js('%process.env.BASE_URI%/event-bus.js')
-  // load.js('%process.env.BASE_URI%/vendor.js'),
+  load.js('%process.env.BASE_URI%/event-bus.js'),
+  load.js('%process.env.BASE_URI%/axios.js'),
 ]).then(() => {
     Promise.all([
       load.js('%process.env.BASE_URI%/main.js'),
     ]).then(function(){
-      console.log('loaded')
       const rootElement = document.getElementById('widget-root');
-      console.log('ROOT', rootElement)
       const event = new Event('widget:loaded');
       rootElement.dispatchEvent(event);
     }).catch(function(){
-      console.log('Oh no, epic failure!');
+      console.error('Has been an error in widget');
     })
 })

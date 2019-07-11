@@ -37,12 +37,12 @@ const load = (function(){
   };
 })();
 
-load.css('%process.env.BASE_URI%/main.css').then(() =>{
-  Promise.all([
-    load.js('%process.env.BASE_URI%/main.js'),
-  ]).then(function(){
-    console.log('loaded')
-  }).catch(function(){
-    console.log('Oh no, epic failure!');
-  })
+Promise.all([load.css('%process.env.BASE_URI%/main.css'), load.js('%process.env.BASE_URI%/event-bus.js')]).then(() => {
+    Promise.all([
+      load.js('%process.env.BASE_URI%/main.js'),
+    ]).then(function(){
+      console.log('loaded')
+    }).catch(function(){
+      console.log('Oh no, epic failure!');
+    })
 })

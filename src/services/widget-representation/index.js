@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { API_URI } from './constants';
 
-const fakeId = '355717f0-9d9c-11e9-bce5-55959cb314b7';
+const fakeId = '6eff0290-a181-11e9-a41f-7940f295bd3f';
 
 const getConfig = async () => {
   const { data } = await axios.get(`${API_URI}/${fakeId}`);
-  return data.styles;
+
+  return { styles: data.styles, insurances: data.objects };
 };
 
 export { getConfig };

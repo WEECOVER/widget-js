@@ -6,6 +6,7 @@ import { handleInsuranceSelected, removeComplements } from './handlers/handle-in
 import { getPrice } from './handlers/handle-price';
 import { fakeData, singleFakeData } from './fakeData';
 import { applyInitialConfig } from './handlers/handle-initial-config';
+import { getInsuranceList } from '../../services/core';
 
 const availableStyles = {
   uncompressed: 'uncompressed',
@@ -23,7 +24,10 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      await applyInitialConfig();
+      const clientInsurances = await applyInitialConfig();
+      console.log(clientInsurances, 'clientInsurances');
+      const data = await getInsuranceList();
+      console.log(data);
       const [
         { mainTitle: _mainTitle, mainDescription: _mainDescription, insurances: _insurances }
       ] = singleFakeData;

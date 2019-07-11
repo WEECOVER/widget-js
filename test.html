@@ -10,6 +10,11 @@
   
   <div id="widget-root"></div>
 
-  <script src="http://localhost:3000/downloader.js"></script>
+  <script src="http://localhost:3000/downloader.js" onload="initListeners()"></script>
+  <script>
+    function initListeners() {
+      console.log('aaaaa', window.widgetEventBus)
+    }
+  </script>
 </body>
 </html>

@@ -33,11 +33,10 @@ const hireInsurance = async () => {
 
 const getInsurance = async () => {
   const data = {
-    clienteId: 'cli2',
+    codigoCliente: 'WEEWIDGET001',
     idioma: 'ES',
-    password: '1234',
-    seguroId: 'G-BIKE-BASICO',
-    transaccionId: '1'
+    password: '?q^PGg5HgccC%qVw',
+    transaccionId: '55'
   };
   const response = await axios.post(`${API_URI}/obtenerSeguro`, data);
   return response;
@@ -45,10 +44,10 @@ const getInsurance = async () => {
 
 const getInsuranceList = async () => {
   const data = {
-    clienteId: 'cli2',
+    codigoCliente: 'WEEWIDGET001',
     idioma: 'ES',
-    password: '1234',
-    transaccionId: '1'
+    password: '?q^PGg5HgccC%qVw',
+    transaccionId: '55'
   };
   const response = await axios.post(`${API_URI}/obtenerSeguros`, data);
   return response;

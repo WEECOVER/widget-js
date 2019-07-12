@@ -8,9 +8,6 @@ module.exports = () => ({
     filename: '[name].js',
     chunkFilename: '[name].js'
   },
-  externals: {
-    react: 'React'
-  },
   module: {
     rules: [
       {

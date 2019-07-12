@@ -13,9 +13,6 @@ module.exports = () => ({
       chunkFilename: '[id].css',
     }),
   ],
-  externals: {
-    react: 'React'
-  },
   module: {
     rules: [
       {

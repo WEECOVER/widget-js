@@ -39,14 +39,14 @@ const load = (function(){
 })();
 
 Promise.all([
-  load.css('%process.env.BASE_URI%/main.css'), 
-  load.js('%process.env.BASE_URI%/event-bus.js'),
-  load.js('%process.env.BASE_URI%/axios.js'),
+  load.css('%process.env.BASE_URI%/main.css'),
+  load.js('%process.env.BASE_URI%/event-bus.js')
 ]).then(() => {
     Promise.all([
       load.js('%process.env.BASE_URI%/main.js'),
     ]).then(function(){
       const rootElement = document.getElementById('widget-root');
+      rootElement.attachShadow({mode: 'open'});
       const event = new Event('widget:loaded');
       rootElement.dispatchEvent(event);
     }).catch(function(){

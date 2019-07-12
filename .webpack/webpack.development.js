@@ -13,6 +13,9 @@ module.exports = () => ({
       chunkFilename: '[id].css',
     }),
   ],
+  externals: {
+    react: 'React'
+  },
   module: {
     rules: [
       {
@@ -28,6 +31,6 @@ module.exports = () => ({
           'css-loader',
         ],
       },
-    ]
+    ],
   }
-})
+  })

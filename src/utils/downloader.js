@@ -47,7 +47,6 @@ Promise.all([
       load.js('%process.env.BASE_URI%/main.js'),
     ]).then(function(){
       const rootElement = document.getElementById('widget-root');
-      rootElement.attachShadow({mode: 'open'});
       const event = new Event('widget:loaded');
       rootElement.dispatchEvent(event);
     }).catch(function(error){

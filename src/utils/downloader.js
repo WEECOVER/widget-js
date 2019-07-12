@@ -49,7 +49,8 @@ Promise.all([
       rootElement.attachShadow({mode: 'open'});
       const event = new Event('widget:loaded');
       rootElement.dispatchEvent(event);
-    }).catch(function(){
+    }).catch(function(error){
+      console.error(error)
       console.error('Has been an error in widget');
     })
 })

@@ -16,4 +16,4 @@ function EventBus() {
   };
 }
 
-window.widgetEventBus = new EventBus()
+export default new EventBus()

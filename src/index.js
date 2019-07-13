@@ -9,8 +9,8 @@ export default {
   widgets: {
     App: {
       eventBus: EventBus,
-      render: () => {
-        ReactDOM.render(<App />, document.getElementById('widget-root'));
+      render: bus => {
+        ReactDOM.render(<App eventBus={bus} />, document.getElementById('widget-root'));
       }
     }
   }

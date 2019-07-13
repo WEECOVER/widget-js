@@ -111,7 +111,7 @@ const availableStyles = {
   compressedSideBar: 'compressedSideBar'
 };
 
-const App = () => {
+const App = ({ eventBus }) => {
   const [mainModifier, setMainModifier] = useState('');
   const [insurances, setInsurances] = useState([]);
   const [mainTitle, setMainTitle] = useState(null);
@@ -164,7 +164,7 @@ const App = () => {
           }))
         : insurances.map(insurance => ({ ...insurance, checked: !insurances[0].checked }));
 
-      window.widgetEventBus.publish('widget:onchange:price', getPrice(updatedInsurance));
+      eventBus.publish('widget:onchange:price', getPrice(updatedInsurance));
 
       return type === 'add' && insurances[0].checked
         ? setInsurances(removeComplements(updatedInsurance))
@@ -173,7 +173,7 @@ const App = () => {
 
     const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId, type);
 
-    window.widgetEventBus.publish('widget:onchange:price', getPrice(updatedInsurance));
+    eventBus.publish('widget:onchange:price', getPrice(updatedInsurance));
 
     setInsurances(updatedInsurance);
   };

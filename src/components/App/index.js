@@ -112,7 +112,7 @@ const availableStyles = {
 
 const App = ({ widgetId, API_CORE, API_CONFIG, eventBus }) => {
   const [mainModifier, setMainModifier] = useState('');
-  const [insurances, setInsurances] = useState([]);
+  const [insurances, setInsurances] = useState(null);
   const [mainTitle, setMainTitle] = useState(null);
   const [mainDescription, setMainDescription] = useState(null);
   const parentRef = useRef(null);
@@ -121,18 +121,20 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus }) => {
     (async () => {
       const [{ mainTitle: _mainTitle, mainDescription: _mainDescription }] = fakeData;
 
-      if (!insurances.length) {
+      if (!insurances) {
         const clientInsurances = await API_CONFIG.applyInitialConfig(widgetId);
-        const result = clientInsurances.isgroup
-          ? API_CORE.getGroupInsurance(clientInsurances.insurance)
-          : API_CORE.getInsurance(clientInsurances.insurance);
+        if (clientInsurances) {
+          const result = clientInsurances.isgroup
+            ? API_CORE.getGroupInsurance(clientInsurances.insurance)
+            : API_CORE.getInsurance(clientInsurances.insurance);
 
-        const _insurances = await result;
-        // console.log({ clientInsurances, data });
+          const _insurances = await result;
+          console.log(_insurances, '_insurances');
 
-        setMainTitle(_mainTitle);
-        setMainDescription(_mainDescription);
-        setInsurances(_insurances);
+          setMainTitle(_mainTitle);
+          setMainDescription(_mainDescription);
+          setInsurances(_insurances);
+        }
       }
 
       if (parentRef) {
@@ -141,7 +143,7 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus }) => {
           ? availableStyles.uncompressed
           : availableStyles.compressedSideBar;
 
-        insurances.length > 1
+        insurances && insurances.length > 1
           ? setMainModifier(displayMode)
           : setMainModifier(
               parentWidth ? availableStyles.single : availableStyles.compressedSideBar

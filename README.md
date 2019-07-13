@@ -54,7 +54,7 @@ Class MyComponent extends from Component {
 
 Function component:
 ```
-import React, {useRef} from react;
+import React, {useRef, useEffect} from react;
 
 const MyComponent = () => {
   const widgetRef = useRef(null);

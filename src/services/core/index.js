@@ -1,86 +1,93 @@
+/* eslint-disable func-names */
 import axios from 'axios';
-import { BASE_URL, API_VERSION } from './constants';
+import { BASE_URL, API_VERSION, AVAILABLES_LANG } from './constants';
 
 const API_URI = `${BASE_URL}${API_VERSION}`;
 
-const hireInsurance = async () => {
-  const data = {
-    apellidos: 'string',
-    clienteId: 'string',
-    codigoPostal: 'string',
-    direccion: 'string',
-    mail: 'string',
-    nif: 'string',
-    nombre: 'string',
-    oferta: 'string',
-    parametros: [
-      {
-        nombre: 'string',
-        valor: 'string',
-        valores: ['string']
-      }
-    ],
-    password: 'string',
-    poblacion: 'string',
-    provincia: 'string',
-    seguroId: 'string',
-    telefono: 'string',
-    transaccionId: 'string'
+const API_CORE = function(lang) {
+  if (!AVAILABLES_LANG.includes(lang)) {
+    throw new Error(`${lang} language is not available, available langs ${AVAILABLES_LANG}`);
+  }
+  this._lang = lang;
+  this.hireInsurance = async () => {
+    const data = {
+      apellidos: 'string',
+      clienteId: 'string',
+      codigoPostal: 'string',
+      direccion: 'string',
+      mail: 'string',
+      nif: 'string',
+      nombre: 'string',
+      oferta: 'string',
+      parametros: [
+        {
+          nombre: 'string',
+          valor: 'string',
+          valores: ['string']
+        }
+      ],
+      password: 'string',
+      poblacion: 'string',
+      provincia: 'string',
+      seguroId: 'string',
+      telefono: 'string',
+      transaccionId: 'string'
+    };
+    const response = await axios.post(`${API_URI}/contrataSeguro`, data);
+    return response;
   };
-  const response = await axios.post(`${API_URI}/contrataSeguro`, data);
-  return response;
+
+  this.getInsurance = async () => {
+    const data = {
+      codigoCliente: 'WEEWIDGET001',
+      idioma: this._lang,
+      password: '?q^PGg5HgccC%qVw',
+      transaccionId: '55'
+    };
+    const response = await axios.post(`${API_URI}/obtenerSeguro`, data);
+    return response;
+  };
+
+  this.getInsuranceList = async () => {
+    const data = {
+      codigoCliente: 'WEEWIDGET001',
+      idioma: this._lang,
+      password: '?q^PGg5HgccC%qVw',
+      transaccionId: '55'
+    };
+    const response = await axios.post(`${API_URI}/obtenerSeguros`, data);
+    return response;
+  };
+
+  this.getGroupInsurance = async () => {
+    const data = {
+      clienteId: 'string',
+      grupoSeguroId: 'string',
+      idioma: this._lang,
+      password: 'string',
+      transaccionId: 'string'
+    };
+    const response = await axios.post(`${API_URI}/obtenerSegurosDelGrupo`, data);
+    return response;
+  };
+
+  this.getInsuranceRate = async () => {
+    const data = {
+      clienteId: 'string',
+      parametros: [
+        {
+          nombre: 'string',
+          valor: 'string',
+          valores: ['string']
+        }
+      ],
+      password: 'string',
+      seguroId: 'string',
+      transaccionId: 'string'
+    };
+    const response = await axios.post(`${API_URI}/tarificaSeguro`, data);
+    return response;
+  };
 };
 
-const getInsurance = async () => {
-  const data = {
-    codigoCliente: 'WEEWIDGET001',
-    idioma: 'ES',
-    password: '?q^PGg5HgccC%qVw',
-    transaccionId: '55'
-  };
-  const response = await axios.post(`${API_URI}/obtenerSeguro`, data);
-  return response;
-};
-
-const getInsuranceList = async () => {
-  const data = {
-    codigoCliente: 'WEEWIDGET001',
-    idioma: 'ES',
-    password: '?q^PGg5HgccC%qVw',
-    transaccionId: '55'
-  };
-  const response = await axios.post(`${API_URI}/obtenerSeguros`, data);
-  return response;
-};
-
-const getGroupInsurance = async () => {
-  const data = {
-    clienteId: 'string',
-    grupoSeguroId: 'string',
-    idioma: 'ES',
-    password: 'string',
-    transaccionId: 'string'
-  };
-  const response = await axios.post(`${API_URI}/obtenerSegurosDelGrupo`, data);
-  return response;
-};
-
-const getInsuranceRate = async () => {
-  const data = {
-    clienteId: 'string',
-    parametros: [
-      {
-        nombre: 'string',
-        valor: 'string',
-        valores: ['string']
-      }
-    ],
-    password: 'string',
-    seguroId: 'string',
-    transaccionId: 'string'
-  };
-  const response = await axios.post(`${API_URI}/tarificaSeguro`, data);
-  return response;
-};
-
-export { hireInsurance, getInsurance, getInsuranceList, getGroupInsurance, getInsuranceRate };
+export default API_CORE;

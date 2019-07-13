@@ -11,12 +11,12 @@
   <div id="widget-root"></div>
 
   <script src="http://localhost:3000/downloader.js" ></script>
-  <script src="http://localhost:3000/vendor.js"></script>
   <script>
     var el = document.getElementById("widget-root").addEventListener("widget:loaded", function() {
-      weecoverWidgert.default.widgets.App.render()
-        console.log('EL WIDGET HA CARGADO', window.widgetEventBus)
-        window.widgetEventBus.subscribe('price', function({detail}) {
+      const widgetEventBus = weecoverWidget.default.widgets.App.eventBus 
+      weecoverWidget.default.widgets.App.render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', widgetEventBus)
+        console.log('EL WIDGET HA CARGADO', widgetEventBus)
+        widgetEventBus.subscribe('widget:onchange:price', function({detail}) {
           console.log('price has change', detail)
         })
       })

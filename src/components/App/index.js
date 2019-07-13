@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types'
 import Content from './Content';
 import Header from './Header';
 import Footer from './Footer';
 import { handleInsuranceSelected, removeComplements } from './handlers/handle-insurances';
 import { getPrice } from './handlers/handle-price';
 import { applyInitialConfig } from './handlers/handle-initial-config';
-import { getInsuranceList } from '../../services/core';
 
 const fakeData = [
   {
@@ -111,20 +111,20 @@ const availableStyles = {
   compressedSideBar: 'compressedSideBar'
 };
 
-const App = ({ eventBus }) => {
+const App = ({ widgetId, API_CORE, eventBus }) => {
   const [mainModifier, setMainModifier] = useState('');
   const [insurances, setInsurances] = useState([]);
   const [mainTitle, setMainTitle] = useState(null);
   const [mainDescription, setMainDescription] = useState(null);
   const parentRef = useRef(null);
   const [allAvailableInsurances, setAllAvailableInsurances] = useState(null);
-  console.log('eventBus', eventBus);
 
   useEffect(() => {
     (async () => {
       if (!allAvailableInsurances) {
-        const clientInsurances = await applyInitialConfig();
-        const data = await getInsuranceList();
+        const clientInsurances = await applyInitialConfig(widgetId);
+
+        const data = await API_CORE.getInsuranceList();
         // console.log({ clientInsurances, data });
         setAllAvailableInsurances(clientInsurances);
       }
@@ -152,7 +152,15 @@ const App = ({ eventBus }) => {
             );
       }
     })();
-  }, [allAvailableInsurances, insurances, mainDescription, mainModifier, mainTitle]);
+  }, [
+    API_CORE,
+    allAvailableInsurances,
+    insurances,
+    mainDescription,
+    mainModifier,
+    mainTitle,
+    widgetId
+  ]);
 
   const addInsuanceToCart = ({ id = null, insuranceId = null, checked, type }) => {
     if (mainModifier === 'single') {
@@ -203,6 +211,12 @@ const App = ({ eventBus }) => {
       />
     </main>
   );
+};
+
+App.propTypes = {
+  widgetId: PropTypes.string.isRequired,
+  API_CORE: PropTypes.object.isRequired,
+  eventBus: PropTypes.object.isRequired
 };
 
 export default App;

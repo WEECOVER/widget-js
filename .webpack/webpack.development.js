@@ -6,7 +6,7 @@ module.exports = () => ({
     path: path.join(__dirname, '../dist'),
     filename: '[name].js',
     chunkFilename: '[name].js',
-    library: ['weecoverWidgert'],
+    library: ['weecoverWidget'],
     libraryTarget: 'umd',
   },
   module: {
@@ -25,18 +25,6 @@ module.exports = () => ({
         ],
       },
     ],
-  },
-  optimization: {
-    runtimeChunk: false,
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
-        }
-      }
-    }
   },
   plugins: [
     new MiniCssExtractPlugin({

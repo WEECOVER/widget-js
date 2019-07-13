@@ -118,6 +118,7 @@ const App = ({ eventBus }) => {
   const [mainDescription, setMainDescription] = useState(null);
   const parentRef = useRef(null);
   const [allAvailableInsurances, setAllAvailableInsurances] = useState(null);
+  console.log('eventBus', eventBus);
 
   useEffect(() => {
     (async () => {

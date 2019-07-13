@@ -5,14 +5,10 @@ module.exports = () => ({
   output: {
     path: path.join(__dirname, '../dist'),
     filename: '[name].js',
-    chunkFilename: '[name].js'
+    chunkFilename: '[name].js',
+    library: ['weecoverWidgert'],
+    libraryTarget: 'umd',
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
-  ],
   module: {
     rules: [
       {
@@ -29,5 +25,23 @@ module.exports = () => ({
         ],
       },
     ],
-  }
+  },
+  optimization: {
+    runtimeChunk: false,
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        }
+      }
+    }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ]
   })

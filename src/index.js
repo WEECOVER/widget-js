@@ -3,4 +3,13 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import './main.css';
 
-ReactDOM.render(<App />, document.getElementById('widget-root'));
+// facade pattern
+export default {
+  widgets: {
+    App: {
+      render: () => {
+        ReactDOM.render(<App />, document.getElementById('widget-root'));
+      }
+    }
+  }
+};

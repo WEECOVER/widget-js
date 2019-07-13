@@ -11,7 +11,9 @@
   <div id="widget-root"></div>
 
   <script src="http://localhost:3000/downloader.js" ></script>
+  <script src="http://localhost:3000/vendor.js"></script>
   <script>
+      weecoverWidgert.default.widgets.App.render()
       var el = document.getElementById("widget-root").addEventListener("widget:loaded", function() {
         console.log('EL WIDGET HA CARGADO', window.widgetEventBus)
         window.widgetEventBus.subscribe('price', function({detail}) {

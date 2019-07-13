@@ -6,7 +6,9 @@ module.exports = () => ({
   output: {
     path: path.join(__dirname, '../dist'),
     filename: '[name].js',
-    chunkFilename: '[name].js'
+    chunkFilename: '[name].js',
+    library: ['weecoverWidgert'],
+    libraryTarget: 'umd',
   },
   module: {
     rules: [

@@ -40,7 +40,6 @@ const load = (function(){
 
 Promise.all([
   load.css('%process.env.BASE_URI%/main.css'),
-  load.js('%process.env.BASE_URI%/event-bus.js')
 ]).then(() => {
     Promise.all([
       load.js('%process.env.BASE_URI%/main.js'),

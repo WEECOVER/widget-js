@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import Content from './Content';
 import Header from './Header';
 import Footer from './Footer';
 import { handleInsuranceSelected, removeComplements } from './handlers/handle-insurances';
 import { getPrice } from './handlers/handle-price';
-import { applyInitialConfig } from './handlers/handle-initial-config';
 
 const fakeData = [
   {
@@ -111,7 +110,7 @@ const availableStyles = {
   compressedSideBar: 'compressedSideBar'
 };
 
-const App = ({ widgetId, API_CORE, eventBus }) => {
+const App = ({ widgetId, API_CORE, API_CONFIG, eventBus }) => {
   const [mainModifier, setMainModifier] = useState('');
   const [insurances, setInsurances] = useState([]);
   const [mainTitle, setMainTitle] = useState(null);
@@ -122,7 +121,7 @@ const App = ({ widgetId, API_CORE, eventBus }) => {
   useEffect(() => {
     (async () => {
       if (!allAvailableInsurances) {
-        const clientInsurances = await applyInitialConfig(widgetId);
+        const clientInsurances = await API_CONFIG.applyInitialConfig(widgetId);
 
         const data = await API_CORE.getInsuranceList();
         // console.log({ clientInsurances, data });
@@ -153,6 +152,7 @@ const App = ({ widgetId, API_CORE, eventBus }) => {
       }
     })();
   }, [
+    API_CONFIG,
     API_CORE,
     allAvailableInsurances,
     insurances,
@@ -216,6 +216,7 @@ const App = ({ widgetId, API_CORE, eventBus }) => {
 App.propTypes = {
   widgetId: PropTypes.string.isRequired,
   API_CORE: PropTypes.object.isRequired,
+  API_CONFIG: PropTypes.object.isRequired,
   eventBus: PropTypes.object.isRequired
 };
 

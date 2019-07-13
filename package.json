@@ -7,8 +7,8 @@
     "build:downloader:dev": "node -r dotenv/config ./src/utils/build-downloader.js dotenv_config_path=./dev.env",
     "build:downloader:prod": "node -r dotenv/config ./src/utils/build-downloader.js dotenv_config_path=./prod.env",
     "clean": "rimraf ./dist",
-    "build:dev": "rimraf ./dist && cpx './src/utils/event-bus.js' './dist' && webpack --display-error-details --env.BASE_URI='http://localhost:3000/main' --env.mode development --config ./.webpack/webpack.config.js && npm run build:downloader:dev",
-    "build:prod": "rimraf ./dist && cpx './src/utils/event-bus.js' './dist' && webpack --env.mode production --env.BASE_URI='http://localhost:3000/main' --config ./.webpack/webpack.config.js && npm run build:downloader:prod",
+    "build:dev": "rimraf ./dist && webpack --display-error-details --env.BASE_URI='http://localhost:3000/main' --env.mode development --config ./.webpack/webpack.config.js && npm run build:downloader:dev",
+    "build:prod": "rimraf ./dist && webpack --env.mode production --env.BASE_URI='http://localhost:3000/main' --config ./.webpack/webpack.config.js && npm run build:downloader:prod",
     "dev": "npm run build:dev && webpack-dev-server --env.mode development --config ./.webpack/webpack.config.js",
     "prod": "npm run build:prod && webpack-dev-server --env.mode production --config ./.webpack/webpack.config.js"
   },
@@ -36,7 +36,6 @@
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
-    "cpx": "^1.5.0",
     "css-loader": "^3.0.0",
     "dotenv-webpack": "^1.7.0",
     "eslint": "^5.3.0",

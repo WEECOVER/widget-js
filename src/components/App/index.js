@@ -116,23 +116,20 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus }) => {
   const [mainTitle, setMainTitle] = useState(null);
   const [mainDescription, setMainDescription] = useState(null);
   const parentRef = useRef(null);
-  const [allAvailableInsurances, setAllAvailableInsurances] = useState(null);
 
   useEffect(() => {
     (async () => {
-      if (!allAvailableInsurances) {
-        const clientInsurances = await API_CONFIG.applyInitialConfig(widgetId);
-
-        const data = await API_CORE.getInsuranceList();
-        // console.log({ clientInsurances, data });
-        setAllAvailableInsurances(clientInsurances);
-      }
-
-      const [
-        { mainTitle: _mainTitle, mainDescription: _mainDescription, insurances: _insurances }
-      ] = fakeData;
+      const [{ mainTitle: _mainTitle, mainDescription: _mainDescription }] = fakeData;
 
       if (!insurances.length) {
+        const clientInsurances = await API_CONFIG.applyInitialConfig(widgetId);
+        const result = clientInsurances.isgroup
+          ? API_CORE.getGroupInsurance(clientInsurances.insurance)
+          : API_CORE.getInsurance(clientInsurances.insurance);
+
+        const _insurances = await result;
+        // console.log({ clientInsurances, data });
+
         setMainTitle(_mainTitle);
         setMainDescription(_mainDescription);
         setInsurances(_insurances);
@@ -144,23 +141,14 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus }) => {
           ? availableStyles.uncompressed
           : availableStyles.compressedSideBar;
 
-        _insurances.length > 1
+        insurances.length > 1
           ? setMainModifier(displayMode)
           : setMainModifier(
               parentWidth ? availableStyles.single : availableStyles.compressedSideBar
             );
       }
     })();
-  }, [
-    API_CONFIG,
-    API_CORE,
-    allAvailableInsurances,
-    insurances,
-    mainDescription,
-    mainModifier,
-    mainTitle,
-    widgetId
-  ]);
+  }, [API_CONFIG, API_CORE, insurances, mainDescription, mainModifier, mainTitle, widgetId]);
 
   const addInsuanceToCart = ({ id = null, insuranceId = null, checked, type }) => {
     if (mainModifier === 'single') {

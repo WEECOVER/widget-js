@@ -37,12 +37,13 @@ const API_CORE = function(lang) {
     return response;
   };
 
-  this.getInsurance = async () => {
+  this.getInsurance = async codigoSeguro => {
     const data = {
       codigoCliente: 'WEEWIDGET001',
       idioma: this._lang,
       password: '?q^PGg5HgccC%qVw',
-      transaccionId: '55'
+      transaccionId: '55',
+      codigoSeguro
     };
     const response = await axios.post(`${API_URI}/obtenerSeguro`, data);
     return response;
@@ -59,15 +60,17 @@ const API_CORE = function(lang) {
     return response;
   };
 
-  this.getGroupInsurance = async () => {
+  this.getGroupInsurance = async codigoGrupoSeguro => {
     const data = {
-      clienteId: 'string',
-      grupoSeguroId: 'string',
+      codigoCliente: 'WEEWIDGET001',
       idioma: this._lang,
-      password: 'string',
-      transaccionId: 'string'
+      password: '?q^PGg5HgccC%qVw',
+      transaccionId: '55',
+      codigoGrupoSeguro: codigoGrupoSeguro.join('')
     };
-    const response = await axios.post(`${API_URI}/obtenerSegurosDelGrupo`, data);
+    const {
+      data: { response }
+    } = await axios.post(`${API_URI}/obtenerSegurosDelGrupo`, data);
     return response;
   };
 

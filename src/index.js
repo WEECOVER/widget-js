@@ -14,6 +14,9 @@ export default {
       render: (id, lang, bus) => {
         const API_CORE_INSTANCE = new API_CORE(lang);
         const API_CONFIG_INSTANCE = new API_CONFIG(id);
+        EventBus.subscribe('widget:add:pricing-parameters', ({ detail }) => {
+          console.log('pricingParameters on widget', detail.parametros);
+        });
         ReactDOM.render(
           <App
             widgetId={id}

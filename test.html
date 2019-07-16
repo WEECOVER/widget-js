@@ -19,6 +19,18 @@
         widgetEventBus.subscribe('widget:onchange:price', function({detail}) {
           console.log('price has change', detail)
         })
+        widgetEventBus.publish('widget:add:pricing-parameters', {parametros: 
+          [
+            {
+              nombre: 'marcaPatineteMussap',
+              valor: '1'
+            },
+            {
+              nombre: 'potenciaPatineteMussap',
+              valor: '1'
+            }
+          ]
+        })
       })
   </script>
 </body>

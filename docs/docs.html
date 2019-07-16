@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles.css">
+  <title>Widget Weecover</title>
+</head>
+<body class="Box-body">
+  <article class="markdown-body entry-content p-5">
+    <h1 id="weecoverwidget">WeecoverWidget:</h1>
+    <p>Instrucciones:</p>
+    <ul>
+    <li>El archivo prod.env coniente la variable de entorno BASE_URI que debe contener una url valida hacia nuestro CDN desde el cual nosotros serviremos todos los archivos necesarios al widget.</li>
+    <li>La comunicación entre la web y el widget se establecerá a traves de eventos, tenemos disponibles los siguients eventos:</li>
+    </ul>
+    <table>
+    <thead>
+    <tr>
+    <th>Nombre del evento</th>
+    <th>Descripción</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>&quot;widget:loaded&quot;</td>
+    <td>Se dispará cuando el widget ha sido cargado por primera vez.</td>
+    </tr>
+    <tr>
+    <td>&quot;widget:onchange:price&quot;</td>
+    <td>Se dispará cuando el usuario ha escogido algun producto o complemento y el precio total ha cambiado.</td>
+    </tr>
+    </tbody></table>
+    <h2 id="integration-inside-existing-react-app">Integración del widget ha través de react</h2>
+    <p>React | Componente de clase:</p>
+    <pre><code class="language-js">import React from react;
+    
+    class MyComponent extends Component {
+      constructor(props) {
+        super(props)
+         this.widgetRef = React.createRef();
+      }
+    
+      componentDidMount() {
+        console.log(this.widgetRef, &#39;this.widgetRef&#39;);
+        if (this.widgetRef &amp;&amp; this.widgetRef.current) {
+          const widgetUrl = &#39;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&#39;;
+          const scriptNode = document.createElement(&#39;script&#39;);
+          scriptNode.src = widgetUrl;
+          document.body.append(scriptNode);
+          document.getElementById(&#39;widget-root&#39;).addEventListener(&#39;widget:loaded&#39;, () =&gt; {
+          const widgetEventBus = weecoverWidgert.default.widgets.App.eventBus  
+          weecoverWidgert.default.widgets.App.render(id, lang, widgetEventBus);  
+          console.log(&#39;EL WIDGET HA CARGADO&#39;, widgetEventBus); 
+            widgetEventBus.subscribe(&#39;widget:onchange:price&#39;, ({ detail }) =&gt; {
+            console.log(&#39;el precio ha cambiado, total = &#39;, detail);
+            });
+          });
+        }
+      }
+    
+      render() {
+        return (
+          &lt;div&gt;
+            &lt;div&gt;My stuff&lt;/div&gt;
+            &lt;div id=&quot;widget-root&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        )
+      }
+    }
+    
+    export default MyComponent</code></pre>
+    <p>React | Componente funcional:</p>
+    <pre><code class="language-js">import React, {useRef, useEffect} from react;
+    
+    const MyComponent = () =&gt; {
+      const widgetRef = useRef(null);
+    
+      useEffect(() =&gt; {
+        if (this.widgetRef &amp;&amp; this.widgetRef.current) {
+              const widgetUrl = &#39;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&#39;;
+              const scriptNode = document.createElement(&#39;script&#39;);
+              scriptNode.src = widgetUrl;
+              document.body.append(scriptNode);
+              document.getElementById(&#39;widget-root&#39;).addEventListener(&#39;widget:loaded&#39;, () =&gt; {
+              const widgetEventBus = weecoverWidgert.default.widgets.App.eventBus  
+              weecoverWidgert.default.widgets.App.render(id, lang, widgetEventBus);  
+                widgetEventBus.subscribe(&#39;widget:onchange:price&#39;, ({ detail }) =&gt; {
+                console.log(&#39;el precio ha cambiado, total = &#39;, detail);
+                });
+              });
+            }
+      }, [])
+    
+        return (
+          &lt;div&gt;
+            &lt;div&gt;My stuff&lt;div&gt;
+            &lt;div id=&quot;widget-root&quot; /&gt;
+          &lt;/div&gt;
+        )
+    }</code></pre>
+    <h2 id="integration-script">Integración mediante tag script:</h2>
+    <p>Podemos integrar nuestro widget a través del siguiente script.</p>
+    <p>Esperaremos a que el wiget haya sido cargado cogeremos nuestra referencia a nuestro bus de eventos y se la pasaremos a la instancia del widget para poder comunicarnos con él.</p>
+    <pre><code class="language-html">&lt;body&gt;
+      &lt;script src=&quot;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&quot;&gt;&lt;/script&gt;
+      &lt;script&gt;
+          var el = document.getElementById(&quot;widget-root&quot;).addEventListener(&quot;widget:loaded&quot;, function() {
+            const widgetEventBus = weecoverWidgert.default.widgets.App.eventBus  
+            // Pass a valid widget id and valid lang
+            weecoverWidgert.default.widgets.App.render(id, lang, widgetEventBus);
+            window.widgetEventBus.subscribe(&#39;widget:onchange:price&#39;, function({detail}) {
+            })
+          })
+      &lt;/script&gt;
+    &lt;/body&gt;</code></pre>
+  </article>
+  </body>
+</html>

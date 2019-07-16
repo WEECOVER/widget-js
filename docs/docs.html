@@ -9,111 +9,164 @@
 </head>
 <body class="Box-body">
   <article class="markdown-body entry-content p-5">
-    <h1 id="weecoverwidget">WeecoverWidget:</h1>
-    <p>Instrucciones:</p>
-    <ul>
-    <li>El archivo prod.env coniente la variable de entorno BASE_URI que debe contener una url valida hacia nuestro CDN desde el cual nosotros serviremos todos los archivos necesarios al widget.</li>
-    <li>La comunicación entre la web y el widget se establecerá a traves de eventos, tenemos disponibles los siguients eventos:</li>
-    </ul>
+    <h1 id="weecoverwidget">WeecoverWidget</h1>
+    <p class="disclaimer">Nota: La siguiete documentación está en período de construcción y podrá estar sujeta a futuros cambios</p>
+    <p>El widget de WeeCover permite ofrecer cualquier seguro disponible en el sitio donde sea incrustado de manera integrada con la web donde se visualiza</p>
+    <p>Si no tiene un código de cliente o seguros a ofrecer, póngase en contacto con nosotros en <a href="mailto:info@weecover.com">info@weecover.com</a></p>
+    <h2 id="instrucciones-de-integracion">Instrucciones de integración</h2>
+    <p>Para integrar el widget en una web y ofrecer los seguros disponibles, se deberá copiar el código facilitado por WeeCover que se encuentra en la página correspondiente de la herramienta backoffice.</p>
+    <p>A continuación se muestra un ejemplo de código de widget a integrar:</p>
+    <pre><code class="language-js">&lt;div id="weecover-widget-1"&gt;&lt;/div&gt;
+&lt;script src="https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js"&gt;&lt;/script&gt;
+</code></pre>
+    <p>Para completar la integración, se deberán instanciar y renderizar los widgets añadidos:</p>
+    <pre><code class="language-js">const {eventBus, render} = weecoverWidget.default.widget('weecover-widget-1')
+render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
+</code></pre>
+    <p>Donde '6eff0290-a181-11e9-a41f-7940f295bd3f' es el id del widget obtenido de la herramienta backoffice.</p>
+    <h2 id="eventos">Eventos</h2>
+    <p>La comunicación entre la web y el widget se establecerá a traves de eventos, para ello tenemos disponibles los siguientes:</p>
     <table>
-    <thead>
-    <tr>
-    <th>Nombre del evento</th>
-    <th>Descripción</th>
-    </tr>
-    </thead>
-    <tbody><tr>
-    <td>&quot;widget:loaded&quot;</td>
-    <td>Se dispará cuando el widget ha sido cargado por primera vez.</td>
-    </tr>
-    <tr>
-    <td>&quot;widget:onchange:price&quot;</td>
-    <td>Se dispará cuando el usuario ha escogido algun producto o complemento y el precio total ha cambiado.</td>
-    </tr>
-    </tbody></table>
-    <h2 id="integration-inside-existing-react-app">Integración del widget ha través de react</h2>
+      <thead>
+      <tr>
+      <th>Nombre del evento</th>
+      <th>Parámetros</th>
+      <th>Descripción</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>&quot;loaded&quot;</td>
+          <td></td>
+          <td>Se dispara cuando el widget ha sido cargado por primera vez.</td>
+        </tr>
+        <tr>
+        <td>&quot;onSelected&quot;</td>
+        <td>
+          <ul>
+            <li><strong>name</strong>: nombre del seguro seleccionado</li>
+            <li><strong>price</strong>: precio del seguro seleccionado</li>
+            <li><strong>addon</strong>: complemento seleccionado (en caso de estarlo)</li>
+          </ul>
+        </td>
+        <td>Se dispara cuando el usuario ha seleccionado algún seguro weecover algún producto.</td>
+        </tr>
+        <tr>
+            <td>&quot;onRemoved&quot;</td>
+            <td>
+              <ul>
+                <li><strong>name</strong>: nombre del seguro retirado</li>
+              </ul>
+            </td>
+            <td>Se dispara cuando el usuario ha retirado el seguro seleccionado.</td>
+          </tr>
+      </tbody>
+    </table>
+    <h3>Ejemplo de suscripción a un evento</h3>
+    <p>Para recibir las publicaciones de un evento se deberá implementar la suscripción de la siguiente manera:</p>
+    <pre><code class="language-js">eventBus.subscribe(
+  eventBus.availableEvents.onSelected, 
+  function({ name, price, addon }) {
+    console.log('insurance added', name, price, addon)
+  }
+)
+</code></pre>
+    <h3>Ejemplo de publicación de un evento</h3>
+    <p>La publicación de un evento se deberá implementar de la siguiente manera:</p>
+    <pre><code class="language-js">eventBus.publish(
+  eventBus.availableEvents.onRemoved, 
+  function({ name }) {
+    console.log('insurance removed', name)
+  }
+)
+</code></pre>
+    <h2 id="integration-examples">Ejemplos completos de integración</h2>
+    <h3 id="integration-script">Integración mediante tag script:</h3>
+    <p>La integración completa del widget se puede realizar a través del siguiente script:</p>
+    <pre><code class="language-html">&lt;body&gt;
+  &lt;div id="weecover-widget-1"&gt;&lt;/div&gt;
+  &lt;script src=&quot;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&quot;&gt;&lt;/script&gt;
+  &lt;script&gt;
+      var el = document.getElementById(&quot;weecover-widget-1&quot;).addEventListener(&quot;widget:loaded&quot;, function() {
+        const widgetEventBus = weecoverWidgert.default.widgets.App.eventBus  
+        weecoverWidgert.default.widgets.App.render(id, lang, widgetEventBus);
+        window.widgetEventBus.subscribe(widgetEventBus.availableEvents.onSelected, function({ name, price, addon }) {
+          console.log('insurance added', name, price, addon)
+        })
+      })
+  &lt;/script&gt;
+&lt;/body&gt;</code></pre>
+    <p>Luego de esperar a que el widget haya sido cargado correctamente se envía la referencia del bus de eventos a la instancia para poder establecer la comunicación.</p>
+    <h3 id="integration-inside-existing-react-app">Integración del widget en una aplicación web implementada en React</h3>
     <p>React | Componente de clase:</p>
     <pre><code class="language-js">import React from react;
     
-    class MyComponent extends Component {
-      constructor(props) {
-        super(props)
-         this.widgetRef = React.createRef();
-      }
+class MyComponent extends Component {
+  constructor(props) {
+    super(props)
+      this.widgetRef = React.createRef();
+  }
+
+  componentDidMount() {
+    if (this.widgetRef &amp;&amp; this.widgetRef.current) {
+      const widgetUrl = &#39;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&#39;;
+      const scriptNode = document.createElement(&#39;script&#39;);
+      scriptNode.src = widgetUrl;
+      document.body.append(scriptNode);
+
+      document.getElementById(&#39;widget-root&#39;).addEventListener(&#39;widget:loaded&#39;, () =&gt; {
+        const widgetEventBus = weecoverWidgert.default.widgets.App.eventBus  
+        weecoverWidgert.default.widgets.App.render(id, lang, widgetEventBus);  
+      
+        widgetEventBus.subscribe(widgetEventBus.availableEvents.onSelected, ({ name, price, addon }) =&gt; {
+          console.log('insurance added', name, price, addon)
+        })
+      });
+    }
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;div&gt;My stuff&lt;/div&gt;
+        &lt;div id=&quot;widget-root&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+
+export default MyComponent</code></pre>
+    <p>React | Componente funcional:</p>
+    <pre><code class="language-js">import React, {useRef, useEffect} from react;
     
-      componentDidMount() {
-        console.log(this.widgetRef, &#39;this.widgetRef&#39;);
-        if (this.widgetRef &amp;&amp; this.widgetRef.current) {
+const MyComponent = () =&gt; {
+  const widgetRef = useRef(null);
+
+  useEffect(() =&gt; {
+    if (this.widgetRef &amp;&amp; this.widgetRef.current) {
           const widgetUrl = &#39;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&#39;;
           const scriptNode = document.createElement(&#39;script&#39;);
           scriptNode.src = widgetUrl;
           document.body.append(scriptNode);
+
           document.getElementById(&#39;widget-root&#39;).addEventListener(&#39;widget:loaded&#39;, () =&gt; {
-          const widgetEventBus = weecoverWidgert.default.widgets.App.eventBus  
-          weecoverWidgert.default.widgets.App.render(id, lang, widgetEventBus);  
-          console.log(&#39;EL WIDGET HA CARGADO&#39;, widgetEventBus); 
-            widgetEventBus.subscribe(&#39;widget:onchange:price&#39;, ({ detail }) =&gt; {
-            console.log(&#39;el precio ha cambiado, total = &#39;, detail);
-            });
+            const widgetEventBus = weecoverWidgert.default.widgets.App.eventBus  
+            weecoverWidgert.default.widgets.App.render(id, lang, widgetEventBus);  
+
+            widgetEventBus.subscribe(widgetEventBus.availableEvents.onSelected, ({ name, price, addon }) =&gt; {
+              console.log('insurance added', name, price, addon)
+            })
           });
         }
-      }
-    
-      render() {
-        return (
-          &lt;div&gt;
-            &lt;div&gt;My stuff&lt;/div&gt;
-            &lt;div id=&quot;widget-root&quot;&gt;&lt;/div&gt;
-          &lt;/div&gt;
-        )
-      }
-    }
-    
-    export default MyComponent</code></pre>
-    <p>React | Componente funcional:</p>
-    <pre><code class="language-js">import React, {useRef, useEffect} from react;
-    
-    const MyComponent = () =&gt; {
-      const widgetRef = useRef(null);
-    
-      useEffect(() =&gt; {
-        if (this.widgetRef &amp;&amp; this.widgetRef.current) {
-              const widgetUrl = &#39;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&#39;;
-              const scriptNode = document.createElement(&#39;script&#39;);
-              scriptNode.src = widgetUrl;
-              document.body.append(scriptNode);
-              document.getElementById(&#39;widget-root&#39;).addEventListener(&#39;widget:loaded&#39;, () =&gt; {
-              const widgetEventBus = weecoverWidgert.default.widgets.App.eventBus  
-              weecoverWidgert.default.widgets.App.render(id, lang, widgetEventBus);  
-                widgetEventBus.subscribe(&#39;widget:onchange:price&#39;, ({ detail }) =&gt; {
-                console.log(&#39;el precio ha cambiado, total = &#39;, detail);
-                });
-              });
-            }
-      }, [])
-    
-        return (
-          &lt;div&gt;
-            &lt;div&gt;My stuff&lt;div&gt;
-            &lt;div id=&quot;widget-root&quot; /&gt;
-          &lt;/div&gt;
-        )
-    }</code></pre>
-    <h2 id="integration-script">Integración mediante tag script:</h2>
-    <p>Podemos integrar nuestro widget a través del siguiente script.</p>
-    <p>Esperaremos a que el wiget haya sido cargado cogeremos nuestra referencia a nuestro bus de eventos y se la pasaremos a la instancia del widget para poder comunicarnos con él.</p>
-    <pre><code class="language-html">&lt;body&gt;
-      &lt;script src=&quot;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&quot;&gt;&lt;/script&gt;
-      &lt;script&gt;
-          var el = document.getElementById(&quot;widget-root&quot;).addEventListener(&quot;widget:loaded&quot;, function() {
-            const widgetEventBus = weecoverWidgert.default.widgets.App.eventBus  
-            // Pass a valid widget id and valid lang
-            weecoverWidgert.default.widgets.App.render(id, lang, widgetEventBus);
-            window.widgetEventBus.subscribe(&#39;widget:onchange:price&#39;, function({detail}) {
-            })
-          })
-      &lt;/script&gt;
-    &lt;/body&gt;</code></pre>
+  }, [])
+
+  return (
+    &lt;div&gt;
+      &lt;div&gt;My stuff&lt;div&gt;
+      &lt;div id=&quot;widget-root&quot; /&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
   </article>
   </body>
 </html>

@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import CheckBox from '../../CheckBox';
 import Button from '../../Button';
 import { getModifiers } from '../../../utils/data-mappers';
 import Price from './Price';
+import Modal from '../../Modal';
 
 const Title = ({
   id,
@@ -17,6 +18,7 @@ const Title = ({
   modifiers,
   checked
 }) => {
+  const [displayModal, setDisplayModal] = useState(false);
   const handleSelect = () => {
     onSelect({ checked: !checked, id, type: 'insurance' });
   };
@@ -25,6 +27,11 @@ const Title = ({
     checked
       ? [Button.availableSizes.sm, Button.availableModifiers.selected]
       : [Button.availableSizes.sm];
+
+  const enableDisplayModal = (status = null) => {
+    status && setDisplayModal(status);
+    !status && setDisplayModal(!displayModal);
+  };
 
   return (
     <Fragment>
@@ -41,7 +48,13 @@ const Title = ({
           </div>
         )}
       </div>
-      <p className="card-title-description">{description}</p>
+      <p className="card-title-description">
+        {description}
+        <button type="button" onClick={enableDisplayModal}>
+          openModal
+        </button>
+        <Modal displayModal={displayModal} enableDisplayModal={enableDisplayModal} />
+      </p>
     </Fragment>
   );
 };

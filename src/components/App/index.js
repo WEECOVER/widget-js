@@ -119,7 +119,9 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus }) => {
 
   useEffect(() => {
     (async () => {
-      const [{ mainTitle: _mainTitle, mainDescription: _mainDescription }] = fakeData;
+      const [
+        { mainTitle: _mainTitle, mainDescription: _mainDescription, insurances: _insurances }
+      ] = fakeData;
 
       if (!insurances) {
         const clientInsurances = await API_CONFIG.applyInitialConfig(widgetId);
@@ -128,7 +130,7 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus }) => {
             ? API_CORE.getGroupInsurance(clientInsurances.insurance)
             : API_CORE.getInsurance(clientInsurances.insurance);
 
-          const _insurances = await result;
+          // const _insurances = await result;
           console.log(_insurances, '_insurances');
 
           setMainTitle(_mainTitle);
@@ -163,7 +165,7 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus }) => {
           }))
         : insurances.map(insurance => ({ ...insurance, checked: !insurances[0].checked }));
 
-      eventBus.publish('widget:onchange:price', getPrice(updatedInsurance));
+      eventBus.publish(eventBus.availableEvents.onChangePrice, getPrice(updatedInsurance));
 
       return type === 'add' && insurances[0].checked
         ? setInsurances(removeComplements(updatedInsurance))
@@ -172,7 +174,8 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus }) => {
 
     const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId, type);
 
-    eventBus.publish('widget:onchange:price', getPrice(updatedInsurance));
+    console.log('before onchange price', eventBus.availableEvents.onChangePrice);
+    eventBus.publish(eventBus.availableEvents.onChangePrice, getPrice(updatedInsurance));
 
     setInsurances(updatedInsurance);
   };

@@ -1,7 +1,11 @@
 /* eslint-disable */ 
 
-function EventBus() {
-  let bus = document.getElementById('widget-root');
+function EventBus(id) {
+  let bus = document.getElementById(id);
+  this.availableEvents = {
+    widgetAddPricingParameters: `widget:add:pricing-parameters${id}`,
+    onChangePrice: `widget:onchange:price${id}`,
+  }
 
   this.subscribe = function(event, callback) {
     bus.addEventListener(event, callback);
@@ -16,4 +20,5 @@ function EventBus() {
   };
 }
 
-export default new EventBus()
+export default EventBus
+

@@ -1,4 +1,18 @@
 /* eslint-disable */
+const idCounter = {}
+function uniqueId(prefix='$lodash$') {
+  if (!idCounter[prefix]) {
+    idCounter[prefix] = 0
+  }
+
+  const id =++idCounter[prefix]
+  if (prefix === '$lodash$') {
+    return `${id}`
+  }
+
+  return `${prefix + id}`
+}
+
 const load = (function(){
   function _load(tag) {
     return function(url) {
@@ -44,9 +58,9 @@ Promise.all([
     Promise.all([
       load.js('%process.env.BASE_URI%/main.js'),
     ]).then(function(){
-      const rootElement = document.getElementById('widget-root');
-      const event = new Event('widget:loaded');
-      rootElement.dispatchEvent(event);
+      const bodyElement = document.body;
+      const event = new event('widget:loaded');
+      bodyElement.dispatchEvent(event);
     }).catch(function(error){
       console.error(error)
       console.error('Has been an error in widget');

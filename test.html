@@ -15,13 +15,7 @@
   <script>
     var el = document.body.addEventListener("widget:loaded", function() {
       const {eventBus, render} = weecoverWidget.default.widget('widget1')
-      render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
-        console.log('EL WIDGET 1 HA CARGADO', eventBus)
-        eventBus.subscribe(eventBus.availableEvents.onChangePrice, function({detail}) {
-          console.log('price has change', detail)
-        })
-        eventBus.publish(eventBus.availableEvents.widgetAddPricingParameters, {parametros: 
-          [
+      render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', {parameters: [
             {
               nombre: 'marcaPatineteMussap',
               valor: '1'
@@ -30,23 +24,27 @@
               nombre: 'potenciaPatineteMussap',
               valor: '1'
             }
-          ]
+          ]})
+        eventBus.subscribe(eventBus.availableEvents.onChangePrice, function({detail}) {
+          console.log('price has change', detail)
         })
       })
   </script>
   <script>
       var el = document.body.addEventListener("widget:loaded", function() {
         const {eventBus, render} = weecoverWidget.default.widget('widget2')
-        render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
-          console.log('EL WIDGET 2 HA CARGADO', eventBus)
-          eventBus.subscribe(eventBus.availableEvents.onChangePrice, function({detail}) {
-            console.log('price has change', detail)
-          })
-          eventBus.publish(eventBus.availableEvents.widgetAddPricingParameters, {parametros: 
+        render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', {parameters: [
             {
               nombre: 'marcaPatineteMussap',
               valor: '1'
+            },
+            {
+              nombre: 'potenciaPatineteMussap',
+              valor: '1'
             }
+          ]})
+          eventBus.subscribe(eventBus.availableEvents.onChangePrice, function({detail}) {
+            console.log('price has change', detail)
           })
         })
     </script>

@@ -3,7 +3,6 @@
 function EventBus(id) {
   let bus = document.getElementById(id);
   this.availableEvents = {
-    widgetAddPricingParameters: `widget:add:pricing-parameters${id}`,
     onChangePrice: `widget:onchange:price${id}`,
   }
 

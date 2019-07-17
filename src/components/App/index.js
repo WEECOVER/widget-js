@@ -110,12 +110,14 @@ const availableStyles = {
   compressedSideBar: 'compressedSideBar'
 };
 
-const App = ({ widgetId, API_CORE, API_CONFIG, eventBus }) => {
+const App = ({ widgetId, API_CORE, API_CONFIG, eventBus, parameters }) => {
   const [mainModifier, setMainModifier] = useState('');
   const [insurances, setInsurances] = useState(null);
   const [mainTitle, setMainTitle] = useState(null);
   const [mainDescription, setMainDescription] = useState(null);
   const parentRef = useRef(null);
+
+  console.log(parameters, 'PARAMETROS');
 
   useEffect(() => {
     (async () => {
@@ -210,7 +212,8 @@ App.propTypes = {
   widgetId: PropTypes.string.isRequired,
   API_CORE: PropTypes.object.isRequired,
   API_CONFIG: PropTypes.object.isRequired,
-  eventBus: PropTypes.object.isRequired
+  eventBus: PropTypes.object.isRequired,
+  parameters: PropTypes.object.isRequired
 };
 
 export default App;

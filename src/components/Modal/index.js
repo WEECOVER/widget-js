@@ -1,10 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import ModalFrame from './ModalFrame';
 
 const Modal = ({ displayModal, nodeId, enableDisplayModal }) => {
   const wrapperEl = useRef(null);
+
+  useEffect(() => {
+    displayModal && document.body.classList.add('disable-scroll');
+    !displayModal && document.body.classList.remove('disable-scroll');
+  }, [displayModal]);
+
   const getContainer = () => {
     let nodeContainerEl = document.getElementById(nodeId);
     if (!nodeContainerEl) {

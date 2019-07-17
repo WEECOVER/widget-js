@@ -50,8 +50,8 @@ const Title = ({
       </div>
       <p className="card-title-description">
         {description}
-        <button type="button" onClick={enableDisplayModal}>
-          openModal
+        <button type="button" className="card-tooltip-modal" onClick={enableDisplayModal}>
+          i
         </button>
         <Modal displayModal={displayModal} enableDisplayModal={enableDisplayModal} />
       </p>

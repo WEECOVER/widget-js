@@ -87,16 +87,26 @@ render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
   &lt;div id="weecover-widget-1"&gt;&lt;/div&gt;
   &lt;script src=&quot;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&quot;&gt;&lt;/script&gt;
   &lt;script&gt;
-      var el = document.getElementById(&quot;weecover-widget-1&quot;).addEventListener(&quot;widget:loaded&quot;, function() {
-        const widgetEventBus = weecoverWidgert.default.widgets.App.eventBus  
-        weecoverWidgert.default.widgets.App.render(id, lang, widgetEventBus);
-        window.widgetEventBus.subscribe(widgetEventBus.availableEvents.onSelected, function({ name, price, addon }) {
-          console.log('insurance added', name, price, addon)
-        })
-      })
+        document.body.addEventListener("widget:loaded", function() {
+          const {eventBus, render} = weecoverWidget.default.widget('weecover-widget-1')
+          render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', {parameters: [
+                {
+                  nombre: 'marcaPatineteMussap',
+                  valor: '1'
+                },
+                {
+                  nombre: 'potenciaPatineteMussap',
+                  valor: '1'
+                }
+              ]})
+            eventBus.subscribe(eventBus.availableEvents.onChangePrice, function({detail}) {
+              console.log('price has change', detail)
+            })
+          })
   &lt;/script&gt;
 &lt;/body&gt;</code></pre>
-    <p>Luego de esperar a que el widget haya sido cargado correctamente se envía la referencia del bus de eventos a la instancia para poder establecer la comunicación.</p>
+    <p>Luego de esperar a que el widget haya sido cargado correctamente llamamos a la función widget pasandole una id para crea una nueva instancia y nos retornara el metodo render y su corresponiente instancia de bus de eventos mediante la cual establecer la comunicación.</p>
+    <p>A través del objeto eventBus.availableEvents podremos obtener los diferentes eventos disponibles.</p>
     <h3 id="integration-inside-existing-react-app">Integración del widget en una aplicación web implementada en React</h3>
     <p>React | Componente de clase:</p>
     <pre><code class="language-js">import React from react;
@@ -109,16 +119,16 @@ class MyComponent extends Component {
 
   componentDidMount() {
     if (this.widgetRef &amp;&amp; this.widgetRef.current) {
-      const widgetUrl = &#39;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&#39;;
-      const scriptNode = document.createElement(&#39;script&#39;);
+      const widgetUrl = "https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js";
+      const scriptNode = document.createElement("script");
       scriptNode.src = widgetUrl;
       document.body.append(scriptNode);
 
-      document.getElementById(&#39;widget-root&#39;).addEventListener(&#39;widget:loaded&#39;, () =&gt; {
-        const widgetEventBus = weecoverWidgert.default.widgets.App.eventBus  
-        weecoverWidgert.default.widgets.App.render(id, lang, widgetEventBus);  
+      document.body.addEventListener("widget:loaded", function() {
+        const {eventBus, render} = weecoverWidget.default.widget('widget2') 
+        render(id, lang, {parameteres});  
       
-        widgetEventBus.subscribe(widgetEventBus.availableEvents.onSelected, ({ name, price, addon }) =&gt; {
+        eventBus.subscribe(widgetEventBus.availableEvents.onSelected, ({ name, price, addon }) =&gt; {
           console.log('insurance added', name, price, addon)
         })
       });
@@ -129,7 +139,7 @@ class MyComponent extends Component {
     return (
       &lt;div&gt;
         &lt;div&gt;My stuff&lt;/div&gt;
-        &lt;div id=&quot;widget-root&quot;&gt;&lt;/div&gt;
+        &lt;div id="widget2"&lt;/div&gt;
       &lt;/div&gt;
     )
   }
@@ -143,17 +153,17 @@ const MyComponent = () =&gt; {
   const widgetRef = useRef(null);
 
   useEffect(() =&gt; {
-    if (this.widgetRef &amp;&amp; this.widgetRef.current) {
-          const widgetUrl = &#39;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&#39;;
-          const scriptNode = document.createElement(&#39;script&#39;);
+    if (widgetRef &amp;&amp; widgetRef.current) {
+          const widgetUrl = "https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js";
+          const scriptNode = document.createElement("script");
           scriptNode.src = widgetUrl;
           document.body.append(scriptNode);
 
-          document.getElementById(&#39;widget-root&#39;).addEventListener(&#39;widget:loaded&#39;, () =&gt; {
-            const widgetEventBus = weecoverWidgert.default.widgets.App.eventBus  
-            weecoverWidgert.default.widgets.App.render(id, lang, widgetEventBus);  
-
-            widgetEventBus.subscribe(widgetEventBus.availableEvents.onSelected, ({ name, price, addon }) =&gt; {
+          document.body.addEventListener("widget:loaded", function() {
+            const {eventBus, render} = weecoverWidget.default.widget('widget3') 
+            render(id, lang, {parameteres});  
+          
+            eventBus.subscribe(widgetEventBus.availableEvents.onSelected, ({ name, price, addon }) =&gt; {
               console.log('insurance added', name, price, addon)
             })
           });
@@ -163,7 +173,7 @@ const MyComponent = () =&gt; {
   return (
     &lt;div&gt;
       &lt;div&gt;My stuff&lt;div&gt;
-      &lt;div id=&quot;widget-root&quot; /&gt;
+      &lt;div id=&quot;widget3&quot; /&gt;
     &lt;/div&gt;
   )
 }</code></pre>

@@ -167,7 +167,7 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus, parameters }) => {
           }))
         : insurances.map(insurance => ({ ...insurance, checked: !insurances[0].checked }));
 
-      eventBus.publish(eventBus.availableEvents.onChangePrice, getPrice(updatedInsurance));
+      eventBus.publish(eventBus.availableEvents.onSelected, getPrice(updatedInsurance));
 
       return type === 'add' && insurances[0].checked
         ? setInsurances(removeComplements(updatedInsurance))
@@ -176,8 +176,8 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus, parameters }) => {
 
     const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId, type);
 
-    console.log('before onchange price', eventBus.availableEvents.onChangePrice);
-    eventBus.publish(eventBus.availableEvents.onChangePrice, getPrice(updatedInsurance));
+    console.log('before onchange price', eventBus.availableEvents.onSelected);
+    eventBus.publish(eventBus.availableEvents.onSelected, getPrice(updatedInsurance));
 
     setInsurances(updatedInsurance);
   };

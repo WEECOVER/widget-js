@@ -99,7 +99,7 @@ render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
                   valor: '1'
                 }
               ]})
-            eventBus.subscribe(eventBus.availableEvents.onChangePrice, function({detail}) {
+            eventBus.subscribe(eventBus.availableEvents.onSelected, function({detail}) {
               console.log('price has change', detail)
             })
           })

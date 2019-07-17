@@ -3,7 +3,8 @@
 function EventBus(id) {
   let bus = document.getElementById(id);
   this.availableEvents = {
-    onChangePrice: `widget:onchange:price${id}`,
+    onSelected: `widget:on:selected:${id}`,
+    onRemove: `widget:on:remove:${id}`,
   }
 
   this.subscribe = function(event, callback) {

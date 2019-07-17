@@ -4,6 +4,12 @@
  *
  * Released under MIT license. Copyright (c) 2019 GitHub Inc.
  */
+  p.disclaimer {
+    font-style: italic;
+    color: #9c9c9c;
+    font-size: 12px;
+  }
+
  .flash {
   background-color: #dbedff;
   border: 1px solid rgba(27,31,35,.15);

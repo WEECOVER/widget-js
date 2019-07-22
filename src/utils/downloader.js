@@ -45,10 +45,8 @@ const load = (function() {
 Promise.all([load.css('%process.env.BASE_URI%/main.css')]).then(() => {
   Promise.all([load.js('%process.env.BASE_URI%/main.js')])
     .then(function() {
-      const bodyElement = document.body;
-      console.log(bodyElement);
       const event = new Event('widget:loaded');
-      bodyElement.dispatchEvent(event);
+      document.body.dispatchEvent(event);
     })
     .catch(function(error) {
       console.error(error);

@@ -1,19 +1,9 @@
-/* eslint-disable */
-const idCounter = {}
-function uniqueId(prefix='$lodash$') {
-  if (!idCounter[prefix]) {
-    idCounter[prefix] = 0
-  }
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable default-case */
+/* eslint-disable func-names */
+/* eslint-disable no-console */
 
-  const id =++idCounter[prefix]
-  if (prefix === '$lodash$') {
-    return `${id}`
-  }
-
-  return `${prefix + id}`
-}
-
-const load = (function(){
+const load = (function() {
   function _load(tag) {
     return function(url) {
       return new Promise(function(resolve, reject) {
@@ -21,10 +11,10 @@ const load = (function(){
         let parent = 'body';
         let attr = 'src';
 
-        element.onload = function(){
+        element.onload = function() {
           resolve(url);
         };
-        element.onerror = function(){
+        element.onerror = function() {
           reject(url);
         };
 
@@ -42,7 +32,7 @@ const load = (function(){
         element[attr] = url;
         document[parent].appendChild(element);
       });
-    }
+    };
   }
 
   return {
@@ -52,17 +42,16 @@ const load = (function(){
   };
 })();
 
-Promise.all([
-  load.css('%process.env.BASE_URI%/main.css'),
-]).then(() => {
-    Promise.all([
-      load.js('%process.env.BASE_URI%/main.js'),
-    ]).then(function(){
+Promise.all([load.css('%process.env.BASE_URI%/main.css')]).then(() => {
+  Promise.all([load.js('%process.env.BASE_URI%/main.js')])
+    .then(function() {
       const bodyElement = document.body;
-      const event = new event('widget:loaded');
+      console.log(bodyElement);
+      const event = new Event('widget:loaded');
       bodyElement.dispatchEvent(event);
-    }).catch(function(error){
-      console.error(error)
-      console.error('Has been an error in widget');
     })
-})
+    .catch(function(error) {
+      console.error(error);
+      console.error('Has been an error in widget');
+    });
+});

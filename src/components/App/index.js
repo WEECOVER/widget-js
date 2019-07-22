@@ -127,11 +127,10 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus, parameters }) => {
 
       if (!insurances) {
         const clientInsurances = await API_CONFIG.applyInitialConfig(widgetId);
+        console.log('codigo seguro', clientInsurances);
         if (clientInsurances) {
-          const result = clientInsurances.isgroup
-            ? API_CORE.getGroupInsurance(clientInsurances.insurance)
-            : API_CORE.getInsurance(clientInsurances.insurance);
-
+          const result = await API_CORE.getPricing(clientInsurances.insurance, parameters);
+          console.log(result, 'RESULT');
           // const _insurances = await result;
           console.log(_insurances, '_insurances');
 
@@ -154,7 +153,16 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus, parameters }) => {
             );
       }
     })();
-  }, [API_CONFIG, API_CORE, insurances, mainDescription, mainModifier, mainTitle, widgetId]);
+  }, [
+    API_CONFIG,
+    API_CORE,
+    insurances,
+    mainDescription,
+    mainModifier,
+    mainTitle,
+    parameters,
+    widgetId
+  ]);
 
   const addInsuanceToCart = ({ id = null, insuranceId = null, checked, type }) => {
     if (mainModifier === 'single') {
@@ -176,7 +184,6 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus, parameters }) => {
 
     const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId, type);
 
-    console.log('before onchange price', eventBus.availableEvents.onSelected);
     eventBus.publish(eventBus.availableEvents.onSelected, getPrice(updatedInsurance));
 
     setInsurances(updatedInsurance);

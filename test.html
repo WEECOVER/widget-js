@@ -15,22 +15,39 @@
   <script>
     var el = document.body.addEventListener("widget:loaded", function() {
       const {eventBus, render} = weecoverWidget.default.widget('widget1')
-      render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', {parameters: [
-            {
-              nombre: 'marcaPatineteMussap',
-              valor: '1'
-            },
-            {
-              nombre: 'potenciaPatineteMussap',
-              valor: '1'
-            }
-          ]})
+      render('3f2226e0-a3bd-11e9-a45e-7502494ad5aa', 'ES', {parameters: [
+          {
+          nombre: "especie001",
+          valor: "1",
+          valores: []
+          },
+          {
+          nombre: "raza001",
+          valor: "1",
+          valores: []
+          },
+          {
+          nombre: "fechaNacimiento001",
+          valor: "01/01/2018",
+          valores: []
+          },
+          {
+          nombre: "chip001",
+          valor: 123456,
+          valores: []
+          },
+          {
+          nombre: "cp001",
+          valor: "08080",
+          valores: []
+          }
+        ]})
         eventBus.subscribe(eventBus.availableEvents.onSelected, function({detail}) {
           console.log('price has change', detail)
         })
       })
   </script>
-  <script>
+  <!-- <script>
       var el = document.body.addEventListener("widget:loaded", function() {
         const {eventBus, render} = weecoverWidget.default.widget('widget2')
         render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', {parameters: [
@@ -47,6 +64,6 @@
             console.log('price has change', detail)
           })
         })
-    </script>
+    </script> -->
 </body>
 </html>

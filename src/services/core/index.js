@@ -91,6 +91,21 @@ const API_CORE = function(lang) {
     const response = await axios.post(`${API_URI}/tarificaSeguro`, data);
     return response;
   };
+
+  this.getPricing = async (insuranceCode, { parameters }) => {
+    const data = {
+      codigoCliente: 'WEEWIDGET001',
+      parametros: parameters,
+      idioma: this._lang,
+      password: '?q^PGg5HgccC%qVw',
+      transaccionId: 'TEST-WIDGET',
+      codigoSeguro: 'WEE-MASCOTAS-001'
+    };
+    const {
+      data: { response }
+    } = await axios.post(`${API_URI}/tarificaSeguro`, data);
+    return response;
+  };
 };
 
 export default API_CORE;

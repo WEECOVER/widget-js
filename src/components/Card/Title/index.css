@@ -44,6 +44,10 @@
   flex: 0 0 100px
 }
 
+.warrany-not-included {
+  opacity: 0.5;
+}
+
 @media screen and (min-width: 0px) {
   .card-title-price::before{
     content: '\A';

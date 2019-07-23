@@ -19,7 +19,8 @@ const Content = ({ addInsuanceToCart, insurances, mainModifier, availableStyles 
           checked,
           garantiasIncluidas,
           tooltip,
-          tooltipGrupoSeguro
+          tooltipGrupoSeguro,
+          garantiasNoIncluidas
         }) => (
           <Card key={id} modifiers={[mainModifier]}>
             <Card.Title
@@ -32,6 +33,7 @@ const Content = ({ addInsuanceToCart, insurances, mainModifier, availableStyles 
               currency={currency}
               textButton={textoCTA}
               warranties={garantiasIncluidas}
+              noIncludedWarranties={garantiasNoIncluidas}
               tooltip={tooltip}
               tooltipGrupoSeguro={tooltipGrupoSeguro}></Card.Title>
             <Card.Complement

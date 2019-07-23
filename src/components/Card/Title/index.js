@@ -10,6 +10,7 @@ const Title = ({
   id,
   title,
   warranties,
+  noIncludedWarranties,
   price,
   currency,
   onSelect,
@@ -56,6 +57,9 @@ const Title = ({
           {warranties.map(warranty => (
             <li>{warranty}</li>
           ))}
+          {noIncludedWarranties.map(warranty =>(
+            <li className="warrany-not-included">{warranty}</li>
+          ))}
         </ul>
         <button type="button" className="card-tooltip-modal" onClick={enableDisplayModal}>
           i
@@ -73,7 +77,8 @@ const Title = ({
 
 Title.propTypes = {
   title: PropTypes.string.isRequired,
-  warranties: PropTypes.string.isRequired,
+  warranties: PropTypes.array.isRequired,
+  noIncludedWarranties: PropTypes.array.isRequired,
   price: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,

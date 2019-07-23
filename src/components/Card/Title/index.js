@@ -43,7 +43,7 @@ const Title = ({
         {displayCheckbox && (
           <CheckBox checked={checked} onClick={handleSelect} size={CheckBox.availableSizes.large} />
         )}
-        <Price title={title} modifiers={modifiers} price={price} currency={currency} />
+        <Price title={title} modifiers={modifiers} price={price} currency="€" />
         {displayAddButton && (
           <div className={getModifiers(modifiers, 'card-add-button-container')}>
             <Button modifiers={getButtonModifiers()} onClick={handleSelect}>

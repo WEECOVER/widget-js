@@ -1,10 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const ModalFrame = () => (
+const ModalFrame = ({ children }) => (
   <div className="modal-frame">
-    this should be the background of the modal
-    <div>this should be the modal frame</div>
+    <div>{children}</div>
   </div>
 );
+
+ModalFrame.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export default ModalFrame;

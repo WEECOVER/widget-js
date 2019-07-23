@@ -6,26 +6,46 @@ import { getModifiers } from '../../../utils/data-mappers';
 const Content = ({ addInsuanceToCart, insurances, mainModifier, availableStyles }) => (
   <section className={getModifiers([mainModifier], 'cards-wrapper')}>
     {insurances &&
-      insurances.map(({ title, price, currency, description, complements, id, checked }) => (
-        <Card key={id} modifiers={[mainModifier]}>
-          <Card.Title
-            onSelect={addInsuanceToCart}
-            displayAddButton={mainModifier === availableStyles.compressedSideBar}
-            id={id}
-            title={title}
-            price={price}
-            checked={checked}
-            currency={currency}
-            description={description}></Card.Title>
-          <Card.Complement onSelect={addInsuanceToCart} complements={complements}></Card.Complement>
-          <Card.Footer
-            checked={checked}
-            addInsuanceToCart={addInsuanceToCart}
-            availableStyles={availableStyles}
-            mainModifier={mainModifier}
-            element={{ title, price, currency, description, complements, id }}></Card.Footer>
-        </Card>
-      ))}
+      insurances.map(
+        ({
+          uniqueId,
+          textoCTA,
+          precio: price,
+          currency,
+          descripcion: title,
+          description,
+          complements,
+          id,
+          checked,
+          garantiasIncluidas,
+          tooltip,
+          tooltipGrupoSeguro
+        }) => (
+          <Card key={id} modifiers={[mainModifier]}>
+            <Card.Title
+              onSelect={addInsuanceToCart}
+              displayAddButton={mainModifier === availableStyles.compressedSideBar}
+              id={uniqueId}
+              title={title}
+              price={price}
+              checked={checked}
+              currency={currency}
+              textButton={textoCTA}
+              warranties={garantiasIncluidas}
+              tooltip={tooltip}
+              tooltipGrupoSeguro={tooltipGrupoSeguro}></Card.Title>
+            <Card.Complement
+              onSelect={addInsuanceToCart}
+              complements={complements}></Card.Complement>
+            <Card.Footer
+              checked={checked}
+              addInsuanceToCart={addInsuanceToCart}
+              availableStyles={availableStyles}
+              mainModifier={mainModifier}
+              element={{ title, price, currency, description, complements, id }}></Card.Footer>
+          </Card>
+        )
+      )}
   </section>
 );
 

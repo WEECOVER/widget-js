@@ -37,15 +37,17 @@ const API_CORE = function(lang) {
     return response;
   };
 
-  this.getInsurance = async codigoSeguro => {
+  this.getInsurance = async insuranceCode => {
     const data = {
       codigoCliente: 'WEEWIDGET001',
       idioma: this._lang,
       password: '?q^PGg5HgccC%qVw',
       transaccionId: '55',
-      codigoSeguro
+      codigoSeguro: insuranceCode
     };
-    const response = await axios.post(`${API_URI}/obtenerSeguro`, data);
+    const {
+      data: { response }
+    } = await axios.post(`${API_URI}/obtenerSeguro`, data);
     return response;
   };
 
@@ -74,24 +76,6 @@ const API_CORE = function(lang) {
     return response;
   };
 
-  this.getInsuranceRate = async () => {
-    const data = {
-      clienteId: 'string',
-      parametros: [
-        {
-          nombre: 'string',
-          valor: 'string',
-          valores: ['string']
-        }
-      ],
-      password: 'string',
-      seguroId: 'string',
-      transaccionId: 'string'
-    };
-    const response = await axios.post(`${API_URI}/tarificaSeguro`, data);
-    return response;
-  };
-
   this.getPricing = async (insuranceCode, { parameters }) => {
     const data = {
       codigoCliente: 'WEEWIDGET001',
@@ -99,12 +83,12 @@ const API_CORE = function(lang) {
       idioma: this._lang,
       password: '?q^PGg5HgccC%qVw',
       transaccionId: 'TEST-WIDGET',
-      codigoSeguro: 'WEE-MASCOTAS-001'
+      codigoSeguro: insuranceCode
     };
     const {
       data: { response }
     } = await axios.post(`${API_URI}/tarificaSeguro`, data);
-    return response;
+    return { ...response, codigoSeguro: insuranceCode };
   };
 };
 

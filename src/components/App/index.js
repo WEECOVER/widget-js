@@ -110,34 +110,19 @@ const availableStyles = {
   compressedSideBar: 'compressedSideBar'
 };
 
-const App = ({ widgetId, API_CORE, API_CONFIG, eventBus, parameters }) => {
+const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances }) => {
   const [mainModifier, setMainModifier] = useState('');
   const [insurances, setInsurances] = useState(null);
   const [mainTitle, setMainTitle] = useState(null);
   const [mainDescription, setMainDescription] = useState(null);
   const parentRef = useRef(null);
 
-  console.log(parameters, 'PARAMETROS');
-
   useEffect(() => {
     (async () => {
-      const [
-        { mainTitle: _mainTitle, mainDescription: _mainDescription, insurances: _insurances }
-      ] = fakeData;
-
       if (!insurances) {
-        const clientInsurances = await API_CONFIG.applyInitialConfig(widgetId);
-        console.log('codigo seguro', clientInsurances);
-        if (clientInsurances) {
-          const result = await API_CORE.getPricing(clientInsurances.insurance, parameters);
-          console.log(result, 'RESULT');
-          // const _insurances = await result;
-          console.log(_insurances, '_insurances');
-
-          setMainTitle(_mainTitle);
-          setMainDescription(_mainDescription);
-          setInsurances(_insurances);
-        }
+        const data = await dataInsurances;
+        console.log('data', data);
+        setInsurances(data);
       }
 
       if (parentRef) {
@@ -153,16 +138,7 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus, parameters }) => {
             );
       }
     })();
-  }, [
-    API_CONFIG,
-    API_CORE,
-    insurances,
-    mainDescription,
-    mainModifier,
-    mainTitle,
-    parameters,
-    widgetId
-  ]);
+  }, [API_CONFIG, API_CORE, dataInsurances, insurances, mainDescription, mainModifier, mainTitle]);
 
   const addInsuanceToCart = ({ id = null, insuranceId = null, checked, type }) => {
     if (mainModifier === 'single') {
@@ -189,15 +165,15 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus, parameters }) => {
     setInsurances(updatedInsurance);
   };
 
-  if (!mainModifier) return null;
+  if (!mainModifier || !insurances) return null;
 
   return (
     <main className="wrapper" ref={parentRef}>
       <Header
         availableStyles={availableStyles}
         mainModifier={mainModifier}
-        mainTitle={mainTitle}
-        mainDescription={mainDescription}
+        mainTitle={insurances[0].descripcionGrupoSeguro}
+        mainDescription={insurances[0].descripcionLargaGrupoSeguro}
       />
       <Content
         addInsuanceToCart={addInsuanceToCart}
@@ -216,11 +192,10 @@ const App = ({ widgetId, API_CORE, API_CONFIG, eventBus, parameters }) => {
 };
 
 App.propTypes = {
-  widgetId: PropTypes.string.isRequired,
   API_CORE: PropTypes.object.isRequired,
   API_CONFIG: PropTypes.object.isRequired,
   eventBus: PropTypes.object.isRequired,
-  parameters: PropTypes.object.isRequired
+  dataInsurances: PropTypes.object.isRequired
 };
 
 export default App;

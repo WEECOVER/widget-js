@@ -9,14 +9,17 @@ import Modal from '../../Modal';
 const Title = ({
   id,
   title,
-  description,
+  warranties,
   price,
   currency,
   onSelect,
   displayCheckbox,
   displayAddButton,
   modifiers,
-  checked
+  checked,
+  textButton,
+  tooltip,
+  tooltipGrupoSeguro
 }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const handleSelect = () => {
@@ -43,33 +46,45 @@ const Title = ({
         {displayAddButton && (
           <div className={getModifiers(modifiers, 'card-add-button-container')}>
             <Button modifiers={getButtonModifiers()} onClick={handleSelect}>
-              {checked ? 'Añadido' : 'Añadir'}
+              {textButton}
             </Button>
           </div>
         )}
       </div>
-      <p className="card-title-description">
-        {description}
+      <div className="card-title-description">
+        <ul>
+          {warranties.map(warranty => (
+            <li>{warranty}</li>
+          ))}
+        </ul>
         <button type="button" className="card-tooltip-modal" onClick={enableDisplayModal}>
           i
         </button>
-        <Modal displayModal={displayModal} enableDisplayModal={enableDisplayModal} />
-      </p>
+        <Modal displayModal={displayModal} enableDisplayModal={enableDisplayModal}>
+          <Modal.Frame>
+            <div>{tooltip}</div>
+            <div>{tooltipGrupoSeguro}</div>
+          </Modal.Frame>
+        </Modal>
+      </div>
     </Fragment>
   );
 };
 
 Title.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  warranties: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
   displayCheckbox: PropTypes.bool,
   displayAddButton: PropTypes.bool,
   modifiers: PropTypes.arrayOf(PropTypes.string),
   id: PropTypes.string.isRequired,
-  checked: PropTypes.bool
+  checked: PropTypes.bool,
+  textButton: PropTypes.string.isRequired,
+  tooltip: PropTypes.string.isRequired,
+  tooltipGrupoSeguro: PropTypes.string.isRequired
 };
 
 Title.defaultProps = {

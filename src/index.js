@@ -7,6 +7,7 @@ import './main.css';
 import EventBus from './utils/event-bus';
 import API_CORE from './services/core';
 import API_CONFIG from './services/widget-representation';
+import { getInitialProps } from './services/getInitialProps';
 
 // facade pattern
 export default {
@@ -19,8 +20,7 @@ export default {
         const API_CONFIG_INSTANCE = new API_CONFIG(id);
         ReactDOM.render(
           <App
-            parameters={parameters}
-            widgetId={id}
+            dataInsurances={getInitialProps(parameters, id, API_CORE_INSTANCE, API_CONFIG_INSTANCE)}
             eventBus={this.eventBus}
             API_CORE={API_CORE_INSTANCE}
             API_CONFIG={API_CONFIG_INSTANCE}

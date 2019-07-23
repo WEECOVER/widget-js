@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import ModalFrame from './ModalFrame';
 
-const Modal = ({ displayModal, nodeId, enableDisplayModal }) => {
+const Modal = ({ displayModal, nodeId, enableDisplayModal, children }) => {
   const wrapperEl = useRef(null);
 
   useEffect(() => {
@@ -27,13 +27,15 @@ const Modal = ({ displayModal, nodeId, enableDisplayModal }) => {
     }
   };
 
+  console.log('children', children);
+
   const renderWrappedModalFrame = () => (
     <div
       role="button"
       className="widget-modal-wrapper"
       ref={wrapperEl}
       onClick={handleOutsideClick}>
-      <ModalFrame />
+      {children}
     </div>
   );
   return displayModal ? createPortal(renderWrappedModalFrame(), getContainer()) : null;
@@ -41,8 +43,11 @@ const Modal = ({ displayModal, nodeId, enableDisplayModal }) => {
 
 Modal.propTypes = {
   nodeId: PropTypes.string,
-  displayModal: PropTypes.bool
+  displayModal: PropTypes.bool,
+  children: PropTypes.object.isRequired
 };
+
+Modal.Frame = ModalFrame;
 
 Modal.defaultProps = {
   nodeId: 'widget-modal-root',

@@ -53,6 +53,35 @@ render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
         <td>Se dispara cuando el usuario ha seleccionado algún seguro weecover algún producto.</td>
         </tr>
         <tr>
+        <td>&quot;insuranceHired&quot;</td>
+        <td>
+          <ul>
+            <li><strong>codigoCliente</strong>: codigo del cliente </li>
+            <li><strong>codigoOferta</strong>: codigo de la oferta </li>
+            <li><strong>codigoSeguro</strong>: codigo del seguro </li>
+            <li><strong>direccion</strong>: direccion del usuario </li>
+            <li><strong>documento</strong>: numero documento de identidad del usuario</li>
+            <li><strong>mail</strong>: email del usuario</li>
+            <li><strong>nombre</strong>: nombre del usuario</li>
+            <li><strong>parametros</strong>: array de parametros que contiene <pre>
+              {nombre: "string",
+                valor: "string",
+                valores: [
+                  "string"
+                ]}
+            </pre></li>
+            <li><strong>password</strong>: contraseña del widget</li>
+            <li><strong>poblacion</strong>: poblacion del usuario</li>
+            <li><strong>primerApellido</strong>: primer apellido del usuario</li>
+            <li><strong>segundoApellido</strong>: segundo apellido del usuario</li>
+            <li><strong>sexo</strong>: sexo del usuario </li>
+            <li><strong>telefono</strong>: telefono del usuario</li>
+            <li><strong>transaccionId</strong>:  id de la transacción</li>
+          </ul>
+        </td>
+        <td>Se dispara cuando se ha finalizado correctamente el proceso de compra</td>
+        </tr>
+        <tr>
             <td>&quot;onRemoved&quot;</td>
             <td>
               <ul>

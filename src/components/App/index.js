@@ -172,6 +172,7 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances }) => {
       <Header
         availableStyles={availableStyles}
         mainModifier={mainModifier}
+        tooltipGrupoSeguro={insurances[0].tooltipGrupoSeguro}
         mainTitle={insurances[0].descripcionGrupoSeguro}
         mainDescription={insurances[0].descripcionLargaGrupoSeguro}
       />

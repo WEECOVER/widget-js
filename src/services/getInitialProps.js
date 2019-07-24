@@ -15,7 +15,13 @@ const getInitialProps = async (parameters, widgetId, API_CORE_INSTANCE, API_CONF
     let insuranceWithPrice;
     prices.forEach(({ codigoSeguro, precio, codigoOferta }) => {
       if (insurance.codigoSeguro === codigoSeguro) {
-        insuranceWithPrice = { ...insurance, precio, codigoOferta, uniqueId: uuidv1() };
+        insuranceWithPrice = {
+          ...insurance,
+          precio,
+          codigoOferta,
+          id: uuidv1(),
+          checked: false
+        };
       }
     });
     return insuranceWithPrice;

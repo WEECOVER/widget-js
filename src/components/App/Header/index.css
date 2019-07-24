@@ -15,6 +15,12 @@
   padding: var(--space-s) 0;
 }
 
+.header-tooltip-modal {
+  border: 1px solid var(--text-color);
+  border-radius: 100%;
+  background-color: #FFFFFF;
+}
+
 .header--compressedSideBar {
   padding: 0 26px;
 }

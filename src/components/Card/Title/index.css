@@ -2,6 +2,7 @@
   border: 1px solid var(--text-color);
   border-radius: 100%;
   background-color: #FFFFFF;
+  margin-left: 6px;
 }
 
 .card-title-container {

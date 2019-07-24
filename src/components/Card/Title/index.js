@@ -19,8 +19,7 @@ const Title = ({
   modifiers,
   checked,
   textButton,
-  tooltip,
-  tooltipGrupoSeguro: description
+  tooltip
 }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const handleSelect = () => {
@@ -53,7 +52,10 @@ const Title = ({
         )}
       </div>
       <div className="card-title-description">
-        <p>{description}</p>
+        <button type="button" className="card-tooltip-modal" onClick={enableDisplayModal}>
+          i
+        </button>
+
         <ul>
           {warranties.map(warranty => (
             <li>{warranty}</li>
@@ -62,9 +64,7 @@ const Title = ({
             <li className="warrany-not-included">{warranty}</li>
           ))}
         </ul>
-        <button type="button" className="card-tooltip-modal" onClick={enableDisplayModal}>
-          i
-        </button>
+
         <Modal displayModal={displayModal} enableDisplayModal={enableDisplayModal}>
           <Modal.Frame>
             <div>{tooltip}</div>

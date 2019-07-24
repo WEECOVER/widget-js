@@ -1,10 +1,12 @@
 const cleanPreviousComplements = insurance => ({
   ...insurance,
   checked: false,
-  complements: insurance.complements.map(complement => ({
-    ...complement,
-    checked: false
-  }))
+  complements:
+    insurance.complements &&
+    insurance.complements.map(complement => ({
+      ...complement,
+      checked: false
+    }))
 });
 
 const removeComplements = updatedInsurances => {
@@ -28,6 +30,7 @@ const setThroughComplement = (insurance, insuranceId, type) => {
 };
 
 const switchBetweenInsurances = (complements, id) =>
+  complements &&
   complements.map(complement =>
     complement.id === id ? { ...complement, checked: !complement.checked } : complement
   );

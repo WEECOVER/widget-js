@@ -8,14 +8,13 @@ const Content = ({ addInsuanceToCart, insurances, mainModifier, availableStyles 
     {insurances &&
       insurances.map(
         ({
-          uniqueId,
+          id,
           textoCTA,
           precio: price,
           currency,
           descripcion: title,
           description,
           complements,
-          id,
           checked,
           garantiasIncluidas,
           tooltip,
@@ -26,7 +25,7 @@ const Content = ({ addInsuanceToCart, insurances, mainModifier, availableStyles 
             <Card.Title
               onSelect={addInsuanceToCart}
               displayAddButton={mainModifier === availableStyles.compressedSideBar}
-              id={uniqueId}
+              id={id}
               title={title}
               price={price}
               checked={checked}

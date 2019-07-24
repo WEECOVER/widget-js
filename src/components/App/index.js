@@ -4,7 +4,7 @@ import Content from './Content';
 import Header from './Header';
 import Footer from './Footer';
 import { handleInsuranceSelected, removeComplements } from './handlers/handle-insurances';
-import { getInsuranceSelected } from './handlers/handle-price';
+import { getInsuranceSelected } from './handlers/get-insurance-selected';
 
 const availableStyles = {
   uncompressed: 'uncompressed',
@@ -59,11 +59,21 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances }) => {
         : setInsurances(updatedInsurance);
     }
 
-    const updatedInsurance = handleInsuranceSelected(insurances, id, checked, insuranceId, type);
+    const [updatedInsurance, selected] = handleInsuranceSelected(
+      insurances,
+      id,
+      checked,
+      insuranceId,
+      type
+    );
 
-    eventBus.publish(eventBus.availableEvents.onSelected, {
-      insurance: getInsuranceSelected(updatedInsurance)
-    });
+    if (!selected) {
+      eventBus.publish(eventBus.availableEvents.onRemove, null);
+    } else {
+      eventBus.publish(eventBus.availableEvents.onSelected, {
+        insurance: getInsuranceSelected(updatedInsurance)
+      });
+    }
 
     setInsurances(updatedInsurance);
   };

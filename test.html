@@ -71,6 +71,9 @@
             transaccionId: "string"
           };
           eventBus.publish(eventBus.availableEvents.insuranceHired, data)
+          eventBus.subscribe(eventBus.availableEvents.onRemove, ({detail}) => {
+            console.log('has been removed', detail)
+          })
         })
       })
   </script>

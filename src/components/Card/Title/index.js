@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
+import uuidv1 from 'uuid/v1';
 import CheckBox from '../../CheckBox';
 import Button from '../../Button';
 import { getModifiers } from '../../../utils/data-mappers';
@@ -58,10 +59,12 @@ const Title = ({
 
         <ul>
           {warranties.map(warranty => (
-            <li>{warranty}</li>
+            <li key={uuidv1()}>{warranty}</li>
           ))}
           {noIncludedWarranties.map(warranty => (
-            <li className="warrany-not-included">{warranty}</li>
+            <li key={uuidv1()} className="warrany-not-included">
+              {warranty}
+            </li>
           ))}
         </ul>
 
@@ -80,7 +83,6 @@ Title.propTypes = {
   warranties: PropTypes.array.isRequired,
   noIncludedWarranties: PropTypes.array.isRequired,
   price: PropTypes.number.isRequired,
-  currency: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
   displayCheckbox: PropTypes.bool,
   displayAddButton: PropTypes.bool,
@@ -88,8 +90,7 @@ Title.propTypes = {
   id: PropTypes.string.isRequired,
   checked: PropTypes.bool,
   textButton: PropTypes.string.isRequired,
-  tooltip: PropTypes.string.isRequired,
-  tooltipGrupoSeguro: PropTypes.string.isRequired
+  tooltip: PropTypes.string.isRequired
 };
 
 Title.defaultProps = {

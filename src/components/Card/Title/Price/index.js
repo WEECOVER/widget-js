@@ -22,7 +22,7 @@ const Price = ({ title, modifiers, price, currency }) => (
 Price.propTypes = {
   title: PropTypes.string.isRequired,
   modifiers: PropTypes.array.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired
 };
 

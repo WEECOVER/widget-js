@@ -18,6 +18,9 @@ export default {
       render: (id, lang, parameters) => {
         const API_CORE_INSTANCE = new API_CORE(lang);
         const API_CONFIG_INSTANCE = new API_CONFIG(id);
+        this.eventBus.subscribe(this.eventBus.availableEvents.insuranceHired, ({ detail }) =>
+          API_CORE_INSTANCE.hireInsurance(detail)
+        );
         ReactDOM.render(
           <App
             dataInsurances={getInitialProps(parameters, id, API_CORE_INSTANCE, API_CONFIG_INSTANCE)}

@@ -9,30 +9,7 @@ const API_CORE = function(lang) {
     throw new Error(`${lang} language is not available, available langs ${AVAILABLES_LANG}`);
   }
   this._lang = lang;
-  this.hireInsurance = async () => {
-    const data = {
-      apellidos: 'string',
-      clienteId: 'string',
-      codigoPostal: 'string',
-      direccion: 'string',
-      mail: 'string',
-      nif: 'string',
-      nombre: 'string',
-      oferta: 'string',
-      parametros: [
-        {
-          nombre: 'string',
-          valor: 'string',
-          valores: ['string']
-        }
-      ],
-      password: 'string',
-      poblacion: 'string',
-      provincia: 'string',
-      seguroId: 'string',
-      telefono: 'string',
-      transaccionId: 'string'
-    };
+  this.hireInsurance = async data => {
     const response = await axios.post(`${API_URI}/contrataSeguro`, data);
     return response;
   };

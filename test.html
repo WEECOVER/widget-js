@@ -43,27 +43,36 @@
           }
         ]})
         eventBus.subscribe(eventBus.availableEvents.onSelected, function({detail}) {
-          console.log('price has change', detail)
+          const {insurance} = detail
+          console.log(insurance.price, 'PRECIO')
+          const data  = {
+            codigoCliente: "string",
+            codigoOferta: insurance.codigoOferta,
+            codigoSeguro: insurance.codigoGrupoSeguro,
+            direccion: "string",
+            documento: "string",
+            mail: "string",
+            nombre: "string",
+            parametros: [
+              {
+                nombre: "string",
+                valor: "string",
+                valores: [
+                  "string"
+                ]
+              }
+            ],
+            password: "string",
+            poblacion: "string",
+            primerApellido: "string",
+            segundoApellido: "string",
+            sexo: "string",
+            telefono: "string",
+            transaccionId: "string"
+          };
+          eventBus.publish(eventBus.availableEvents.insuranceHired, data)
         })
       })
   </script>
-  <!-- <script>
-      var el = document.body.addEventListener("widget:loaded", function() {
-        const {eventBus, render} = weecoverWidget.default.widget('widget2')
-        render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', {parameters: [
-            {
-              nombre: 'marcaPatineteMussap',
-              valor: '1'
-            },
-            {
-              nombre: 'potenciaPatineteMussap',
-              valor: '1'
-            }
-          ]})
-          eventBus.subscribe(eventBus.availableEvents.onSelected, function({detail}) {
-            console.log('price has change', detail)
-          })
-        })
-    </script> -->
 </body>
 </html>

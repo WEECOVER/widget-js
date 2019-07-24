@@ -27,8 +27,6 @@ const Modal = ({ displayModal, nodeId, enableDisplayModal, children }) => {
     }
   };
 
-  console.log('children', children);
-
   const renderWrappedModalFrame = () => (
     <div
       role="button"

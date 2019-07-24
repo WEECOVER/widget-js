@@ -5,6 +5,7 @@ function EventBus(id) {
   this.availableEvents = {
     onSelected: `widget:on:selected:${id}`,
     onRemove: `widget:on:remove:${id}`,
+    insuranceHired: `widget:on:insurance:hired:${id}`
   }
 
   this.subscribe = function(event, callback) {

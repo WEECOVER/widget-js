@@ -1,20 +1,26 @@
-const getPrice = updatedInsurance => {
-  let price = 0;
+const getInsuranceSelected = updatedInsurance => {
+  const selectedInsurance = {
+    price: 0,
+    codigoOferta: null,
+    codigoGrupoSeguro: null
+  };
   updatedInsurance.forEach(insurance => {
     if (insurance.checked) {
-      const { precio: _price } = insurance;
-      price += Number(_price);
+      const { precio: _price, codigoOferta, codigoGrupoSeguro } = insurance;
+      selectedInsurance.codigoOferta = codigoOferta;
+      selectedInsurance.codigoGrupoSeguro = codigoGrupoSeguro;
+      selectedInsurance.price += Number(_price);
     }
 
     if (insurance.complements && insurance.complements.some(({ checked }) => checked)) {
       insurance.complements.forEach(({ checked, precio: _price }) => {
         if (checked) {
-          price += Number(_price);
+          selectedInsurance.price += Number(_price);
         }
       });
     }
   });
-  return price;
+  return selectedInsurance;
 };
 
-export { getPrice };
+export { getInsuranceSelected };

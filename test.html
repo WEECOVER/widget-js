@@ -15,32 +15,28 @@
   <script>
     var el = document.body.addEventListener("widget:loaded", function() {
       const {eventBus, render} = weecoverWidget.default.widget('widget1')
-      render('3f2226e0-a3bd-11e9-a45e-7502494ad5aa', 'ES', {parameters: [
-          {
-          nombre: "especie001",
-          valor: "1",
-          valores: []
-          },
-          {
-          nombre: "raza001",
-          valor: "1",
-          valores: []
-          },
-          {
-          nombre: "fechaNacimiento001",
-          valor: "01/01/2018",
-          valores: []
-          },
-          {
-          nombre: "chip001",
-          valor: 123456,
-          valores: []
-          },
-          {
-          nombre: "cp001",
-          valor: "08080",
-          valores: []
-          }
+      render('62a17690-9e4d-11e9-8098-69aea8a91817', 'ES', {parameters: 
+      [           
+            {
+                "nombre": "especie001",
+              "valor": "1"
+            },
+            {
+                "nombre": "fechaNacimiento001",
+              "valor": "01/01/2017"
+            },
+            {
+                "nombre": "chip001",
+              "valor": "12345678"
+            },
+            {
+                "nombre": "cp001",
+              "valor": "08020"
+            },
+            {
+                "nombre": "raza001",
+              "valor": "19"
+            }
         ]})
         eventBus.subscribe(eventBus.availableEvents.onSelected, function({detail}) {
           const {insurance} = detail

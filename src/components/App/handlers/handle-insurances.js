@@ -38,11 +38,12 @@ const switchBetweenInsurances = (complements, id) =>
 const handleInsuranceSelected = (insurances, id, checked, insuranceId, type) => {
   let selected = null;
   const updatedInsurances = insurances.map(insurance => {
-    let currentInsurace;
+    let currentInsurace = insurance;
     if (insurance.id === id) {
       currentInsurace = { ...insurance, checked: !insurance.checked };
       selected = currentInsurace;
     } else {
+      console.log('ENTRA');
       currentInsurace = setThroughComplement(insurance, insuranceId, type, id);
     }
 

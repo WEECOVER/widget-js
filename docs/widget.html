@@ -9,6 +9,7 @@
 </head>
 <body class="Box-body">
   <article class="markdown-body entry-content p-5">
+    <img src="./logo.png" />
     <h1 id="weecoverwidget">WeecoverWidget</h1>
     <p class="disclaimer">Nota: La siguiete documentación está en período de construcción y podrá estar sujeta a futuros cambios</p>
     <p>El widget de WeeCover permite ofrecer cualquier seguro disponible en el sitio donde sea incrustado de manera integrada con la web donde se visualiza</p>
@@ -64,11 +65,13 @@ render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
             <li><strong>mail</strong>: email del usuario</li>
             <li><strong>nombre</strong>: nombre del usuario</li>
             <li><strong>parametros</strong>: array de parametros que contiene <pre>
-              {nombre: "string",
-                valor: "string",
-                valores: [
-                  "string"
-                ]}
+  {
+    nombre: "string",
+    valor: "string",
+    valores: [
+      "string"
+    ]
+  }
             </pre></li>
             <li><strong>password</strong>: contraseña del widget</li>
             <li><strong>poblacion</strong>: poblacion del usuario</li>
@@ -105,8 +108,10 @@ render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
     <p>La publicación de un evento se deberá implementar de la siguiente manera:</p>
     <pre><code class="language-js">eventBus.publish(
   eventBus.availableEvents.onRemoved, 
-  function({ name }) {
-    console.log('insurance removed', name)
+  {
+    param1: value1,
+    param2: value2,
+    ...
   }
 )
 </code></pre>
@@ -117,26 +122,63 @@ render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
   &lt;div id="weecover-widget-1"&gt;&lt;/div&gt;
   &lt;script src=&quot;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&quot;&gt;&lt;/script&gt;
   &lt;script&gt;
-        document.body.addEventListener("widget:loaded", function() {
-          const {eventBus, render} = weecoverWidget.default.widget('weecover-widget-1')
-          render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', {parameters: [
-                {
-                  nombre: 'marcaPatineteMussap',
-                  valor: '1'
-                },
-                {
-                  nombre: 'potenciaPatineteMussap',
-                  valor: '1'
-                }
-              ]})
-            eventBus.subscribe(eventBus.availableEvents.onSelected, function({detail}) {
-              console.log('price has change', detail)
-            })
-          })
+    let eventBus;
+    document.body.addEventListener("widget:loaded", function() {
+      const widgetInstance = weecoverWidget.default.widget('weecover-widget-1')
+      const { render } = widgetInstance;
+      eventBus = widgetInstance.eventBus;
+
+      render(
+        '6eff0290-a181-11e9-a41f-7940f295bd3f', 
+        'ES', 
+        {
+          parameters: [
+            {
+              nombre: 'marcaPatineteMussap',
+              valor: '1'
+            },
+            {
+              nombre: 'potenciaPatineteMussap',
+              valor: '1'
+            }
+          ]
+        }
+      );
+      eventBus.subscribe(eventBus.availableEvents.onSelected, function({detail}) {
+        console.log('price has change', detail)
+      })
+    })
+
+    // Notificar compra pago exitoso del seguro
+    function notifyInsuranceHired(){
+      eventBus.publish(eventBus.availableEvents.insuranceHired, {
+        codigoCliente: 'string',
+        codigoOferta: 'string',
+        ...
+      });
+    }
+
   &lt;/script&gt;
 &lt;/body&gt;</code></pre>
     <p>Luego de esperar a que el widget haya sido cargado correctamente llamamos a la función widget pasandole una id para crea una nueva instancia y nos retornara el metodo render y su corresponiente instancia de bus de eventos mediante la cual establecer la comunicación.</p>
     <p>A través del objeto eventBus.availableEvents podremos obtener los diferentes eventos disponibles.</p>
+    <h3 id="integration-script-thankyou">Integración en página de final de compra:</h3>
+    <p>Cuando el resumen final de compra está ubicado en una página distinta a la del checkout y se debe cargar la URL completa, se puede instanciar el widget sin ejecutar la función render y notificar el pago del seguro a través del event bus de la siguiente manera:</p>
+    <pre><code class="language-html">&lt;body&gt;
+  &lt;div id="weecover-widget-1"&gt;&lt;/div&gt;
+  &lt;script src=&quot;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&quot;&gt;&lt;/script&gt;
+  &lt;script&gt;
+    document.body.addEventListener("widget:loaded", function() {
+      const {eventBus} = weecoverWidget.default.widget('weecover-widget-1')
+      
+      eventBus.publish(eventBus.availableEvents.insuranceHired, {
+        codigoCliente: 'string',
+        codigoOferta: 'string',
+        ...
+      });
+    })
+  &lt;/script&gt;
+&lt;/body&gt;</code></pre>
     <h3 id="integration-inside-existing-react-app">Integración del widget en una aplicación web implementada en React</h3>
     <p>React | Componente de clase:</p>
     <pre><code class="language-js">import React from react;

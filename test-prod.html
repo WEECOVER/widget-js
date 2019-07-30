@@ -7,17 +7,75 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="widget-root"></div>
-  <script src="https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js"></script>
+  
+  <div id="widget1"></div>
+  <div id="widget2"></div>
+
+  <script src="https://widget.weecover.com/downloader.js"></script>
   <script>
-      var el = document.getElementById("widget-root").addEventListener("widget:loaded", function() {
-        const widgetEventBus = weecoverWidget.default.widgets.App.eventBus 
-        weecoverWidget.default.widgets.App.render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', widgetEventBus)
-          console.log('EL WIDGET HA CARGADO', widgetEventBus)
-          widgetEventBus.subscribe('price', function({detail}) {
-            console.log('price has change', detail)
+    var el = document.body.addEventListener("widget:loaded", function() {
+      const {eventBus, render} = weecoverWidget.default.widget('widget1')
+      render('3f2226e0-a3bd-11e9-a45e-7502494ad5aa', 'ES', {parameters: [
+          {
+          nombre: "especie001",
+          valor: "1",
+          valores: []
+          },
+          {
+          nombre: "raza001",
+          valor: "1",
+          valores: []
+          },
+          {
+          nombre: "fechaNacimiento001",
+          valor: "01/01/2018",
+          valores: []
+          },
+          {
+          nombre: "chip001",
+          valor: 123456,
+          valores: []
+          },
+          {
+          nombre: "cp001",
+          valor: "08080",
+          valores: []
+          }
+        ]})
+        eventBus.subscribe(eventBus.availableEvents.onSelected, function({detail}) {
+          const {insurance} = detail
+          console.log(insurance.price, 'PRECIO')
+          const data  = {
+            codigoCliente: "string",
+            codigoOferta: insurance.codigoOferta,
+            codigoSeguro: insurance.codigoGrupoSeguro,
+            direccion: "string",
+            documento: "string",
+            mail: "string",
+            nombre: "string",
+            parametros: [
+              {
+                nombre: "string",
+                valor: "string",
+                valores: [
+                  "string"
+                ]
+              }
+            ],
+            password: "string",
+            poblacion: "string",
+            primerApellido: "string",
+            segundoApellido: "string",
+            sexo: "string",
+            telefono: "string",
+            transaccionId: "string"
+          };
+          eventBus.publish(eventBus.availableEvents.insuranceHired, data)
+          eventBus.subscribe(eventBus.availableEvents.onRemove, ({detail}) => {
+            console.log('has been removed', detail)
           })
         })
-    </script>
+      })
+  </script>
 </body>
 </html>

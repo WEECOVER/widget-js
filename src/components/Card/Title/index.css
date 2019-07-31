@@ -43,11 +43,8 @@
 }
 
 .card-title-description-list{
-
-}
-
-.card-title-description-list-item{
-  
+  padding-left: 40px;
+  margin: 10px 0;
 }
 
 .card-add-button-container {

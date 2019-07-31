@@ -14,7 +14,8 @@ const Footer = ({ mainModifier, availableStyles, element, addInsuanceToCart, che
           onClick={() =>
             addInsuanceToCart({
               type: 'single',
-              id: element.id
+              id: element.id,
+              checked: !checked
             })
           }
           modifiers={getButtonModifiers()}>

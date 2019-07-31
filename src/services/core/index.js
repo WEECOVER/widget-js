@@ -54,7 +54,6 @@ const API_CORE = function(lang) {
   };
 
   this.getPricing = async (insuranceCode, { parameters }) => {
-    console.log('reciving', parameters);
     const data = {
       codigoCliente: 'WEEWIDGET001',
       parametros: parameters,

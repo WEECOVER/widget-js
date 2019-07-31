@@ -57,12 +57,14 @@ const Title = ({
           i
         </button>
 
-        <ul>
+        <ul className="card-title-description-list">
           {warranties.map(warranty => (
-            <li key={uuidv1()}>{warranty}</li>
+            <li className="card-title-description-list-item" key={uuidv1()}>
+              {warranty}
+            </li>
           ))}
           {noIncludedWarranties.map(warranty => (
-            <li key={uuidv1()} className="warrany-not-included">
+            <li key={uuidv1()} className="card-title-description-list-item warrany-not-included">
               {warranty}
             </li>
           ))}

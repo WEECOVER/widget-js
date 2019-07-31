@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import Card from '../../Card';
 import { getModifiers } from '../../../utils/data-mappers';
 
-const Content = ({ addInsuanceToCart, insurances, mainModifier, availableStyles }) => (
+const Content = ({
+  addInsuanceToCart,
+  insurances,
+  mainModifier,
+  availableStyles,
+  uniqueWidgetId
+}) => (
   <section className={getModifiers([mainModifier], 'cards-wrapper')}>
     {insurances &&
       insurances.map(
@@ -23,6 +29,7 @@ const Content = ({ addInsuanceToCart, insurances, mainModifier, availableStyles 
         }) => (
           <Card key={id} modifiers={[mainModifier]}>
             <Card.Title
+              uniqueWidgetId={uniqueWidgetId}
               onSelect={addInsuanceToCart}
               displayAddButton={mainModifier === availableStyles.compressedSideBar}
               id={id}
@@ -54,7 +61,8 @@ Content.propTypes = {
   insurances: PropTypes.array.isRequired,
   mainModifier: PropTypes.string.isRequired,
   availableStyles: PropTypes.object.isRequired,
-  addInsuanceToCart: PropTypes.func.isRequired
+  addInsuanceToCart: PropTypes.func.isRequired,
+  uniqueWidgetId: PropTypes.string.isRequired
 };
 
 export default Content;

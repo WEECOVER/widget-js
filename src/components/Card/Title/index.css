@@ -3,6 +3,7 @@
   border-radius: 100%;
   background-color: #FFFFFF;
   margin-left: 6px;
+  min-width: 16px
 }
 
 .card-title-container {

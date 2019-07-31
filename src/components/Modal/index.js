@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import ModalFrame from './ModalFrame';
 
-const Modal = ({ displayModal, nodeId, enableDisplayModal, children }) => {
+const Modal = ({ displayModal, nodeId, enableDisplayModal, children, uniqueWidgetId }) => {
   const wrapperEl = useRef(null);
 
   useEffect(() => {
@@ -12,13 +12,12 @@ const Modal = ({ displayModal, nodeId, enableDisplayModal, children }) => {
   }, [displayModal]);
 
   const getContainer = () => {
-    let nodeContainerEl = document.getElementById(nodeId);
-    if (!nodeContainerEl) {
-      nodeContainerEl = document.createElement('div');
-      nodeContainerEl.id = nodeId;
-      document.body.appendChild(nodeContainerEl);
-    }
-    return nodeContainerEl;
+    const nodeContainerEl = document.getElementById(uniqueWidgetId);
+    const node = document.createElement('div');
+    node.id = nodeId;
+    nodeContainerEl.appendChild(node);
+
+    return node;
   };
 
   const handleOutsideClick = event => {

@@ -3,3 +3,7 @@
 @import "./styles/spacing.css";
 @import "./styles/base.css";
 @import "./styles/components.css";
+
+.widget-root {
+  position: relative;
+}

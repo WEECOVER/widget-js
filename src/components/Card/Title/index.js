@@ -13,7 +13,7 @@ const Title = ({
   warranties,
   noIncludedWarranties,
   price,
-  currency,
+  uniqueWidgetId,
   onSelect,
   displayCheckbox,
   displayAddButton,
@@ -68,7 +68,10 @@ const Title = ({
           ))}
         </ul>
 
-        <Modal displayModal={displayModal} enableDisplayModal={enableDisplayModal}>
+        <Modal
+          uniqueWidgetId={uniqueWidgetId}
+          displayModal={displayModal}
+          enableDisplayModal={enableDisplayModal}>
           <Modal.Frame>
             <div>{tooltip}</div>
           </Modal.Frame>
@@ -80,6 +83,7 @@ const Title = ({
 
 Title.propTypes = {
   title: PropTypes.string.isRequired,
+  uniqueWidgetId: PropTypes.string.isRequired,
   warranties: PropTypes.array.isRequired,
   noIncludedWarranties: PropTypes.array.isRequired,
   price: PropTypes.number.isRequired,

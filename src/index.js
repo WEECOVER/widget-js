@@ -21,14 +21,19 @@ export default {
         this.eventBus.subscribe(this.eventBus.availableEvents.insuranceHired, ({ detail }) =>
           API_CORE_INSTANCE.hireInsurance(detail)
         );
+
+        const node = document.getElementById(uniqueWidgetId);
+        node.classList.add('widget-root');
+
         ReactDOM.render(
           <App
             dataInsurances={getInitialProps(parameters, id, API_CORE_INSTANCE, API_CONFIG_INSTANCE)}
             eventBus={this.eventBus}
             API_CORE={API_CORE_INSTANCE}
             API_CONFIG={API_CONFIG_INSTANCE}
+            uniqueWidgetId={uniqueWidgetId}
           />,
-          document.getElementById(uniqueWidgetId)
+          node
         );
       }
     });

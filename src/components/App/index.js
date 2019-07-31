@@ -12,7 +12,7 @@ const availableStyles = {
   compressedSideBar: 'compressedSideBar'
 };
 
-const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances }) => {
+const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId }) => {
   const [mainModifier, setMainModifier] = useState('');
   const [insurances, setInsurances] = useState(null);
   const parentRef = useRef(null);
@@ -83,6 +83,7 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances }) => {
   return (
     <main className="wrapper" ref={parentRef}>
       <Header
+        uniqueWidgetId={uniqueWidgetId}
         availableStyles={availableStyles}
         mainModifier={mainModifier}
         tooltipGrupoSeguro={insurances[0].tooltipGrupoSeguro}
@@ -90,6 +91,7 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances }) => {
         mainDescription={insurances[0].descripcionLargaGrupoSeguro}
       />
       <Content
+        uniqueWidgetId={uniqueWidgetId}
         addInsuanceToCart={addInsuanceToCart}
         mainModifier={mainModifier}
         insurances={insurances}
@@ -109,7 +111,8 @@ App.propTypes = {
   API_CORE: PropTypes.object.isRequired,
   API_CONFIG: PropTypes.object.isRequired,
   eventBus: PropTypes.object.isRequired,
-  dataInsurances: PropTypes.object.isRequired
+  dataInsurances: PropTypes.object.isRequired,
+  uniqueWidgetId: PropTypes.string.isRequired
 };
 
 export default App;

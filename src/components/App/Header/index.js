@@ -8,7 +8,8 @@ const Header = ({
   mainModifier,
   mainTitle,
   mainDescription,
-  tooltipGrupoSeguro
+  tooltipGrupoSeguro,
+  uniqueWidgetId
 }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const enableDisplayModal = (status = null) => {
@@ -26,7 +27,10 @@ const Header = ({
               i
             </button>
           </p>
-          <Modal displayModal={displayModal} enableDisplayModal={enableDisplayModal}>
+          <Modal
+            uniqueWidgetId={uniqueWidgetId}
+            displayModal={displayModal}
+            enableDisplayModal={enableDisplayModal}>
             <Modal.Frame>
               <div>{tooltipGrupoSeguro}</div>
             </Modal.Frame>
@@ -42,7 +46,8 @@ Header.propTypes = {
   mainModifier: PropTypes.string.isRequired,
   mainTitle: PropTypes.string,
   mainDescription: PropTypes.string,
-  tooltipGrupoSeguro: PropTypes.string.isRequired
+  tooltipGrupoSeguro: PropTypes.string.isRequired,
+  uniqueWidgetId: PropTypes.string.isRequired
 };
 
 Header.defaultProps = {

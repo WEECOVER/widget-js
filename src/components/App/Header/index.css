@@ -19,6 +19,8 @@
   border: 1px solid var(--text-color);
   border-radius: 100%;
   background-color: #FFFFFF;
+  min-width: 16px;
+  margin-left: 4px;
 }
 
 .header--compressedSideBar {

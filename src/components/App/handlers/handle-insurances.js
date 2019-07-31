@@ -43,7 +43,6 @@ const handleInsuranceSelected = (insurances, id, checked, insuranceId, type) => 
       currentInsurace = { ...insurance, checked: !insurance.checked };
       selected = currentInsurace;
     } else {
-      console.log('ENTRA');
       currentInsurace = setThroughComplement(insurance, insuranceId, type, id);
     }
 

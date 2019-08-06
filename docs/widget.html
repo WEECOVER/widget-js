@@ -18,7 +18,7 @@
     <p>Para integrar el widget en una web y ofrecer los seguros disponibles, se deberá copiar el código facilitado por WeeCover que se encuentra en la página correspondiente de la herramienta backoffice.</p>
     <p>A continuación se muestra un ejemplo de código de widget a integrar:</p>
     <pre><code class="language-js">&lt;div id="weecover-widget-1"&gt;&lt;/div&gt;
-&lt;script src="https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js"&gt;&lt;/script&gt;
+&lt;script src="https://widget.weecover.com/downloader.js"&gt;&lt;/script&gt;
 </code></pre>
     <p>Para completar la integración, se deberán instanciar y renderizar los widgets añadidos:</p>
     <pre><code class="language-js">const {eventBus, render} = weecoverWidget.default.widget('weecover-widget-1')
@@ -121,7 +121,7 @@ render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
     <p>La integración completa del widget se puede realizar a través del siguiente script:</p>
     <pre><code class="language-html">&lt;body&gt;
   &lt;div id="weecover-widget-1"&gt;&lt;/div&gt;
-  &lt;script src=&quot;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;https://widget.weecover.com/downloader.js&quot;&gt;&lt;/script&gt;
   &lt;script&gt;
     let eventBus;
     document.body.addEventListener("widget:loaded", function() {
@@ -167,7 +167,7 @@ render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
     <p>Cuando el resumen final de compra está ubicado en una página distinta a la del checkout y se debe cargar la URL completa, se puede instanciar el widget sin ejecutar la función render y notificar el pago del seguro a través del event bus de la siguiente manera:</p>
     <pre><code class="language-html">&lt;body&gt;
   &lt;div id="weecover-widget-1"&gt;&lt;/div&gt;
-  &lt;script src=&quot;https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;https://widget.weecover.com/downloader.js&quot;&gt;&lt;/script&gt;
   &lt;script&gt;
     document.body.addEventListener("widget:loaded", function() {
       const {eventBus} = weecoverWidget.default.widget('weecover-widget-1')
@@ -192,7 +192,7 @@ class MyComponent extends Component {
 
   componentDidMount() {
     if (this.widgetRef &amp;&amp; this.widgetRef.current) {
-      const widgetUrl = "https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js";
+      const widgetUrl = "https://widget.weecover.com/downloader.js";
       const scriptNode = document.createElement("script");
       scriptNode.src = widgetUrl;
       document.body.append(scriptNode);
@@ -227,7 +227,7 @@ const MyComponent = () =&gt; {
 
   useEffect(() =&gt; {
     if (widgetRef &amp;&amp; widgetRef.current) {
-          const widgetUrl = "https://weecover-widget.s3.eu-west-2.amazonaws.com/downloader.js";
+          const widgetUrl = "https://widget.weecover.com/downloader.js";
           const scriptNode = document.createElement("script");
           scriptNode.src = widgetUrl;
           document.body.append(scriptNode);

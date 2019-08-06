@@ -22,6 +22,7 @@
   min-width: 16px;
   margin-left: 4px;
   outline: none;
+  cursor: pointer;
 }
 
 .header--compressedSideBar {

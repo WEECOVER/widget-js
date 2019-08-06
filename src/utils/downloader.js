@@ -1,13 +1,14 @@
+/* eslint-disable no-var */
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable default-case */
 /* eslint-disable func-names */
 /* eslint-disable no-console */
 
-const load = (function() {
+var load = (function() {
   function _load(tag) {
     return function(url) {
       return new Promise(function(resolve, reject) {
-        const element = document.createElement(tag);
+        var element = document.createElement(tag);
         let parent = 'body';
         let attr = 'src';
 
@@ -45,7 +46,7 @@ const load = (function() {
 Promise.all([load.css('%process.env.BASE_URI%/main.css')]).then(() => {
   Promise.all([load.js('%process.env.BASE_URI%/main.js')])
     .then(function() {
-      const event = new Event('widget:loaded');
+      var event = new Event('widget:loaded');
       document.body.dispatchEvent(event);
     })
     .catch(function(error) {

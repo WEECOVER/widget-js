@@ -15,8 +15,8 @@ export default {
     this.eventBus = new EventBus(uniqueWidgetId);
     const WidgetApp = () => ({
       eventBus: this.eventBus,
-      render: (id, lang, parameters) => {
-        const API_CORE_INSTANCE = new API_CORE(lang);
+      render: (id, lang, parameters, clientCode, password) => {
+        const API_CORE_INSTANCE = new API_CORE(lang, clientCode, password);
         const API_CONFIG_INSTANCE = new API_CONFIG(id);
         this.eventBus.subscribe(this.eventBus.availableEvents.insuranceHired, ({ detail }) =>
           API_CORE_INSTANCE.hireInsurance(detail)

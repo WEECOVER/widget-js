@@ -4,11 +4,13 @@ import { BASE_URL, API_VERSION, AVAILABLES_LANG } from './constants';
 
 const API_URI = `${BASE_URL}${API_VERSION}`;
 
-const API_CORE = function(lang) {
+const API_CORE = function(lang, clientCode, password) {
   if (!AVAILABLES_LANG.includes(lang)) {
     throw new Error(`${lang} language is not available, available langs ${AVAILABLES_LANG}`);
   }
   this._lang = lang;
+  this._clientCode = clientCode;
+  this._password = password;
   this.hireInsurance = async data => {
     const response = await axios.post(`${API_URI}/contrataSeguro`, data);
     return response;
@@ -16,9 +18,9 @@ const API_CORE = function(lang) {
 
   this.getInsurance = async insuranceCode => {
     const data = {
-      codigoCliente: 'WEEWIDGET001',
+      codigoCliente: this._clientCode,
       idioma: this._lang,
-      password: '?q^PGg5HgccC%qVw',
+      password: this._password,
       transaccionId: '55',
       codigoSeguro: insuranceCode
     };
@@ -30,9 +32,9 @@ const API_CORE = function(lang) {
 
   this.getInsuranceList = async () => {
     const data = {
-      codigoCliente: 'WEEWIDGET001',
+      codigoCliente: this._clientCode,
       idioma: this._lang,
-      password: '?q^PGg5HgccC%qVw',
+      password: this._password,
       transaccionId: '55'
     };
     const response = await axios.post(`${API_URI}/obtenerSeguros`, data);
@@ -41,9 +43,9 @@ const API_CORE = function(lang) {
 
   this.getGroupInsurance = async codigoGrupoSeguro => {
     const data = {
-      codigoCliente: 'WEEWIDGET001',
+      codigoCliente: this._clientCode,
       idioma: this._lang,
-      password: '?q^PGg5HgccC%qVw',
+      password: this._password,
       transaccionId: '55',
       codigoGrupoSeguro: codigoGrupoSeguro.join('')
     };
@@ -55,10 +57,10 @@ const API_CORE = function(lang) {
 
   this.getPricing = async (insuranceCode, { parameters }) => {
     const data = {
-      codigoCliente: 'WEEWIDGET001',
+      codigoCliente: this._clientCode,
       parametros: parameters,
       idioma: this._lang,
-      password: '?q^PGg5HgccC%qVw',
+      password: this._password,
       transaccionId: 'TEST-WIDGET',
       codigoSeguro: insuranceCode
     };

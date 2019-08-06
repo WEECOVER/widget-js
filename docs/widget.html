@@ -49,6 +49,7 @@ render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
             <li><strong>codigoOferta</strong>: numero de la correspondiente a la oferta</li>
             <li><strong>codigoGrupoSeguro</strong>: codigo del seguro</li>
             <li><strong>complements</strong>: complementos seleccionados</li>
+            <li><strong>codigo seguro</strong>: codigo seguro</li>
           </ul>
         </td>
         <td>Se dispara cuando el usuario ha seleccionado algún seguro weecover algún producto.</td>
@@ -99,8 +100,8 @@ render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
     <p>Para recibir las publicaciones de un evento se deberá implementar la suscripción de la siguiente manera:</p>
     <pre><code class="language-js">eventBus.subscribe(
   eventBus.availableEvents.onSelected, 
-  function({ name, price, addon }) {
-    console.log('insurance added', name, price, addon)
+  function({ detail }) {
+    console.log('insurance added', detail)
   }
 )
 </code></pre>

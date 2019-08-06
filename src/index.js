@@ -25,9 +25,16 @@ export default {
         const node = document.getElementById(uniqueWidgetId);
         node.classList.add('widget-root');
 
+        const initialProps = getInitialProps(
+          parameters,
+          id,
+          API_CORE_INSTANCE,
+          API_CONFIG_INSTANCE
+        );
+
         ReactDOM.render(
           <App
-            dataInsurances={getInitialProps(parameters, id, API_CORE_INSTANCE, API_CONFIG_INSTANCE)}
+            dataInsurances={initialProps}
             eventBus={this.eventBus}
             API_CORE={API_CORE_INSTANCE}
             API_CONFIG={API_CONFIG_INSTANCE}

@@ -62,6 +62,7 @@ const API_CORE = function(lang) {
       transaccionId: 'TEST-WIDGET',
       codigoSeguro: insuranceCode
     };
+
     const {
       data: { response }
     } = await axios.post(`${API_URI}/tarificaSeguro`, data);

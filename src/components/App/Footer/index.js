@@ -24,7 +24,7 @@ const Footer = ({ addInsuanceToCart, mainModifier, availableStyles, insurances }
           <Button
             disabled={!(anyChecked || mainModifier === 'single')}
             modifiers={getButtonModifiers()}
-            onClick={event => addInsuanceToCart({ ...event, type: 'add' })}>
+            onClick={event => addInsuanceToCart({ ...event, type: 'add', checked: !anyChecked })}>
             {anyChecked ? 'AÑADIDO' : 'AÑADIR'}
           </Button>
         </div>

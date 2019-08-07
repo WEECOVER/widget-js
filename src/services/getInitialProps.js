@@ -13,6 +13,8 @@ const getInitialProps = async (parameters, widgetId, API_CORE_INSTANCE, API_CONF
 
   const [prices, data] = await Promise.all([Promise.all(pricingPromise), Promise.all(dataPromise)]);
 
+  console.log('data', data);
+
   const allInsurancesWithPrices = data.map(insurance => {
     let insuranceWithPrice;
     prices.forEach(({ codigoSeguro, precio, codigoOferta }) => {

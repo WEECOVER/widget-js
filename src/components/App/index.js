@@ -51,11 +51,14 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
           }))
         : insurances.map(insurance => ({ ...insurance, checked: !insurances[0].checked }));
 
-      eventBus.publish(eventBus.availableEvents.onSelected, {
-        insurance: getInsuranceSelected(updatedInsurance)
-      });
+      checked &&
+        eventBus.publish(eventBus.availableEvents.onSelected, {
+          insurance: getInsuranceSelected(updatedInsurance)
+        });
 
-      return type === 'add' && insurances[0].checked
+      !checked && eventBus.publish(eventBus.availableEvents.onRemove, insurances[0].codigoSeguro);
+
+      return type === 'add' && checked
         ? setInsurances(removeComplements(updatedInsurance))
         : setInsurances(updatedInsurance);
     }

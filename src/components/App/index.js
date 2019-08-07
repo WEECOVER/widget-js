@@ -40,7 +40,7 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
     })();
   }, [API_CONFIG, API_CORE, dataInsurances, insurances, mainModifier]);
 
-  const addInsuanceToCart = ({ id = null, insuranceId = null, checked, type }) => {
+  const addInsuranceToCart = ({ id = null, insuranceId = null, checked, type }) => {
     if (mainModifier === 'single') {
       const updatedInsurance = id
         ? insurances.map(insurance => ({
@@ -51,12 +51,31 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
           }))
         : insurances.map(insurance => ({ ...insurance, checked: !insurances[0].checked }));
 
-      checked &&
-        eventBus.publish(eventBus.availableEvents.onSelected, {
-          insurance: getInsuranceSelected(updatedInsurance)
+      if (!checked && type === 'complement') {
+        eventBus.publish(eventBus.availableEvents.onRemove, {
+          price: insurances[0].precio,
+          type: 'deleted',
+          complement: insurances[0].complements[0]
         });
+      }
 
-      !checked && eventBus.publish(eventBus.availableEvents.onRemove, insurances[0].codigoSeguro);
+      if (checked && type === 'complement') {
+        eventBus.publish(eventBus.availableEvents.onSelected, {
+          price: insurances[0].totalPrecio,
+          type: 'add',
+          complement: insurances[0].complements[0]
+        });
+      }
+
+      if (checked && type === 'add') {
+        eventBus.publish(eventBus.availableEvents.onSelected, {
+          ...getInsuranceSelected(updatedInsurance)
+        });
+      }
+
+      if (!checked && type === 'add') {
+        eventBus.publish(eventBus.availableEvents.onRemove, insurances[0].codigoSeguro);
+      }
 
       return type === 'add' && checked
         ? setInsurances(removeComplements(updatedInsurance))
@@ -97,7 +116,7 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
       />
       <Content
         uniqueWidgetId={uniqueWidgetId}
-        addInsuanceToCart={addInsuanceToCart}
+        addInsuranceToCart={addInsuranceToCart}
         mainModifier={mainModifier}
         insurances={insurances}
         availableStyles={availableStyles}
@@ -105,7 +124,7 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
       <Footer
         mainModifier={mainModifier}
         availableStyles={availableStyles}
-        addInsuanceToCart={addInsuanceToCart}
+        addInsuranceToCart={addInsuranceToCart}
         insurances={insurances}
       />
     </main>

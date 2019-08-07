@@ -56,6 +56,7 @@ const API_CORE = function(lang, clientCode, password) {
   };
 
   this.getPricing = async (insuranceCode, { parameters }) => {
+    console.log(parameters, 'DENTRO');
     const data = {
       codigoCliente: this._clientCode,
       parametros: parameters,

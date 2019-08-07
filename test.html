@@ -15,6 +15,9 @@
   <script>
     var el = document.body.addEventListener("widget:loaded", function() {
       const {eventBus, render} = weecoverWidget.default.widget('widget1')
+      eventBus.subscribe(eventBus.availableEvents.onRemove, ({detail}) => {
+          console.log('has been removed', detail)
+      })
       var parameters =  {parameters: 
       [           
             {
@@ -36,42 +39,16 @@
             {
                 "nombre": "raza001",
               "valor": "19"
+            },
+            {
+              "nombre" : "rc001",
+              "valor" : "true"
             }
         ]}
       render('a94ddd30-b88e-11e9-b38a-0327ea3509f1', 'ES', parameters, 'WEEWIDGET001', '?q^PGg5HgccC%qVw')
         eventBus.subscribe(eventBus.availableEvents.onSelected, function({detail}) {
-          const {insurance} = detail
-          console.log('ALL INSURANCE', insurance)
-          console.log(insurance.price, 'PRECIO')
-          const data  = {
-            codigoCliente: "string",
-            codigoOferta: insurance.codigoOferta,
-            codigoSeguro: insurance.codigoGrupoSeguro,
-            direccion: "string",
-            documento: "string",
-            mail: "string",
-            nombre: "string",
-            parametros: [
-              {
-                nombre: "string",
-                valor: "string",
-                valores: [
-                  "string"
-                ]
-              }
-            ],
-            password: "string",
-            poblacion: "string",
-            primerApellido: "string",
-            segundoApellido: "string",
-            sexo: "string",
-            telefono: "string",
-            transaccionId: "string"
-          };
+          console.log(detail, 'PRECIO')
           eventBus.publish(eventBus.availableEvents.insuranceHired, data)
-          eventBus.subscribe(eventBus.availableEvents.onRemove, ({detail}) => {
-            console.log('has been removed', detail)
-          })
         })
       })
   </script>

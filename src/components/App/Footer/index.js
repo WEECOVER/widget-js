@@ -4,7 +4,7 @@ import Button from '../../Button';
 import { getModifiers } from '../../../utils/data-mappers';
 import logo from '../../../assets/images/logo.png';
 
-const Footer = ({ addInsuanceToCart, mainModifier, availableStyles, insurances }) => {
+const Footer = ({ addInsuranceToCart, mainModifier, availableStyles, insurances }) => {
   const displayGlobalAddButton = availableStyles.single === mainModifier;
 
   const anyChecked = insurances.some(({ checked }) => checked);
@@ -24,7 +24,7 @@ const Footer = ({ addInsuanceToCart, mainModifier, availableStyles, insurances }
           <Button
             disabled={!(anyChecked || mainModifier === 'single')}
             modifiers={getButtonModifiers()}
-            onClick={event => addInsuanceToCart({ ...event, type: 'add', checked: !anyChecked })}>
+            onClick={event => addInsuranceToCart({ ...event, type: 'add', checked: !anyChecked })}>
             {anyChecked ? 'AÑADIDO' : 'AÑADIR'}
           </Button>
         </div>
@@ -40,7 +40,7 @@ const Footer = ({ addInsuanceToCart, mainModifier, availableStyles, insurances }
 Footer.propTypes = {
   mainModifier: PropTypes.string.isRequired,
   availableStyles: PropTypes.object.isRequired,
-  addInsuanceToCart: PropTypes.func.isRequired,
+  addInsuranceToCart: PropTypes.func.isRequired,
   insurances: PropTypes.array.isRequired
 };
 

@@ -15,6 +15,7 @@ const availableStyles = {
 const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId }) => {
   const [mainModifier, setMainModifier] = useState('');
   const [insurances, setInsurances] = useState(null);
+  const [previousInsuranceSelected, setPreviousInsuranceSelected] = useState(null);
   const parentRef = useRef(null);
 
   useEffect(() => {
@@ -68,8 +69,9 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
     );
 
     if (!selected) {
-      eventBus.publish(eventBus.availableEvents.onRemove, null);
+      eventBus.publish(eventBus.availableEvents.onRemove, previousInsuranceSelected.codigoSeguro);
     } else {
+      setPreviousInsuranceSelected(selected);
       eventBus.publish(eventBus.availableEvents.onSelected, {
         insurance: getInsuranceSelected(updatedInsurance)
       });

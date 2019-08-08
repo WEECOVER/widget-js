@@ -11,26 +11,23 @@ const Complement = ({ onSelect, complements, modifiers }) => {
   return (
     <Fragment>
       {complements &&
-        complements.map(
-          ({ checked, nombre: name, texto: description, price, currency, id, insuranceId }) => (
-            <div key={id} className={getModifiers(modifiers, 'complement-wrapper')}>
-              <CheckBox
-                onClick={({ checked: _checked }) =>
-                  handleSelect({ checked: _checked, id, insuranceId })
-                }
-                checked={checked}
-              />
-              <p className={getModifiers(modifiers, 'complement-description')}>
-                <span>{name}:</span>
-                {description}{' '}
-                <span className="complement-price">
-                  {price}
-                  {currency}
-                </span>
-              </p>
-            </div>
-          )
-        )}
+        complements.map(({ checked, texto: description, price, currency, id, insuranceId }) => (
+          <div key={id} className={getModifiers(modifiers, 'complement-wrapper')}>
+            <CheckBox
+              onClick={({ checked: _checked }) =>
+                handleSelect({ checked: _checked, id, insuranceId })
+              }
+              checked={checked}
+            />
+            <p className={getModifiers(modifiers, 'complement-description')}>
+              {description}{' '}
+              <span className="complement-price">
+                {price}
+                {currency}
+              </span>
+            </p>
+          </div>
+        ))}
     </Fragment>
   );
 };

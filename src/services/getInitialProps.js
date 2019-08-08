@@ -42,7 +42,7 @@ const getInitialProps = async (parameters, widgetId, API_CORE_INSTANCE, API_CONF
             checked: false
           })),
           totalPrecio: precio,
-          precio: basicPrice,
+          precio: basicPrice || precio,
           codigoOferta,
           id: insuranceId,
           checked: false

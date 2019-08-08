@@ -95,7 +95,7 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
     } else {
       setPreviousInsuranceSelected(selected);
       eventBus.publish(eventBus.availableEvents.onSelected, {
-        insurance: getInsuranceSelected(updatedInsurance)
+        ...getInsuranceSelected(updatedInsurance)
       });
     }
 

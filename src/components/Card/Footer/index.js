@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../Button';
 
-const Footer = ({ mainModifier, availableStyles, element, addInsuanceToCart, checked }) => {
+const Footer = ({ mainModifier, availableStyles, element, addInsuranceToCart, checked }) => {
   const getButtonModifiers = () =>
     checked
       ? [Button.availableSizes.sm, Button.availableModifiers.selected]
@@ -12,7 +12,7 @@ const Footer = ({ mainModifier, availableStyles, element, addInsuanceToCart, che
       {mainModifier === availableStyles.uncompressed && (
         <Button
           onClick={() =>
-            addInsuanceToCart({
+            addInsuranceToCart({
               type: 'single',
               id: element.id,
               checked: !checked
@@ -30,7 +30,7 @@ Footer.propTypes = {
   mainModifier: PropTypes.string.isRequired,
   availableStyles: PropTypes.object.isRequired,
   element: PropTypes.object.isRequired,
-  addInsuanceToCart: PropTypes.func.isRequired,
+  addInsuranceToCart: PropTypes.func.isRequired,
   checked: PropTypes.bool
 };
 

@@ -13,16 +13,15 @@ const getInitialProps = async (parameters, widgetId, API_CORE_INSTANCE, API_CONF
 
   const [prices, data] = await Promise.all([Promise.all(pricingPromise), Promise.all(dataPromise)]);
 
-  const [{ precio: basicPrice }] = await Promise.all(
+  const [{ precio: totalPrecio }] = await Promise.all(
     data.map(insurance => {
       if (insurance.complementos && insurance.complementos.length) {
-        const [{ nombre }] = insurance.complementos;
-        const filteredParameters = insurance.parametros.filter(
-          ({ nombre: _nombre }) => _nombre !== nombre
-        );
+        const [{ nombre, valor }] = insurance.complementos;
+
+        insurance.parametros.push({ nombre, valor: true });
 
         return API_CORE_INSTANCE.getPricing(insurance.codigoSeguro, {
-          parameters: filteredParameters
+          parameters: insurance.parametros
         });
       }
       return insurance;
@@ -41,8 +40,8 @@ const getInitialProps = async (parameters, widgetId, API_CORE_INSTANCE, API_CONF
             insuranceId,
             checked: false
           })),
-          totalPrecio: precio,
-          precio: basicPrice || precio,
+          totalPrecio,
+          precio,
           codigoOferta,
           id: insuranceId,
           checked: false

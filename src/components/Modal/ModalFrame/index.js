@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from '../index.css';
 
 const ModalFrame = ({ children }) => (
-  <div className="modal-frame">
+  <div className={styles['modal-frame']}>
     <div>{children}</div>
   </div>
 );

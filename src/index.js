@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import './main.css';
+import styles from './main.css';
 import EventBus from './utils/event-bus';
 import API_CORE from './services/core';
 import API_CONFIG from './services/widget-representation';
@@ -23,7 +23,7 @@ export default {
         );
 
         const node = document.getElementById(uniqueWidgetId);
-        node.classList.add('widget-root');
+        node.classList.add(styles['widget-root']);
 
         const initialProps = getInitialProps(
           parameters,

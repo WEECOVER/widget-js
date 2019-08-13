@@ -6,6 +6,8 @@ import Footer from './Footer';
 import { handleInsuranceSelected, removeComplements } from './handlers/handle-insurances';
 import { getInsuranceSelected } from './handlers/get-insurance-selected';
 
+import styles from './index.css';
+
 const availableStyles = {
   uncompressed: 'uncompressed',
   single: 'single',
@@ -105,7 +107,7 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
   if (!mainModifier || !insurances) return null;
 
   return (
-    <main className="wrapper" ref={parentRef}>
+    <main className={styles.wrapper} ref={parentRef}>
       <Header
         uniqueWidgetId={uniqueWidgetId}
         availableStyles={availableStyles}

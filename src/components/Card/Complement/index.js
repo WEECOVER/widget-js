@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import CheckBox from '../../CheckBox';
 import { getModifiers } from '../../../utils/data-mappers';
 
+import styles from './index.css';
+
 const Complement = ({ onSelect, complements, modifiers }) => {
   const handleSelect = ({ checked, id, insuranceId }) => {
     onSelect({ insuranceId, checked, id, type: 'complement' });
@@ -12,16 +14,16 @@ const Complement = ({ onSelect, complements, modifiers }) => {
     <Fragment>
       {complements &&
         complements.map(({ checked, texto: description, price, currency, id, insuranceId }) => (
-          <div key={id} className={getModifiers(modifiers, 'complement-wrapper')}>
+          <div key={id} className={getModifiers(modifiers, 'complement-wrapper', styles)}>
             <CheckBox
               onClick={({ checked: _checked }) =>
                 handleSelect({ checked: _checked, id, insuranceId })
               }
               checked={checked}
             />
-            <p className={getModifiers(modifiers, 'complement-description')}>
+            <p className={getModifiers(modifiers, 'complement-description', styles)}>
               {description}{' '}
-              <span className="complement-price">
+              <span className={styles['complement-price']}>
                 {price}
                 {currency}
               </span>

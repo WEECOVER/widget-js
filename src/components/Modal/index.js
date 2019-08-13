@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import ModalFrame from './ModalFrame';
 
+import styles from './index.css';
+
 const Modal = ({ displayModal, nodeId, enableDisplayModal, children, uniqueWidgetId }) => {
   const wrapperEl = useRef(null);
 
@@ -24,7 +26,7 @@ const Modal = ({ displayModal, nodeId, enableDisplayModal, children, uniqueWidge
   const renderWrappedModalFrame = () => (
     <div
       role="button"
-      className="widget-modal-wrapper"
+      className={styles['widget-modal-wrapper']}
       ref={wrapperEl}
       onClick={handleOutsideClick}>
       {children}

@@ -4,6 +4,8 @@ import Button from '../../Button';
 import { getModifiers } from '../../../utils/data-mappers';
 import logo from '../../../assets/images/logo.png';
 
+import styles from './index.css';
+
 const Footer = ({ addInsuranceToCart, mainModifier, availableStyles, insurances }) => {
   const displayGlobalAddButton = availableStyles.single === mainModifier;
 
@@ -20,7 +22,7 @@ const Footer = ({ addInsuranceToCart, mainModifier, availableStyles, insurances 
   return (
     <Fragment>
       {displayGlobalAddButton && (
-        <div className={getModifiers([mainModifier], 'footer-button-wrapper')}>
+        <div className={getModifiers([mainModifier], 'footer-button-wrapper', styles)}>
           <Button
             disabled={!(anyChecked || mainModifier === 'single')}
             modifiers={getButtonModifiers()}
@@ -29,9 +31,9 @@ const Footer = ({ addInsuranceToCart, mainModifier, availableStyles, insurances 
           </Button>
         </div>
       )}
-      <div className={getModifiers([mainModifier], 'logo-wrapper')}>
+      <div className={getModifiers([mainModifier], 'logo-wrapper', styles)}>
         <span>By </span>
-        <img className="logo-image" src={logo} alt="weecover logo" />
+        <img className={styles['logo-image']} src={logo} alt="weecover logo" />
       </div>
     </Fragment>
   );

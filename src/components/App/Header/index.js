@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { getModifiers } from '../../../utils/data-mappers';
 import Modal from '../../Modal';
 
+import styles from './index.css';
+
 const Header = ({
   availableStyles,
   mainModifier,
@@ -19,11 +21,14 @@ const Header = ({
   return (
     <Fragment>
       {availableStyles.single !== mainModifier && (
-        <header className={getModifiers([mainModifier], 'header')}>
-          <h1 className="header-title">{mainTitle}</h1>
-          <p className="header-subtitle">
+        <header className={getModifiers([mainModifier], 'header', styles)}>
+          <h1 className={styles['header-title']}>{mainTitle}</h1>
+          <p className={styles['header-subtitle']}>
             {mainDescription}
-            <button type="button" className="header-tooltip-modal" onClick={enableDisplayModal}>
+            <button
+              type="button"
+              className={styles['header-tooltip-modal']}
+              onClick={enableDisplayModal}>
               i
             </button>
           </p>

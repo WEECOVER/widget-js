@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const cssModules = 'modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]'
 
 module.exports = () => ({
   output: {
@@ -9,27 +10,27 @@ module.exports = () => ({
     library: ['weecoverWidget'],
     libraryTarget: 'umd',
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-              reloadAll: true,
-            },
-          },
-          'css-loader',
-        ],
-      },
-    ],
-  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
-  ]
-  })
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader,
+          {
+            loader:'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[local]___[hash:base64:5]'
+              }
+            }
+          },
+        ],
+      },
+    ],
+  }
+})

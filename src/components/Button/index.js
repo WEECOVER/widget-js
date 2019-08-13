@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getModifiers } from '../../utils/data-mappers';
 
+import styles from './index.css';
+
 const availableSizes = {
   sm: 'sm',
   default: ''
@@ -15,7 +17,7 @@ const availableModifiers = {
 const Button = ({ children, onClick, modifiers, disabled }) => (
   <button
     type="button"
-    className={getModifiers(modifiers, 'button')}
+    className={getModifiers(modifiers, 'button', styles)}
     onClick={e => {
       if (disabled) return;
       onClick(e);

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+import styles from './index.css';
+
 const availableSize = {
   small: 'small',
   medium: 'medium',
@@ -20,8 +22,8 @@ const CheckBox = ({ onClick, size, checked }) => {
     setChecked(_checked);
   };
 
-  const CheckBoxClassName = classnames(`checkbox checkbox--${size}`, {
-    'checkbox--checked': isChecked
+  const CheckBoxClassName = classnames(`${[styles.checkbox]} ${[styles[`checkbox--${size}`]]}`, {
+    [styles['checkbox--checked']]: isChecked
   });
 
   return <input className={CheckBoxClassName} type="checkbox" onClick={handleCheckBox} />;

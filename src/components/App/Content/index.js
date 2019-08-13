@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Card from '../../Card';
 import { getModifiers } from '../../../utils/data-mappers';
 
+import styles from './index.css';
+
 const Content = ({
   addInsuranceToCart,
   insurances,
@@ -10,7 +12,7 @@ const Content = ({
   availableStyles,
   uniqueWidgetId
 }) => (
-  <section className={getModifiers([mainModifier], 'cards-wrapper')}>
+  <section className={getModifiers([mainModifier], 'cards-wrapper', styles)}>
     {insurances &&
       insurances.map(
         ({

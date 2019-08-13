@@ -1,7 +1,9 @@
-const getModifiers = (modifiers, prefix) => {
+const getModifiers = (modifiers, prefix, styles) => {
   if (modifiers.length > 0) {
-    const allModifiersClassNames = modifiers.map(modifier => `${prefix}--${modifier}`).join(' ');
-    return `${prefix} ${allModifiersClassNames}`;
+    const allModifiersClassNames = modifiers
+      .map(modifier => styles[`${prefix}--${modifier}`])
+      .join(' ');
+    return `${styles[prefix]} ${allModifiersClassNames}`;
   }
   return null;
 };

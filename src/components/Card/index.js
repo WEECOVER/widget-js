@@ -5,12 +5,14 @@ import Footer from './Footer';
 import Title from './Title';
 import { getModifiers } from '../../utils/data-mappers';
 
+import styles from './index.css';
+
 const availableStyle = {
   uncompressed: 'uncompressed'
 };
 
 const Card = ({ children, modifiers }) => (
-  <div className={getModifiers(modifiers, 'card')}>
+  <div className={getModifiers(modifiers, 'card', styles)}>
     {React.Children.map(children, child => {
       const existChildAndModifiers = child && child.props && child.props.modifiers;
       const allModifiers = existChildAndModifiers

@@ -7,6 +7,8 @@ import { getModifiers } from '../../../utils/data-mappers';
 import Price from './Price';
 import Modal from '../../Modal';
 
+import styles from './index.css';
+
 const Title = ({
   id,
   title,
@@ -39,32 +41,34 @@ const Title = ({
 
   return (
     <Fragment>
-      <div className={getModifiers(modifiers, 'card-title-container')}>
+      <div className={getModifiers(modifiers, 'card-title-container', styles)}>
         {displayCheckbox && (
           <CheckBox checked={checked} onClick={handleSelect} size={CheckBox.availableSizes.large} />
         )}
         <Price title={title} modifiers={modifiers} price={price} currency="€" />
         {displayAddButton && (
-          <div className={getModifiers(modifiers, 'card-add-button-container')}>
+          <div className={getModifiers(modifiers, 'card-add-button-container', styles)}>
             <Button modifiers={getButtonModifiers()} onClick={handleSelect}>
               {textButton}
             </Button>
           </div>
         )}
       </div>
-      <div className="card-title-description">
-        <button type="button" className="card-tooltip-modal" onClick={enableDisplayModal}>
+      <div className={styles['card-title-description']}>
+        <button type="button" className={styles['card-tooltip-modal']} onClick={enableDisplayModal}>
           i
         </button>
 
-        <ul className="card-title-description-list">
+        <ul className={styles['card-title-description-list']}>
           {warranties.map(warranty => (
-            <li className="card-title-description-list-item" key={uuidv1()}>
+            <li className={styles['card-title-description-list-item']} key={uuidv1()}>
               {warranty}
             </li>
           ))}
           {noIncludedWarranties.map(warranty => (
-            <li key={uuidv1()} className="card-title-description-list-item warrany-not-included">
+            <li
+              key={uuidv1()}
+              className={styles['card-title-description-list-item warrany-not-included']}>
               {warranty}
             </li>
           ))}

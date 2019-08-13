@@ -10,6 +10,12 @@ module.exports = () => ({
     library: ['weecoverWidget'],
     libraryTarget: 'umd',
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    })
+  ],
   module: {
     rules: [
       {
@@ -39,11 +45,5 @@ module.exports = () => ({
       })
     ],
     runtimeChunk: false,
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    })
-  ]
+  }
 })

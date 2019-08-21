@@ -78,6 +78,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-spinner-material": "^1.1.3",
     "shortid": "^2.2.14",
     "uuid": "^3.3.2"
   }

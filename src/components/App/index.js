@@ -5,6 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { handleInsuranceSelected, removeComplements } from './handlers/handle-insurances';
 import { getInsuranceSelected } from './handlers/get-insurance-selected';
+import Loading from '../Loading';
 
 import styles from './index.css';
 
@@ -104,7 +105,7 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
     setInsurances(updatedInsurance);
   };
 
-  if (!mainModifier || !insurances) return null;
+  if (!mainModifier || !insurances) return <Loading />;
 
   return (
     <main className={styles.wrapper} ref={parentRef}>

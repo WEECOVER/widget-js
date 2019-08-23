@@ -113,7 +113,7 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
         <main className={styles.wrapper} ref={parentRef}>
           <Loading />
         </main>
-        <div className={getModifiers([mainModifier], 'logo-wrapper', styles)}>
+        <div className={`${styles['logo-wrapper--uncompressed']} ${styles['logo-wrapper']}`}>
           <span>By </span>
           <img className={styles['logo-image']} src={logo} alt="weecover logo" />
         </div>

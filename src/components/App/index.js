@@ -6,6 +6,8 @@ import Footer from './Footer';
 import { handleInsuranceSelected, removeComplements } from './handlers/handle-insurances';
 import { getInsuranceSelected } from './handlers/get-insurance-selected';
 import Loading from '../Loading';
+import logo from '../../assets/images/logo.png';
+import { getModifiers } from '../../utils/data-mappers';
 
 import styles from './index.css';
 
@@ -105,7 +107,19 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
     setInsurances(updatedInsurance);
   };
 
-  if (!mainModifier || !insurances) return <Loading />;
+  if (!mainModifier || !insurances) {
+    return (
+      <div className={styles.loadingWrapper}>
+        <main className={styles.wrapper} ref={parentRef}>
+          <Loading />
+        </main>
+        <div className={getModifiers([mainModifier], 'logo-wrapper', styles)}>
+          <span>By </span>
+          <img className={styles['logo-image']} src={logo} alt="weecover logo" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className={styles.wrapper} ref={parentRef}>

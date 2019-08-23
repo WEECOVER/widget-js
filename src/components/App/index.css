@@ -9,3 +9,21 @@
 .wrapper {
   padding: var(--space-m);
 }
+
+.loadingWrapper {
+  border: 1px solid var(--border-color);
+  margin: var(--space-m);
+  padding: var(--space-m);
+}
+
+.logo-wrapper {
+  border-top: 0;
+  padding: 0 26px;
+  display: flex;
+  justify-content: flex-end;
+  height: 40px;
+  align-items: center;
+}
+.logo-image {
+  height: 28px;
+}

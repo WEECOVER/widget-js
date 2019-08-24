@@ -112,6 +112,7 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
       <div className={styles.loadingWrapper}>
         <main className={styles.wrapper} ref={parentRef}>
           <Loading />
+          <p className={styles.textLoader}>Obteniendo propuesta de seguro</p>
         </main>
         <div className={`${styles['logo-wrapper--uncompressed']} ${styles['logo-wrapper']}`}>
           <span>By </span>

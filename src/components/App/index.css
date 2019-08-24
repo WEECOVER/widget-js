@@ -16,6 +16,10 @@
   padding: var(--space-m);
 }
 
+.textLoader {
+  text-align: center;
+}
+
 .logo-wrapper {
   border-top: 0;
   padding: 0 26px;

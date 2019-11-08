@@ -19,7 +19,7 @@ const getInsuranceSelected = updatedInsurance => {
       insurance.complements.forEach(complement => {
         const { checked, precio: _price } = complement;
         if (checked) {
-          selectedInsurance.price = insurance.totalPrecio;
+          selectedInsurance.price = insurance.precioComplementoAnual;
           selectedInsurance.complements.push(complement);
           selectedInsurance.codigoSeguro = insurance.codigoSeguro;
         }

@@ -66,7 +66,7 @@ const App = ({ API_CORE, API_CONFIG, eventBus, dataInsurances, uniqueWidgetId })
 
       if (checked && type === 'complement') {
         eventBus.publish(eventBus.availableEvents.onSelected, {
-          price: insurances[0].totalPrecio,
+          price: insurances[0].precioComplementoAnual,
           type: 'add',
           complement: insurances[0].complements[0]
         });

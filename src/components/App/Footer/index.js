@@ -14,8 +14,8 @@ const Footer = ({ addInsuranceToCart, mainModifier, availableStyles, insurances 
   const getButtonModifiers = () => {
     const modifiers = [];
 
-    mainModifier === 'single' && modifiers.push([Button.availableSizes.sm]);
-    anyChecked && modifiers.push([Button.availableModifiers.selected]);
+    mainModifier === 'single' && modifiers.push(Button.availableSizes.sm);
+    anyChecked && modifiers.push(Button.availableModifiers.selected);
 
     return modifiers;
   };

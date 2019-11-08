@@ -18,7 +18,8 @@ const Content = ({
         ({
           id,
           textoCTA,
-          totalPrecio,
+          precioComplementoAnual,
+          precioComplementoMensual,
           precio: price,
           currency,
           descripcion: title,
@@ -40,7 +41,7 @@ const Content = ({
                 displayAddButton={mainModifier === availableStyles.compressedSideBar}
                 id={id}
                 title={title}
-                price={complementHasBeenChecked ? totalPrecio : price}
+                price={complementHasBeenChecked ? precioComplementoAnual : price}
                 checked={checked}
                 currency={currency}
                 textButton={textoCTA}

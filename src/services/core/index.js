@@ -59,6 +59,7 @@ const API_CORE = function(lang, clientCode, password) {
     console.log(parameters, 'DENTRO');
     const data = {
       codigoCliente: this._clientCode,
+      mail: 'cristiam@iamtech.tech',
       parametros: parameters,
       idioma: this._lang,
       password: this._password,

@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.weecover.com';
+const BASE_URL = 'https://api.pre.weecover.com';
 const API_VERSION = '/api/1';
 const AVAILABLES_LANG = ['ES', 'CA', 'EN'];
 

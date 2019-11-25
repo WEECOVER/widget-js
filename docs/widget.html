@@ -22,9 +22,9 @@
 </code></pre>
     <p>Para completar la integración, se deberán instanciar y renderizar los widgets añadidos:</p>
     <pre><code class="language-js">const {eventBus, render} = weecoverWidget.default.widget('weecover-widget-1')
-render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
+render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', parameters, 'COD_CLIENTE', 'PWD_CLIENT')
 </code></pre>
-    <p>Donde '6eff0290-a181-11e9-a41f-7940f295bd3f' es el id del widget obtenido de la herramienta backoffice.</p>
+    <p>Donde '6eff0290-a181-11e9-a41f-7940f295bd3f' es el id del widget obtenido de la herramienta backoffice y COD_CLIENTE y PWD_CLIENTE las credenciales de cliente proporcionadas por WeeCover.</p>
     <h2 id="eventos">Eventos</h2>
     <p>La comunicación entre la web y el widget se establecerá a traves de eventos, para ello tenemos disponibles los siguientes:</p>
     <table>
@@ -143,7 +143,9 @@ render('6eff0290-a181-11e9-a41f-7940f295bd3f', 'ES', eventBus)
               valor: '1'
             }
           ]
-        }
+        },
+        'COD_CLIENTE', 
+        'PWD_CLIENT'
       );
       eventBus.subscribe(eventBus.availableEvents.onSelected, function({detail}) {
         console.log('price has change', detail)
@@ -199,7 +201,7 @@ class MyComponent extends Component {
 
       document.body.addEventListener("widget:loaded", function() {
         const {eventBus, render} = weecoverWidget.default.widget('widget2') 
-        render(id, lang, {parameteres});  
+        render(id, lang, {parameteres}, 'COD_CLIENTE', 'PWD_CLIENT');  
       
         eventBus.subscribe(widgetEventBus.availableEvents.onSelected, ({ name, price, addon }) =&gt; {
           console.log('insurance added', name, price, addon)
@@ -234,7 +236,7 @@ const MyComponent = () =&gt; {
 
           document.body.addEventListener("widget:loaded", function() {
             const {eventBus, render} = weecoverWidget.default.widget('widget3') 
-            render(id, lang, {parameteres});  
+            render(id, lang, {parameteres}, 'COD_CLIENTE', 'PWD_CLIENT');  
           
             eventBus.subscribe(widgetEventBus.availableEvents.onSelected, ({ name, price, addon }) =&gt; {
               console.log('insurance added', name, price, addon)

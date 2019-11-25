@@ -68,7 +68,7 @@ const Title = ({
           {noIncludedWarranties.map(warranty => (
             <li
               key={uuidv1()}
-              className={styles['card-title-description-list-item warrany-not-included']}>
+              className={`${styles['card-title-description-list-item']} ${styles['warrany-not-included']}`}>
               {warranty}
             </li>
           ))}

@@ -3,7 +3,8 @@
   border-radius: 100%;
   background-color: #FFFFFF;
   margin-left: 6px;
-  min-width: 16px;
+  width: 20px;
+  height: 20px;
   outline: none;
   cursor: pointer;
 }
@@ -23,6 +24,7 @@
   margin-left: var(--space-s);
   padding: var(--space-m) 0;
   font-size: var(--fz-xs);
+  font-family: inherit;
 }
 
 .card-title-price-prefix {
@@ -48,6 +50,10 @@
   padding-left: 40px;
   margin: 10px 0;
 }
+
+.card-title-description-list li{
+  font-family: inherit;
+}  
 
 .card-add-button-container {
   flex: 0 0 100px

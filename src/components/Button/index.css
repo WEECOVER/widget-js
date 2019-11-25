@@ -1,5 +1,6 @@
 .button {
   font-size: var(--fz-m);
+  font-family: inherit;
   width: 100%;
   color: var(--c-white);
   background-color: var(--accent);

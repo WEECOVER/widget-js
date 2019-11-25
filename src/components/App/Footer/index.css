@@ -1,6 +1,6 @@
 .footer-button-wrapper {
   padding: var(--space-m);
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--border-color);
   border-top: 0;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .logo-wrapper {
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--border-color);
   border-top: 0;
   padding: 0 26px;
   display: flex;

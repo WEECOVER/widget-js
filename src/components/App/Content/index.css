@@ -12,7 +12,7 @@
 }
 
 .cards-wrapper--single {
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--border-color);
   border-bottom: 0;
 }
 

@@ -8,6 +8,7 @@
 
 .wrapper {
   padding: var(--space-m);
+  background-color: var(--c-white);
 }
 
 .loadingWrapper {

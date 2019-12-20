@@ -24,12 +24,12 @@ const Header = ({
           <h1 className={styles['header-title']}>{mainTitle}</h1>
           <p className={styles['header-subtitle']}>
             {mainDescription}
-            <button
+            {/* <button
               type="button"
               className={styles['header-tooltip-modal']}
               onClick={enableDisplayModal}>
               i
-            </button>
+            </button> */}
           </p>
           <Modal
             uniqueWidgetId={uniqueWidgetId}

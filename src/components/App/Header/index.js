@@ -14,9 +14,8 @@ const Header = ({
   uniqueWidgetId
 }) => {
   const [displayModal, setDisplayModal] = useState(false);
-  const enableDisplayModal = (status = null) => {
-    status && setDisplayModal(status);
-    !status && setDisplayModal(!displayModal);
+  const enableDisplayModal = () => {
+    setDisplayModal(!displayModal);
   };
   return (
     <Fragment>

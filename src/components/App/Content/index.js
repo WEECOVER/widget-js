@@ -29,7 +29,8 @@ const Content = ({
           garantiasIncluidas,
           tooltip,
           tooltipGrupoSeguro,
-          garantiasNoIncluidas
+          garantiasNoIncluidas,
+          textoModal
         }) => {
           const complementHasBeenChecked = complements.some(({ checked: _checked }) => _checked);
 
@@ -48,6 +49,7 @@ const Content = ({
                 warranties={garantiasIncluidas}
                 noIncludedWarranties={garantiasNoIncluidas}
                 tooltip={tooltip}
+                textoModal={textoModal}
                 tooltipGrupoSeguro={tooltipGrupoSeguro}></Card.Title>
               <Card.Complement
                 onSelect={addInsuranceToCart}

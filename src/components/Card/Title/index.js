@@ -22,8 +22,12 @@ const Title = ({
   modifiers,
   checked,
   textButton,
-  tooltip
+  tooltip,
+  textoModal
 }) => {
+  const buttonAddText = textButton || (checked ? 'AÑADIDO' : 'AÑADIR');
+  const modalText = tooltip || textoModal;
+
   const [displayModal, setDisplayModal] = useState(false);
   const handleSelect = () => {
     onSelect({ checked: !checked, id, type: 'insurance' });
@@ -34,9 +38,8 @@ const Title = ({
       ? [Button.availableSizes.sm, Button.availableModifiers.selected]
       : [Button.availableSizes.sm];
 
-  const enableDisplayModal = (status = null) => {
-    status && setDisplayModal(status);
-    !status && setDisplayModal(!displayModal);
+  const enableDisplayModal = () => {
+    setDisplayModal(!displayModal);
   };
 
   return (
@@ -49,7 +52,7 @@ const Title = ({
         {displayAddButton && (
           <div className={getModifiers(modifiers, 'card-add-button-container', styles)}>
             <Button modifiers={getButtonModifiers()} onClick={handleSelect}>
-              {textButton}
+              {buttonAddText}
             </Button>
           </div>
         )}
@@ -78,9 +81,7 @@ const Title = ({
           uniqueWidgetId={uniqueWidgetId}
           displayModal={displayModal}
           enableDisplayModal={enableDisplayModal}>
-          <Modal.Frame>
-            <div>{tooltip}</div>
-          </Modal.Frame>
+          <Modal.Frame text={modalText} />
         </Modal>
       </div>
     </Fragment>
@@ -100,14 +101,16 @@ Title.propTypes = {
   id: PropTypes.string.isRequired,
   checked: PropTypes.bool,
   textButton: PropTypes.string.isRequired,
-  tooltip: PropTypes.string.isRequired
+  tooltip: PropTypes.string.isRequired,
+  textoModal: PropTypes.string
 };
 
 Title.defaultProps = {
   displayCheckbox: false,
   displayAddButton: false,
   modifiers: [],
-  checked: false
+  checked: false,
+  textoModal: ''
 };
 
 export default Title;
